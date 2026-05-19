@@ -1,6 +1,6 @@
 <?php
 
-class Character {
+class Personagem {
 
     private int    $id;
     private string $nome;
@@ -22,15 +22,15 @@ class Character {
     public function getNivel():     int    { return $this->nivel; }
     public function getUsuarioId(): int    { return $this->usuarioId; }
 
-    public static function novo(string $nome, string $tipo, int $nivel, int $usuarioId): Character {
+    public static function novo(string $nome, string $tipo, int $nivel, int $usuarioId): Personagem {
         if ($usuarioId <= 0) {
             throw new InvalidArgumentException('Usuário inválido.');
         }
 
-        $character = new Character(['usuario_id' => $usuarioId]);
-        $character->alterarDados($nome, $tipo, $nivel);
+        $personagem = new Personagem(['usuario_id' => $usuarioId]);
+        $personagem->alterarDados($nome, $tipo, $nivel);
 
-        return $character;
+        return $personagem;
     }
 
     public function alterarDados(string $nome, string $tipo, int $nivel): void {

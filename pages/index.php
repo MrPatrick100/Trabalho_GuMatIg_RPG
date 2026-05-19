@@ -36,7 +36,7 @@ require_once __DIR__ . '/../includes/header.php';
           <tr>
             <td><?= $personagem->getId() ?></td>
             <td><strong><?= htmlspecialchars($personagem->getNome()) ?></strong></td>
-            <td><span class="badge badge-tipo"><?= htmlspecialchars($personagem->getTipo()) ?></span></td>
+            <td><span class="badge badge-raça"><?= htmlspecialchars($personagem->getRaca()) ?></span></td>
             <td>Lv. <?= $personagem->getNivel() ?></td>
             <td class="acoes">
               <a href="personagem_edit.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar</a>

@@ -39,47 +39,62 @@ class PersonagemRepository {
     public function salvar(Personagem $personagem): void {
         if ($personagem->getId() > 0) {
             $stmt = $this->pdo->prepare(
-                'UPDATE personagem SET nome = :nome, tipo = :tipo, nivel = :nivel WHERE id = :id'
+                'UPDATE personagem SET nome = :nome, idade = :idade, raca = :raca, nivel = :nivel, agilidade = :agilidade, forca = :forca, intelecto = :intelecto, constituicao = :constituicao, carisma = :carisma, magia = :magia, aparencia = :aparencia WHERE id = :id'
             );
             $stmt->execute([
-                ':nome'  => $personagem->getNome(),
-                ':tipo'  => $personagem->getTipo(),
+                ':nome' => $personagem->getNome(),
+                ':idade' => $personagem->getIdade(),
+                ':raca' => $personagem->getRaca(),
                 ':nivel' => $personagem->getNivel(),
-                ':id'    => $personagem->getId(),
+                ':agilidade' => $personagem->getNome(),
+                ':forca' => $personagem->getForca(),
+                ':intelecto' => $personagem->getIntelecto(),
+                ':constituicao' => $personagem->getConstituicao(),
+                ':carisma' => $personagem->getCarisma(),
+                ':magia' => $personagem->getMagia(),
+                ':aparencia' => $personagem->getAparencia(),
+                ':id' => $personagem->getId(),
             ]);
             return;
         }
 
-        if ($personagem->getUsuarioId() <= 0) {
+        if ($personagem->getId_usuario() <= 0) {
             throw new InvalidArgumentException('Usuário inválido.');
         }
 
         $stmt = $this->pdo->prepare(
-            'INSERT INTO personagem (nome, tipo, nivel, id_usuario) VALUES (:nome, :tipo, :nivel, :uid)'
+            'INSERT INTO personagem (id_usuario, nome, raca, nivel, agilidade, forca, intelecto, constituicao, carisma, magia, aparencia) VALUES (:idu, :nome, :raca, :nivel, :agilidade, :forca, :intelecto, :constituicao, :carisma, :magia, :aparencia)'
         );
         $stmt->execute([
+            ':idu'   => $personagem->getId_usuario(),
             ':nome'  => $personagem->getNome(),
-            ':tipo'  => $personagem->getTipo(),
+            ':raca'  => $personagem->getRaca(),
             ':nivel' => $personagem->getNivel(),
-            ':uid'   => $personagem->getUsuarioId(),
+            ':agilidade'   => $personagem->getAgilidade(),
+            ':forca'  => $personagem->getForca(),
+            ':intelecto'  => $personagem->getIntelecto(),
+            ':constituicao' => $personagem->getConstituicao(),
+            ':carisma'   => $personagem->getCarisma(),
+            ':magia'  => $personagem->getMagia(),
+            ':aparencia'  => $personagem->getAparencia(),
         ]);
 
         $personagem->registrarIdGerado((int) $this->pdo->lastInsertId());
     }
 
-    public function inserir(string $nome, string $tipo, int $nivel, int $usuarioId): void {
-        $personagem = Personagem::novo($nome, $tipo, $nivel, $usuarioId);
+    public function inserir(int $id_usuario, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia): void {
+        $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
         $this->salvar($personagem);
     }
 
-    public function atualizar(int $id, string $nome, string $tipo, int $nivel): void {
+    public function atualizar(int $id, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia): void {
         $personagem = $this->buscarPorId($id);
 
         if ($personagem === null) {
             throw new RuntimeException('Pokémon não encontrado.');
         }
 
-        $personagem->alterarDados($nome, $tipo, $nivel);
+        $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
         $this->salvar($personagem);
     }
 

@@ -1,9 +1,9 @@
 <?php
 
 require_once __DIR__ . '/../includes/auth.php';
-require_once __DIR__ . '/../repository/PokemonRepository.php';
+require_once __DIR__ . '/../repository/PersonagemRepository.php';
 
-$repo = new PokemonRepository();
+$repo = new PersonagemRepository();
 
 $erro = '';
 $nome = '';
@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nivel = (int) ($_POST['nivel'] ?? 1);
 
     try {
-        $pokemon = Pokemon::novo($nome, $tipo, $nivel, $_SESSION['usuario_id']);
-        $repo->salvar($pokemon);
+        $personagem = Personagem::novo($nome, $tipo, $nivel, $_SESSION['usuario_id']);
+        $repo->salvar($personagem);
 
         header('Location: index.php');
         exit;
@@ -34,7 +34,7 @@ require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="page-header">
-  <h2>Novo Pokémon</h2>
+  <h2>Novo Personagem</h2>
   <a href="index.php" class="btn btn-ghost">← Voltar</a>
 </div>
 
@@ -43,10 +43,10 @@ require_once __DIR__ . '/../includes/header.php';
 <?php endif; ?>
 
 <div class="form-card">
-  <form method="POST" action="pokemon_create.php">
+  <form method="POST" action="personagem_create.php">
 
     <div class="form-group">
-      <label for="nome">Nome do Pokémon</label>
+      <label for="nome">Nome do Personagem</label>
       <input
         type="text"
         id="nome"
@@ -89,7 +89,7 @@ require_once __DIR__ . '/../includes/header.php';
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Cadastrar Pokémon</button>
+      <button type="submit" class="btn btn-primary">Cadastrar Personagem</button>
       <a href="index.php" class="btn btn-ghost">Cancelar</a>
     </div>
 

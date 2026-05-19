@@ -1,6 +1,6 @@
 <?php
 
-class Pokemon {
+class Character {
 
     private int    $id;
     private string $nome;
@@ -22,15 +22,15 @@ class Pokemon {
     public function getNivel():     int    { return $this->nivel; }
     public function getUsuarioId(): int    { return $this->usuarioId; }
 
-    public static function novo(string $nome, string $tipo, int $nivel, int $usuarioId): Pokemon {
+    public static function novo(string $nome, string $tipo, int $nivel, int $usuarioId): Character {
         if ($usuarioId <= 0) {
             throw new InvalidArgumentException('Usuário inválido.');
         }
 
-        $pokemon = new Pokemon(['usuario_id' => $usuarioId]);
-        $pokemon->alterarDados($nome, $tipo, $nivel);
+        $character = new Character(['usuario_id' => $usuarioId]);
+        $character->alterarDados($nome, $tipo, $nivel);
 
-        return $pokemon;
+        return $character;
     }
 
     public function alterarDados(string $nome, string $tipo, int $nivel): void {

@@ -1,29 +1,29 @@
 <?php
 
 require_once __DIR__ . '/../includes/auth.php';
-require_once __DIR__ . '/../repository/PokemonRepository.php';
+require_once __DIR__ . '/../repository/PersonagemRepository.php';
 
-$repo = new PokemonRepository();
+$repo = new PersonagemRepository();
 
 $id = 0;
 if (isset($_GET['id'])) {
     $id = (int) $_GET['id'];
 }
 
-$pokemon = null;
+$personagem = null;
 if ($id > 0) {
-    $pokemon = $repo->buscarPorId($id);
+    $personagem = $repo->buscarPorId($id);
 }
 
-if ($pokemon === null || $pokemon->getUsuarioId() !== $_SESSION['usuario_id']) {
+if ($personagem === null || $personagem->getUsuarioId() !== $_SESSION['usuario_id']) {
     header('Location: index.php');
     exit;
 }
 
 $erro = '';
-$nome = $pokemon->getNome();
-$tipo = $pokemon->getTipo();
-$nivel = $pokemon->getNivel();
+$nome = $personagem->getNome();
+$tipo = $personagem->getTipo();
+$nivel = $personagem->getNivel();
 
 $tipos = ['Fogo', 'Água', 'Planta', 'Elétrico', 'Terra', 'Voador',
           'Psíquico', 'Gelo', 'Lutador', 'Venenoso', 'Normal', 'Fantasma',
@@ -35,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nivel = (int) ($_POST['nivel'] ?? 1);
 
     try {
-        $pokemon->alterarDados($nome, $tipo, $nivel);
-        $repo->salvar($pokemon);
+        $personagem->alterarDados($nome, $tipo, $nivel);
+        $repo->salvar($personagem);
 
         header('Location: index.php');
         exit;
@@ -58,7 +58,7 @@ require_once __DIR__ . '/../includes/header.php';
 <?php endif; ?>
 
 <div class="form-card">
-  <form method="POST" action="pokemon_edit.php?id=<?= $pokemon->getId() ?>">
+  <form method="POST" action="personagem_edit.php?id=<?= $personagem->getId() ?>">
 
     <div class="form-group">
       <label for="nome">Nome do Pokémon</label>
@@ -66,7 +66,7 @@ require_once __DIR__ . '/../includes/header.php';
         type="text"
         id="nome"
         name="nome"
-        placeholder="Ex: Charmander"
+        placeholder="Ex: Mago"
         value="<?= htmlspecialchars($nome) ?>"
         required
       />

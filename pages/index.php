@@ -3,8 +3,8 @@
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../repository/PersonagemRepository.php';
 
-$repo     = new PersonagemRepository();
-$personagems = $repo->listarPorUsuario($_SESSION['usuario_id']);
+$repo = new PersonagemRepository();
+$personagens = $repo->listarPorUsuario($_SESSION['id_usuario']);
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
@@ -14,7 +14,7 @@ require_once __DIR__ . '/../includes/header.php';
   <a href="personagem_create.php" class="btn btn-primary">+ Novo Personagem</a>
 </div>
 
-<?php if (empty($personagems)): ?>
+<?php if (empty($personagens)): ?>
   <div class="empty-state">
     <p>Você ainda não cadastrou nenhum personagem.</p>
     <a href="personagem_create.php" class="btn btn-primary">Cadastrar agora</a>
@@ -32,7 +32,7 @@ require_once __DIR__ . '/../includes/header.php';
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($personagems as $personagem): ?>
+        <?php foreach ($personagens as $personagem): ?>
           <tr>
             <td><?= $personagem->getId() ?></td>
             <td><strong><?= htmlspecialchars($personagem->getNome()) ?></strong></td>

@@ -3,7 +3,7 @@
 session_start();
 
 // Se já estiver logado, vai direto para a página principal
-if (!empty($_SESSION['usuario_id'])) {
+if (!empty($_SESSION['id_usuario'])) {
     header('Location: index.php');
     exit;
 }
@@ -20,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($email === '' || $senha === '') {
         $erro = 'Preencha todos os campos.';
     } else {
-        $repo    = new UsuarioRepository();
+        $repo = new UsuarioRepository();
         $usuario = $repo->buscarPorEmail($email);
 
         // Compara o hash SHA256 da senha digitada com o hash salvo no banco
         if ($usuario && hash('sha256', $senha) === $usuario->getSenha()) {
-            $_SESSION['usuario_id']   = $usuario->getId();
+            $_SESSION['id_usuario']   = $usuario->getId();
             $_SESSION['usuario_nome'] = $usuario->getNome();
 
             header('Location: index.php');

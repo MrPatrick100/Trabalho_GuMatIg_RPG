@@ -43,9 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mana = $magia * 10;
     if($carisma > $intelecto) $pf = $carisma;
     else $pf = $intelecto;
+    $id_usuario = $_SESSION['id_usuario'];
 
     try {
-        $personagem = Personagem::novo($_SESSION['id_usuario'],$nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
+        $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
         $repo->salvar($personagem);
 
         header('Location: index.php');

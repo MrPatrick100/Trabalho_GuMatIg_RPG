@@ -16,7 +16,7 @@ if ($id > 0) {
 }
 
 // Pokémon não encontrado ou não pertence ao usuário logado
-if ($personagem === null || $personagem->getUsuarioId() !== $_SESSION['usuario_id']) {
+if ($personagem === null || $personagem->getId_usuario() !== $_SESSION['id_usuario']) {
     header('Location: index.php');
     exit;
 }
@@ -40,7 +40,7 @@ require_once __DIR__ . '/../includes/header.php';
   <p>
     Você está prestes a excluir o personagem
     <strong><?= htmlspecialchars($personagem->getNome()) ?></strong>
-    (<?= htmlspecialchars($personagem->getTipo()) ?>, Lv. <?= $personagem->getNivel() ?>).
+    (<?= htmlspecialchars($personagem->getRaca()) ?>, Lv. <?= $personagem->getNivel() ?>).
     Esta ação não pode ser desfeita.
   </p>
 

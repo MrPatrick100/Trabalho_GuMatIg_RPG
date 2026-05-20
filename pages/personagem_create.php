@@ -217,225 +217,280 @@ require_once __DIR__ . '/../includes/header.php';
 
     <div class="form-pericias">
 
-        <h3>Perícias</h3>
+      <h3>Perícias</h3>
 
-     <div class="form-group">
-    <label for="atletismo">Atletismo</label>
-    <input
-    type="number"
-    id="atletismo"
-    name="atletismo"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
+      <div class="div-pericia">
+        <label for="acrobacia">Acrobacia</label>
+        <input
+        type="number"
+        id="acrobacia"
+        name="acrobacia"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="adestramento">Adestramento</label>
+        <input
+        type="number"
+        id="adestramento"
+        name="adestramento"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="artes">Artes</label>
+        <input
+        type="number"
+        id="artes"
+        name="artes"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="atletismo">Atletismo</label>
+        <input
+        type="number"
+        id="atletismo"
+        name="atletismo"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="diplomacia">Diplomacia</label>
+        <input
+        type="number"
+        id="diplomacia"
+        name="diplomacia"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="enganacao">Enganação</label>
+        <input
+        type="number"
+        id="enganacao"
+        name="enganacao"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="fortitude">Fortitude</label>
+        <input
+        type="number"
+        id="fortitude"
+        name="fortitude"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="furtividade">Furtividade</label>
+        <input
+        type="number"
+        id="furtividade"
+        name="furtividade"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="intimidacao">Intimidação</label>
+        <input
+        type="number"
+        id="intimidacao"
+        name="intimidacao"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="intuicao">Intuição</label>
+        <input
+        type="number"
+        id="intuicao"
+        name="intuicao"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="investigacao">Investigação</label>
+        <input
+        type="number"
+        id="investigacao"
+        name="investigacao"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="luta_briga">Luta/Briga</label>
+        <input
+        type="number"
+        id="luta_briga"
+        name="luta_briga"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+
+      <div class="div-pericia">
+        <label for="medicina">Medicina</label>
+        <input
+        type="number"
+        id="medicina"
+        name="medicina"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+      <div class="div-pericia">
+        <label for="ocultismo">Ocultismo</label>
+        <input
+        type="number"
+        id="ocultismo"
+        name="ocultismo"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+      <div class="div-pericia">
+        <label for="percepcao">Percepção</label>
+        <input
+        type="number"
+        id="percepcao"
+        name="percepcao"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+      <div class="div-pericia">
+        <label for="pontaria">Pontaria</label>
+        <input
+        type="number"
+        id="pontaria"
+        name="pontaria"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+      <div class="div-pericia">
+        <label for="reflexos_iniciativa">Reflexos/Iniciativa</label>
+        <input
+        type="number"
+        id="reflexos_iniciativa"
+        name="reflexos_iniciativa"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+      <div class="div-pericia">
+        <label for="religiao">Religião</label>
+        <input
+        type="number"
+        id="religiao"
+        name="religiao"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+      <div class="div-pericia">
+        <label for="tatica">Tática</label>
+        <input
+        type="number"
+        id="tatica"
+        name="tatica"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
+
+      <div class="div-pericia">
+        <label for="vontade">Vontade</label>
+        <input
+        type="number"
+        id="vontade"
+        name="vontade"
+        class="input-pericias"
+        min="0"
+        max="5"
+        value="<?= $nivel ?>"
+        required>
+      </div>
     </div>
-
-
-     <div class="form-group">
-    <label for="diplomacia">Diplomacia</label>
-    <input
-    type="number"
-    id="diplomacia"
-    name="diplomacia"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="enganacao">Enganação</label>
-    <input
-    type="number"
-    id="enganacao"
-    name="enganacao"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="fortitude">Fortitude</label>
-    <input
-    type="number"
-    id="fortitude"
-    name="fortitude"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="furtividade">Furtividade</label>
-    <input
-    type="number"
-    id="furtividade"
-    name="furtividade"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="intimidacao">Intimidação</label>
-    <input
-    type="number"
-    id="intimidacao"
-    name="intimidacao"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="intuicao">Intuição</label>
-    <input
-    type="number"
-    id="intuicao"
-    name="intuicao"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="investigacao">Investigação</label>
-    <input
-    type="number"
-    id="investigacao"
-    name="investigacao"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="luta_briga">Luta/Briga</label>
-    <input
-    type="number"
-    id="luta_briga"
-    name="luta_briga"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="medicina">Medicina</label>
-    <input
-    type="number"
-    id="medicina"
-    name="medicina"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="ocultismo">Ocultismo</label>
-    <input
-    type="number"
-    id="ocultismo"
-    name="ocultismo"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="percepcao">Percepção</label>
-    <input
-    type="number"
-    id="percepcao"
-    name="percepcao"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-    </div>
-
-
-     <div class="form-group">
-    <label for="pontaria">Pontaria</label>
-    <input
-    type="number"
-    id="pontaria"
-    name="pontaria"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-</div>
-
-     <div class="form-group">
-    <label for="reflexos_iniciativa">Reflexos/Iniciativa</label>
-    <input
-    type="number"
-    id="reflexos_iniciativa"
-    name="reflexos_iniciativa"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-</div>
-
-     <div class="form-group">
-    <label for="religiao">Religião</label>
-    <input
-    type="number"
-    id="religiao"
-    name="religiao"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-</div>
-
-     <div class="form-group">
-    <label for="tatica">Tática</label>
-    <input
-    type="number"
-    id="tatica"
-    name="tatica"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-</div>
-
-     <div class="form-group">
-    <label for="vontade">Vontade</label>
-    <input
-    type="number"
-    id="vontade"
-    name="vontade"
-    min="0"
-    max="5"
-    value="<?= $nivel ?>"
-    required>
-        </div>
-
-
 
 
     <div class="form-actions">

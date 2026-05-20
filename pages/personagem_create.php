@@ -214,6 +214,230 @@ require_once __DIR__ . '/../includes/header.php';
       />
     </div>
 
+
+    <div class="form-pericias">
+
+        <h3>Perícias</h3>
+
+     <div class="form-group">
+    <label for="atletismo">Atletismo</label>
+    <input
+    type="number"
+    id="atletismo"
+    name="atletismo"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="diplomacia">Diplomacia</label>
+    <input
+    type="number"
+    id="diplomacia"
+    name="diplomacia"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="enganacao">Enganação</label>
+    <input
+    type="number"
+    id="enganacao"
+    name="enganacao"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="fortitude">Fortitude</label>
+    <input
+    type="number"
+    id="fortitude"
+    name="fortitude"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="furtividade">Furtividade</label>
+    <input
+    type="number"
+    id="furtividade"
+    name="furtividade"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="intimidacao">Intimidação</label>
+    <input
+    type="number"
+    id="intimidacao"
+    name="intimidacao"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="intuicao">Intuição</label>
+    <input
+    type="number"
+    id="intuicao"
+    name="intuicao"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="investigacao">Investigação</label>
+    <input
+    type="number"
+    id="investigacao"
+    name="investigacao"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="luta_briga">Luta/Briga</label>
+    <input
+    type="number"
+    id="luta_briga"
+    name="luta_briga"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="medicina">Medicina</label>
+    <input
+    type="number"
+    id="medicina"
+    name="medicina"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="ocultismo">Ocultismo</label>
+    <input
+    type="number"
+    id="ocultismo"
+    name="ocultismo"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="percepcao">Percepção</label>
+    <input
+    type="number"
+    id="percepcao"
+    name="percepcao"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+    </div>
+
+
+     <div class="form-group">
+    <label for="pontaria">Pontaria</label>
+    <input
+    type="number"
+    id="pontaria"
+    name="pontaria"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+</div>
+
+     <div class="form-group">
+    <label for="reflexos_iniciativa">Reflexos/Iniciativa</label>
+    <input
+    type="number"
+    id="reflexos_iniciativa"
+    name="reflexos_iniciativa"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+</div>
+
+     <div class="form-group">
+    <label for="religiao">Religião</label>
+    <input
+    type="number"
+    id="religiao"
+    name="religiao"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+</div>
+
+     <div class="form-group">
+    <label for="tatica">Tática</label>
+    <input
+    type="number"
+    id="tatica"
+    name="tatica"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+</div>
+
+     <div class="form-group">
+    <label for="vontade">Vontade</label>
+    <input
+    type="number"
+    id="vontade"
+    name="vontade"
+    min="0"
+    max="5"
+    value="<?= $nivel ?>"
+    required>
+        </div>
+
+
+
+
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Cadastrar Personagem</button>
       <a href="index.php" class="btn btn-ghost">Cancelar</a>

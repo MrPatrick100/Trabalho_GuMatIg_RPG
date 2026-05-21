@@ -12,6 +12,7 @@ $nome = '';
 $idade = 0;
 $raca = '';
 $nivel = 1;
+$nivelp = 0;
 $agilidade = 0;
 $forca = 0;
 $intelecto = 0;
@@ -227,7 +228,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="atletismo"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -240,7 +241,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="diplomacia"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -253,7 +254,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="enganacao"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -266,7 +267,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="fortitude"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -279,7 +280,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="furtividade"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -292,7 +293,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="intimidacao"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -305,7 +306,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="intuicao"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -318,7 +319,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="investigacao"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -331,7 +332,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="luta_briga"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -344,7 +345,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="medicina"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -357,7 +358,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="ocultismo"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -370,7 +371,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="percepcao"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
     </div>
 
@@ -383,7 +384,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="pontaria"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
 </div>
 
@@ -395,7 +396,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="reflexos_iniciativa"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
 </div>
 
@@ -407,7 +408,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="religiao"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
 </div>
 
@@ -419,7 +420,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="tatica"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
 </div>
 
@@ -431,7 +432,7 @@ require_once __DIR__ . '/../includes/header.php';
     name="vontade"
     min="0"
     max="5"
-    value="<?= $nivel ?>"
+    value="<?= $nivelp ?>"
     required>
         </div>
 
@@ -439,10 +440,14 @@ require_once __DIR__ . '/../includes/header.php';
 
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Cadastrar Personagem</button>
+      <button type="submit" class="btn btn-primary">Cadastrar Personagem</button> <br>
+       
       <a href="index.php" class="btn btn-ghost">Cancelar</a>
     </div>
 
+  </form>
+  <form action="inventario_edit.php" method="post">
+    <button type="submit" class="btn btn-primary">Adicionar inventário</button>
   </form>
 </div>
 

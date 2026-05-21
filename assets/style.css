@@ -476,6 +476,7 @@ a:hover {
 .form-group {
   margin-bottom: 20px;
   margin-left: 10%;
+  padding-top: 30px;
 }
 
 .form-group label {
@@ -513,6 +514,11 @@ a:hover {
 .form-group select:focus {
   background: #fff;
   box-shadow: 0 0 0 4px rgba(240,189,47,.42);
+}
+
+.form-card{
+  max-width: 620px;
+  
 }
 
 .form-actions {

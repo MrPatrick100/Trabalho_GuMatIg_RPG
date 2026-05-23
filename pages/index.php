@@ -11,6 +11,7 @@ require_once __DIR__ . '/../includes/header.php';
 
 <div class="page-header">
   <h2>Meus Personagens</h2>
+  <a href="habilidade_create.php" class="btn btn-primary">+ Nova Habilidade</a>
   <a href="personagem_create.php" class="btn btn-primary">+ Novo Personagem</a>
 </div>
 

@@ -2,6 +2,7 @@
 
 class Habilidade {
 
+    private int    $id_usuario;
     private int    $id;
     private string $nome;
     private string $tipo;
@@ -11,15 +12,18 @@ class Habilidade {
     private string $descricao;
 
     public function __construct(array $dados) {
-        $this->id                = (int) ($dados['id']        ?? 0);
-        $this->nome              =        $dados['nome']      ?? '';
-        $this->tipo              =        $dados['tipo']      ?? '';
-        $this->ciclo             = (int) ($dados['ciclo']     ?? 0);
-        $this->estilo            =        $dados['estilo']    ?? '';
-        $this->custo             = (int) ($dados['custo']     ?? 0);
-        $this->descricao         =        $dados['descricao'] ?? '';
+
+        $this->id_usuario        = (int) ($dados['id_usuario']  ?? 0);
+        $this->id                = (int) ($dados['id']          ?? 0);
+        $this->nome              =        $dados['nome']        ?? '';
+        $this->tipo              =        $dados['tipo']        ?? '';
+        $this->ciclo             = (int) ($dados['ciclo']       ?? 0);
+        $this->estilo            =        $dados['estilo']      ?? '';
+        $this->custo             = (int) ($dados['custo']       ?? 0);
+        $this->descricao         =        $dados['descricao']   ?? '';
     }
 
+    public function getId_usuario():      int    { return $this->id_usuario; }
     public function getId():              int    { return $this->id; }
     public function getNome():            string { return $this->nome; }
     public function getTipo():            string { return $this->tipo; }
@@ -28,9 +32,12 @@ class Habilidade {
     public function getCusto():           int    { return $this->custo; }
     public function getDescricao():       string { return $this->descricao; }
 
-    public static function novo(int $id, string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao): Personagem {
+    public static function novo(int $id_usuario, string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao): Personagem {
+            if ($id_usuario <= 0) {
+            throw new InvalidArgumentException('Usuário inválido.');
+        }
 
-        $habilidade = new Habilidade();
+        $habilidade = new Habilidade(['id_usuario' => $id_usuario]);
         $habilidade->alterarDados($nome, $tipo, $ciclo, $estilo, $custo, $descricao);
 
         return $habilidade;

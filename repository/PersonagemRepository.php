@@ -11,7 +11,7 @@ class PersonagemRepository {
         $this->pdo = getConexao();
     }
 
-    /** @return Personagem[] */
+    /** @return Personagem[] */ // Lista todas os personagens salvos no Banco daquele usuário
     public function listarPorUsuario(int $usuarioId): array {
         $stmt = $this->pdo->prepare(
             'SELECT * FROM personagem WHERE id_usuario = :idu ORDER BY nome ASC'
@@ -42,6 +42,7 @@ class PersonagemRepository {
                 'UPDATE personagem SET nome = :nome, idade = :idade, raca = :raca, nivel = :nivel, agilidade = :agilidade, forca = :forca, intelecto = :intelecto, constituicao = :constituicao, carisma = :carisma, magia = :magia, aparencia = :aparencia WHERE id = :id'
             );
             $stmt->execute([
+                ':id' => $personagem->getId(),
                 ':nome' => $personagem->getNome(),
                 ':idade' => $personagem->getIdade(),
                 ':raca' => $personagem->getRaca(),
@@ -53,7 +54,6 @@ class PersonagemRepository {
                 ':carisma' => $personagem->getCarisma(),
                 ':magia' => $personagem->getMagia(),
                 ':aparencia' => $personagem->getAparencia(),
-                ':id' => $personagem->getId(),
             ]);
             return;
         }

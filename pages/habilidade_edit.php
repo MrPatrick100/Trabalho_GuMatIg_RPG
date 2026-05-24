@@ -1,70 +1,54 @@
 <?php
 
 require_once __DIR__ . '/../includes/auth.php';
-require_once __DIR__ . '/../repository/PersonagemRepository.php';
+require_once __DIR__ . '/../repository/HabilidadeRepository.php';
 
-$repo = new PersonagemRepository();
+$repo = new HabilidadeRepository();
 
 $id = 0;
 if (isset($_GET['id'])) {
     $id = (int) $_GET['id'];
 }
 
-$personagem = null;
+$habilidade = null;
 if ($id > 0) {
-    $personagem = $repo->buscarPorId($id);
+    $habilidade = $repo->buscarPorId($id);
 }
 
-if ($personagem === null || $personagem->getId_usuario() !== $_SESSION['id_usuario']) {
-    header('Location: index.php');
+if ($habilidade === null || $habilidade->getId_usuario() !== $_SESSION['id_usuario']) {
+    header('Location: index2.php');
     exit;
 }
 
 $erro = '';
+
 $id_usuario = 0;
 $id = 0;
 $nome = '';
-$idade = 0;
-$raca = '';
-$nivel = 1;
-$agilidade = 0;
-$forca = 0;
-$intelecto = 0;
-$constituicao = 0;
-$carisma = 0;
-$magia = 0;
-$aparencia = '';
-$hp = 0;
-$stamina = 0;
-$mana = 0;
-$pf = 0;
+$tipo = '';
+$ciclo = 1;
+$estilo = '';
+$custo = 2;
+$descricao = '';
 
-$racas = ['Humano', 'Elfo', 'Goblin', 'Anao', 'Lefou', 'Demonio', 'Gnomo', 'Orc', 'Troll', 'Tita'];
+$tipos = ['Passiva', 'Ativa'];
+$estilos = ['Física', 'Mágica', 'Híbrida'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = trim($_POST['nome'] ?? '');
-    $idade = (int) ($_POST['idade'] ?? 0);
-    $raca = trim($_POST['raca'] ?? '');
-    $nivel = (int) ($_POST['nivel'] ?? 1);
-    $agilidade = (int) ($_POST['agilidade'] ?? 0);
-    $forca = (int) ($_POST['forca'] ?? 0);
-    $intelecto = (int) ($_POST['intelecto'] ?? 0);
-    $constituicao = (int) ($_POST['constituicao'] ?? 0);
-    $carisma = (int) ($_POST['carisma'] ?? 0);
-    $magia = (int) ($_POST['magia'] ?? 0);
-    $aparencia = trim($_POST['aparencia'] ?? '');
-    $hp = $nivel * 5 + $constituicao * 5;
-    $stamina = $forca * 10;
-    $mana = $magia * 10;
-    if($carisma > $intelecto) $pf = $carisma;
-    else $pf = $intelecto;
+    $nome       = trim  ($_POST['nome']      ?? '');
+    $tipo       = trim  ($_POST['tipo']      ?? '');
+    $ciclo      = (int) ($_POST['ciclo']     ?? 0);
+    $estilo     = trim  ($_POST['estilo']    ?? '');
+    $custo      = (int) ($_POST['custo']     ?? 0);
+    $descricao  = trim  ($_POST['descricao'] ?? '');
+
     $id_usuario = $_SESSION['id_usuario'];
 
     try {
-        $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
-        $repo->salvar($personagem);
+        $habilidade->alterarDados($nome, $tipo, $ciclo, $estilo, $custo, $descricao);
+        $repo->salvar($habilidade);
 
-        header('Location: index.php');
+        header('Location: index2.php');
         exit;
     } catch (InvalidArgumentException $e) {
         $erro = $e->getMessage();
@@ -75,8 +59,8 @@ require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="page-header">
-  <h2>Editar Personagem</h2>
-  <a href="index.php" class="btn btn-ghost">← Voltar</a>
+  <h2>Editar Habilidade</h2>
+  <a href="index2.php" class="btn btn-ghost">← Voltar</a>
 </div>
 
 <?php if ($erro !== ''): ?>
@@ -84,154 +68,97 @@ require_once __DIR__ . '/../includes/header.php';
 <?php endif; ?>
 
 <div class="form-card">
-  <form method="POST" action="personagem_edit.php?id=<?= $personagem->getId() ?>">
+  <form method="POST" action="habilidade_edit.php?id=<?= $habilidade->getId() ?>">
 
     <div class="form-group">
-      <label for="nome">Nome do Personagem</label>
+      <label for="nome">Nome da Habilidade</label>
       <input
         type="text"
         id="nome"
         name="nome"
-        placeholder="Ex: Dragão"
+        placeholder="Ex: Bola de Fogo"
         value="<?= htmlspecialchars($nome) ?>"
         required
       />
     </div>
 
     <div class="form-group">
-      <label for="idade">Idade</label>
-      <input
-        type="number"
-        id="idade"
-        name="idade"
-        placeholder="Ex: 50"
-        value="<?= htmlspecialchars($idade) ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="raca">Raça</label>
-      <select id="raca" name="raca" required>
-        <option value="">Selecione a raça...</option>
-        <?php foreach ($racas as $r): ?>
+      <label for="tipo">Tipo</label>
+      <select id="tipo" name="tipo" required>
+        <option value="">Selecione o tipo...</option>
+        <?php foreach ($tipos as $t): ?>
           <?php
             $selecionado = '';
-            if ($raca === $r) {
+            if ($tipo === $t) {
                 $selecionado = 'selected';
             }
           ?>
-          <option value="<?= $r ?>" <?= $selecionado ?>>
-            <?= $r ?>
+          <option value="<?= $t ?>" <?= $selecionado ?>>
+            <?= $t ?>
           </option>
         <?php endforeach; ?>
       </select>
     </div>
 
     <div class="form-group">
-      <label for="nivel">Nível (1 – 5)</label>
+      <label for="ciclo">Ciclo (1 – 6)</label>
       <input
         type="number"
-        id="nivel"
-        name="nivel"
+        id="ciclo"
+        name="ciclo"
         min="1"
-        max="5"
-        value="<?= $nivel ?>"
+        max="6"
+        value="<?= $ciclo ?>"
         required
       />
     </div>
 
     <div class="form-group">
-      <label for="agilidade">Agilidade</label>
+      <label for="estilo">Estilo</label>
+      <select id="estilo" name="estilo" required>
+        <option value="">Selecione o estilo...</option>
+        <?php foreach ($estilos as $e): ?>
+          <?php
+            $selecionado = '';
+            if ($estilo === $e) {
+                $selecionado = 'selected';
+            }
+          ?>
+          <option value="<?= $e ?>" <?= $selecionado ?>>
+            <?= $e ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="custo">Custo</label>
       <input
         type="number"
-        id="agilidade"
-        name="agilidade"
-        min="0"
-        max="5"
-        value="<?= $agilidade ?>"
+        id="custo"
+        name="custo"
+        min="2"
+        max="18"
+        step="2"
+        value="<?= $custo ?>"
         required
       />
     </div>
 
     <div class="form-group">
-      <label for="forca">Força</label>
+      <label for="descricao">Descrição</label>
       <input
-        type="number"
-        id="forca"
-        name="forca"
-        min="0"
-        max="5"
-        value="<?= $forca ?>"
+        type="text"
+        id="descricao"
+        name="descricao"
+        value="<?= htmlspecialchars($descricao) ?>"
         required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="intelecto">Intelecto</label>
-      <input
-        type="number"
-        id="intelecto"
-        name="intelecto"
-        min="0"
-        max="5"
-        value="<?= $intelecto ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="constituicao">Constituição</label>
-      <input
-        type="number"
-        id="constituicao"
-        name="constituicao"
-        min="0"
-        max="5"
-        value="<?= $constituicao ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="carisma">Carisma</label>
-      <input
-        type="number"
-        id="carisma"
-        name="carisma"
-        min="0"
-        max="5"
-        value="<?= $carisma ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="magia">Magia</label>
-      <input
-        type="number"
-        id="magia"
-        name="magia"
-        min="0"
-        max="5"
-        value="<?= $magia ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="aparencia">Aparência</label>
-      <input
-        type="file"
-        id="aparencia"
-        name="aparencia"
-        value="<?= $aparencia ?>"
       />
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Salvar alterações</button>
-      <a href="index.php" class="btn btn-ghost">Cancelar</a>
+      <button type="submit" class="btn btn-primary">Salvar Habilidade</button>
+      <a href="index2.php" class="btn btn-ghost">Cancelar</a>
     </div>
 
   </form>

@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $custo, $descricao);
         $repo->salvar($habilidade);
 
-        header('Location: index.php');
+        header('Location: index2.php');
         exit;
     } catch (InvalidArgumentException $e) {
         $erro = $e->getMessage();
@@ -44,7 +44,7 @@ require_once __DIR__ . '/../includes/header.php';
 
 <div class="page-header">
   <h2>Nova Habilidade</h2>
-  <a href="index.php" class="btn btn-ghost">← Voltar</a>
+  <a href="index2.php" class="btn btn-ghost">← Voltar</a>
 </div>
 
 <?php if ($erro !== ''): ?>
@@ -142,7 +142,7 @@ require_once __DIR__ . '/../includes/header.php';
 
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Cadastrar Habilidade</button>
-      <a href="index.php" class="btn btn-ghost">Cancelar</a>
+      <a href="index2.php" class="btn btn-ghost">Cancelar</a>
     </div>
 
   </form>

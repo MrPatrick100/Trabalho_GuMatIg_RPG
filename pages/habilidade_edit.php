@@ -7,12 +7,12 @@ $repo = new HabilidadeRepository();
 
 $id = 0;
 if (isset($_GET['id'])) {
-    $id = (int) $_GET['id'];
+  $id = (int) $_GET['id'];
 }
 
 $habilidade = null;
 if ($id > 0) {
-    $habilidade = $repo->buscarPorId($id);
+  $habilidade = $repo->buscarPorId($id);
 }
 
 if ($habilidade === null || $habilidade->getId_usuario() !== $_SESSION['id_usuario']) {
@@ -21,9 +21,8 @@ if ($habilidade === null || $habilidade->getId_usuario() !== $_SESSION['id_usuar
 }
 
 $erro = '';
-
 $id_usuario = 0;
-$id = 0;
+
 $nome = '';
 $tipo = '';
 $ciclo = 1;
@@ -33,6 +32,15 @@ $descricao = '';
 
 $tipos = ['Passiva', 'Ativa'];
 $estilos = ['Física', 'Mágica', 'Híbrida'];
+
+if ($habilidade !== null) {
+  $nome = $habilidade->getNome();
+  $tipo = $habilidade->getTipo();
+  $ciclo = $habilidade->getCiclo();
+  $estilo = $habilidade->getEstilo();
+  $custo = $habilidade->getCusto();
+  $descricao = $habilidade->getDescricao();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome       = trim  ($_POST['nome']      ?? '');

@@ -492,7 +492,6 @@ require_once __DIR__ . '/../includes/header.php';
       </div>
     </div>
 
-
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Cadastrar Personagem</button>
       <a href="index.php" class="btn btn-ghost">Cancelar</a>

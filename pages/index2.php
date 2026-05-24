@@ -4,21 +4,20 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../repository/HabilidadeRepository.php';
 
 $repo = new HabilidadeRepository();
-$personagens = $repo->listarPorUsuario($_SESSION['id_usuario']);
+$habilidades = $repo->listarPorUsuario($_SESSION['id_usuario']);
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="page-header">
-  <h2>Meus Personagens</h2>
+  <h2>Minhas Habilidades</h2>
   <a href="habilidade_create.php" class="btn btn-primary">+ Nova Habilidade</a>
-  <a href="personagem_create.php" class="btn btn-primary">+ Novo Personagem</a>
 </div>
 
-<?php if (empty($personagens)): ?>
+<?php if (empty($habilidades)): ?>
   <div class="empty-state">
-    <p>Você ainda não cadastrou nenhum personagem.</p>
-    <a href="personagem_create.php" class="btn btn-primary">Cadastrar agora</a>
+    <p>Você ainda não cadastrou nenhuma habilidade.</p>
+    <a href="habilidade_create.php" class="btn btn-primary">Cadastrar agora</a>
   </div>
 <?php else: ?>
   <div class="table-wrapper">
@@ -27,21 +26,21 @@ require_once __DIR__ . '/../includes/header.php';
         <tr>
           <th>#</th>
           <th>Nome</th>
-          <th>Tipo</th>
-          <th>Nível</th>
+          <th>Estilo</th>
+          <th>Ciclo</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($personagens as $personagem): ?>
+        <?php foreach ($habilidades as $h): ?>
           <tr>
-            <td><?= $personagem->getId() ?></td>
-            <td><strong><?= htmlspecialchars($personagem->getNome()) ?></strong></td>
-            <td><span class="badge badge-raça"><?= htmlspecialchars($personagem->getRaca()) ?></span></td>
-            <td>Lv. <?= $personagem->getNivel() ?></td>
+            <td><?= $h->getId() ?></td>
+            <td><strong><?= htmlspecialchars($h->getNome()) ?></strong></td>
+            <td><span class="badge badge-raça"><?= htmlspecialchars($h->getEstilo()) ?></span></td>
+            <td><?= $h->getCiclo() ?>°</td>
             <td class="acoes">
-              <a href="personagem_edit.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
-              <a href="personagem_delete.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
+              <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
+              <a href="habilidade_delete.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
             </td>
           </tr>
         <?php endforeach; ?>

@@ -32,7 +32,7 @@ class Habilidade {
     public function getCusto():           int    { return $this->custo; }
     public function getDescricao():       string { return $this->descricao; }
 
-    public static function novo(int $id_usuario, string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao): Personagem {
+    public static function novo(int $id_usuario, string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao): Habilidade {
             if ($id_usuario <= 0) {
             throw new InvalidArgumentException('Usuário inválido.');
         }

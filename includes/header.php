@@ -14,7 +14,9 @@
 
     <nav class="nav">
       <a href="../pages/index.php">Meus Personagens</a>
+      <a href="../pages/index2.php">Minhas Habilidades</a>
       <a href="../pages/personagem_create.php">+ Novo Personagem</a>
+      <a href="../pages/habilidade_create.php">+ Nova Habilidade</a>
     </nav>
 
     <div class="header-user">

@@ -32,15 +32,16 @@ require_once __DIR__ . '/../includes/header.php';
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($personagens as $personagem): ?>
+        <?php foreach ($personagens as $indice => $personagem): ?>
           <tr>
-            <td><?= $personagem->getId() ?></td>
+            <td><?= $indice + 1 ?></td>
             <td><strong><?= htmlspecialchars($personagem->getNome()) ?></strong></td>
             <td><span class="badge badge-raça"><?= htmlspecialchars($personagem->getRaca()) ?></span></td>
             <td>Lv. <?= $personagem->getNivel() ?></td>
             <td class="acoes">
               <a href="personagem_edit.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
               <a href="personagem_delete.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
+              <a href="personagem_espiar.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
             </td>
           </tr>
         <?php endforeach; ?>

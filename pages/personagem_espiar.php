@@ -67,6 +67,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($carisma > $intelecto) $pf = $carisma;
     else $pf = $intelecto;
     $id_usuario = $_SESSION['id_usuario'];
+    $pericias["Acrobacia"] = (int) ($_POST['acrobacia'] ?? 0);
+    $pericias["Adestramento"]
+    $pericias["Artes"]
+    $pericias["Atletismo"]
+    $pericias["Diplomacia"]
+    $pericias["Enganacao"]
+    $pericias["Fortitude"]
+    $pericias["Furtividade"]
+    $pericias["Intimidacao"]
+    $pericias["Intuicao"]
+    $pericias["Investigacao"]
+    $pericias["Luta_Briga"]
+    $pericias["Medicina"]
+    $pericias["Ocultismo"]
+    $pericias["Percepcao"]
+    $pericias["Pontaria"]
+    $pericias["Reflexos_Iniciativa"]
+    $pericias["Religiao"]
+    $pericias["Tatica"]
+    $pericias["Vontade"]
 
     try {
         $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);

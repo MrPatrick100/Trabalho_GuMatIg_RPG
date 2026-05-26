@@ -2,32 +2,12 @@
 
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../repository/PersonagemRepository.php';
-require_once __DIR__ . '/../repository/PericiaRepository.php';
 
-$repoPersonagem = new PersonagemRepository();
-$repoPericia = new PericiaRepository();
-
-$id = 0;
-if (isset($_GET['id'])) {
-    $id = (int) $_GET['id'];
-}
-
-$personagem = null;
-$pericia = null;
-if ($id > 0) {
-    $personagem = $repoPersonagem->buscarPorId($id);
-    $pericia = $repoPericia->buscarPorId($personagem->getId());
-}
-
-if ($personagem === null || $personagem->getId_usuario() !== $_SESSION['id_usuario']) {
-    header('Location: index.php');
-    exit;
-}
-
+$repo = new PersonagemRepository();
 $erro = '';
-$id_usuario = 0;
-$id = 0;
 
+$id_usuario = 0;
+$id_personagem = 0;
 $nome = '';
 $idade = 0;
 $raca = '';
@@ -68,44 +48,6 @@ $pericias = [
   "Vontade" => 0
 ];
 
-if ($personagem !== null) {
-  $nome = $personagem->getNome();
-  $idade = $personagem->getIdade();
-  $raca = $personagem->getRaca();
-  $nivel = $personagem->getNivel();
-  $agilidade = $personagem->getAgilidade();
-  $forca = $personagem->getForca();
-  $intelecto = $personagem->getIntelecto();
-  $constituicao = $personagem->getConstituicao();
-  $carisma = $personagem->getCarisma();
-  $magia = $personagem->getMagia();
-  $aparencia = $personagem->getAparencia();
-  $hp = $personagem->getHp();
-  $stamina = $personagem->getStamina();
-  $mana = $personagem->getMana();
-  $pf = $personagem->getPf();
-
-  $pericias["Acrobacia"]              = $pericia->getAcrobacia();
-  $pericias["Adestramento"]           = $pericia->getAdestramento();
-  $pericias["Artes"]                  = $pericia->getArtes();
-  $pericias["Atletismo"]              = $pericia->getAtletismo();
-  $pericias["Diplomacia"]             = $pericia->getDiplomacia();
-  $pericias["Enganacao"]              = $pericia->getEnganacao();
-  $pericias["Fortitude"]              = $pericia->getFortitude();
-  $pericias["Furtividade"]            = $pericia->getFurtividade();
-  $pericias["Intimidacao"]            = $pericia->getIntimidacao();
-  $pericias["Intuicao"]               = $pericia->getIntuicao();
-  $pericias["Investigacao"]           = $pericia->getInvestigacao();
-  $pericias["Luta_Briga"]             = $pericia->getLuta_Briga();
-  $pericias["Medicina"]               = $pericia->getMedicina();
-  $pericias["Ocultismo"]              = $pericia->getOcultismo();
-  $pericias["Percepcao"]              = $pericia->getPercepcao();
-  $pericias["Pontaria"]               = $pericia->getPontaria();
-  $pericias["Reflexos_Iniciativa"]    = $pericia->getReflexos_Iniciativa();
-  $pericias["Religiao"]               = $pericia->getReligiao();
-  $pericias["Tatica"]                 = $pericia->getTatica();
-  $pericias["Vontade"]                = $pericia->getVontade();
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = trim($_POST['nome'] ?? '');
@@ -125,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($carisma > $intelecto) $pf = $carisma;
     else $pf = $intelecto;
     $id_usuario = $_SESSION['id_usuario'];
-
+    
     $pericias["Acrobacia"]              = (int) ($_POST['acrobacia'] ?? 0);
     $pericias["Adestramento"]           = (int) ($_POST['adestramento'] ?? 0);
     $pericias["Artes"]                  = (int) ($_POST['artes'] ?? 0);
@@ -148,17 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pericias["Vontade"]                = (int) ($_POST['vontade'] ?? 0);
 
     try {
-        $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
-        $repoPersonagem->salvar($personagem);
+        $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
+        $repo->salvar($personagem);
 
-        $pericia->alterarDados(
-          $pericias["Acrobacia"], $pericias["Adestramento"], $pericias["Artes"], $pericias["Atletismo"], 
-          $pericias["Diplomacia"], $pericias["Enganacao"], $pericias["Fortitude"], $pericias["Furtividade"],
-          $pericias["Intimidacao"], $pericias["Intuicao"], $pericias["Investigacao"], $pericias["Luta_Briga"],
-          $pericias["Medicina"], $pericias["Ocultismo"], $pericias["Percepcao"], $pericias["Pontaria"],
-          $pericias["Reflexos_Iniciativa"], $pericias["Religiao"], $pericias["Tatica"], $pericias["Vontade"]
-        );
-        $repoPericia->salvar($pericia);
         header('Location: index.php');
         exit;
     } catch (InvalidArgumentException $e) {
@@ -170,7 +104,7 @@ require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="page-header">
-  <h2>Editar Personagem</h2>
+  <h2>Novo Personagem</h2>
   <a href="index.php" class="btn btn-ghost">← Voltar</a>
 </div>
 
@@ -179,7 +113,7 @@ require_once __DIR__ . '/../includes/header.php';
 <?php endif; ?>
 
 <div class="form-card">
-  <form method="POST" action="personagem_edit.php?id=<?= $personagem->getId() ?>">
+  <form method="POST" action="personagem_create.php">
 
     <div class="form-group">
       <label for="nome">Nome do Personagem</label>
@@ -323,6 +257,7 @@ require_once __DIR__ . '/../includes/header.php';
         value="<?= $aparencia ?>"
       />
     </div>
+
 
     <div class="form-pericias">
 
@@ -602,7 +537,7 @@ require_once __DIR__ . '/../includes/header.php';
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Salvar alterações</button>
+      <button type="submit" class="btn btn-primary">Cadastrar Personagem</button>
       <a href="index.php" class="btn btn-ghost">Cancelar</a>
     </div>
 

@@ -2,8 +2,10 @@
 
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../repository/PersonagemRepository.php';
+require_once __DIR__ . '/../repository/PericiaRepository.php';
 
-$repo = new PersonagemRepository();
+$repoPersonagem = new PersonagemRepository();
+$repoPericia = new PericiaRepository();
 
 $id = 0;
 if (isset($_GET['id'])) {
@@ -11,18 +13,21 @@ if (isset($_GET['id'])) {
 }
 
 $personagem = null;
+$pericia = null;
 if ($id > 0) {
-    $personagem = $repo->buscarPorId($id);
+    $personagem = $repoPersonagem->buscarPorId($id);
+    $pericia = $repoPericia->buscarPorId($personagem->getId());
 }
 
-// Pokémon não encontrado ou não pertence ao usuário logado
-if ($personagem === null || $personagem->getUsuarioId() !== $_SESSION['usuario_id']) {
+// Personagem não encontrado ou não pertence ao usuário logado
+if ($personagem === null || $personagem->getId_usuario() !== $_SESSION['id_usuario']) {
     header('Location: index.php');
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $repo->excluir($personagem->getId());
+    $repoPericia->excluir($pericia->getId_Personagem());
+    $repoPersonagem->excluir($personagem->getId());
     header('Location: index.php');
     exit;
 }
@@ -38,10 +43,10 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="confirm-card">
   <h3>Você tem certeza?</h3>
   <p>
-    Você está prestes a excluir o personagem
+    Você está prestes a EXCLUIR um personagem
     <strong><?= htmlspecialchars($personagem->getNome()) ?></strong>
-    (<?= htmlspecialchars($personagem->getTipo()) ?>, Lv. <?= $personagem->getNivel() ?>).
-    Esta ação não pode ser desfeita.
+    (<?= htmlspecialchars($personagem->getRaca()) ?>, Lv. <?= $personagem->getNivel() ?>).
+    Esta ação NÃO pode ser desfeita.
   </p>
 
   <form method="POST" action="personagem_delete.php?id=<?= $personagem->getId() ?>">

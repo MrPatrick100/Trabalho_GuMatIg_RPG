@@ -469,7 +469,6 @@ a:hover {
 /* focus */
 .form-pericias input[type="number"]:focus {
   background: #fff;
-
   box-shadow: 0 0 0 4px rgba(240,189,47,.35);
 }
 
@@ -526,6 +525,12 @@ a:hover {
   gap: 13px;
   flex-wrap: wrap;
   margin-top: 10px;
+}
+
+.div-input {
+  width: 50%;
+  margin-bottom: 20px;
+  margin-left: 10%;
 }
 
 /* Delete confirmation */

@@ -2,8 +2,10 @@
 
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../repository/PersonagemRepository.php';
+require_once __DIR__ . '/../repository/PericiaRepository.php';
 
-$repo = new PersonagemRepository();
+$repoPersonagem = new PersonagemRepository();
+$repoPericia = new PericiaRepository();
 
 $id = 0;
 if (isset($_GET['id'])) {
@@ -11,8 +13,10 @@ if (isset($_GET['id'])) {
 }
 
 $personagem = null;
+$pericia = null;
 if ($id > 0) {
-    $personagem = $repo->buscarPorId($id);
+    $personagem = $repoPersonagem->buscarPorId($id);
+    $pericia = $repoPericia->buscarPorId($personagem->getId());
 }
 
 if ($personagem === null || $personagem->getId_usuario() !== $_SESSION['id_usuario']) {
@@ -41,6 +45,28 @@ $mana = 0;
 $pf = 0;
 
 $racas = ['Humano', 'Elfo', 'Goblin', 'Anao', 'Lefou', 'Demonio', 'Gnomo', 'Orc', 'Troll', 'Tita'];
+$pericias = [
+  "Acrobacia" => 0,
+  "Adestramento" => 0,
+  "Artes" => 0,
+  "Atletismo" => 0,
+  "Diplomacia" => 0,
+  "Enganacao" => 0,
+  "Fortitude"=> 0,
+  "Furtividade" => 0,
+  "Intimidacao" => 0,
+  "Intuicao" => 0,
+  "Investigacao" => 0,
+  "Luta_Briga" => 0,
+  "Medicina" => 0,
+  "Ocultismo" => 0,
+  "Percepcao" => 0,
+  "Pontaria" => 0,
+  "Reflexos_Iniciativa" => 0,
+  "Religiao" => 0,
+  "Tatica" => 0,
+  "Vontade" => 0
+];
 
 if ($personagem !== null) {
   $nome = $personagem->getNome();
@@ -58,6 +84,27 @@ if ($personagem !== null) {
   $stamina = $personagem->getStamina();
   $mana = $personagem->getMana();
   $pf = $personagem->getPf();
+
+  $pericias["Acrobacia"]              = $pericia->getAcrobacia();
+  $pericias["Adestramento"]           = $pericia->getAdestramento();
+  $pericias["Artes"]                  = $pericia->getArtes();
+  $pericias["Atletismo"]              = $pericia->getAtletismo();
+  $pericias["Diplomacia"]             = $pericia->getDiplomacia();
+  $pericias["Enganacao"]              = $pericia->getEnganacao();
+  $pericias["Fortitude"]              = $pericia->getFortitude();
+  $pericias["Furtividade"]            = $pericia->getFurtividade();
+  $pericias["Intimidacao"]            = $pericia->getIntimidacao();
+  $pericias["Intuicao"]               = $pericia->getIntuicao();
+  $pericias["Investigacao"]           = $pericia->getInvestigacao();
+  $pericias["Luta_Briga"]             = $pericia->getLuta_Briga();
+  $pericias["Medicina"]               = $pericia->getMedicina();
+  $pericias["Ocultismo"]              = $pericia->getOcultismo();
+  $pericias["Percepcao"]              = $pericia->getPercepcao();
+  $pericias["Pontaria"]               = $pericia->getPontaria();
+  $pericias["Reflexos_Iniciativa"]    = $pericia->getReflexos_Iniciativa();
+  $pericias["Religiao"]               = $pericia->getReligiao();
+  $pericias["Tatica"]                 = $pericia->getTatica();
+  $pericias["Vontade"]                = $pericia->getVontade();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -79,10 +126,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     else $pf = $intelecto;
     $id_usuario = $_SESSION['id_usuario'];
 
+    $pericias["Acrobacia"]              = (int) ($_POST['acrobacia'] ?? 0);
+    $pericias["Adestramento"]           = (int) ($_POST['adestramento'] ?? 0);
+    $pericias["Artes"]                  = (int) ($_POST['artes'] ?? 0);
+    $pericias["Atletismo"]              = (int) ($_POST['atletismo'] ?? 0);
+    $pericias["Diplomacia"]             = (int) ($_POST['diplomacia'] ?? 0);
+    $pericias["Enganacao"]              = (int) ($_POST['enganacao'] ?? 0);
+    $pericias["Fortitude"]              = (int) ($_POST['fortitude'] ?? 0);
+    $pericias["Furtividade"]            = (int) ($_POST['furtividade'] ?? 0);
+    $pericias["Intimidacao"]            = (int) ($_POST['intimidacao'] ?? 0);
+    $pericias["Intuicao"]               = (int) ($_POST['intuicao'] ?? 0);
+    $pericias["Investigacao"]           = (int) ($_POST['investigacao'] ?? 0);
+    $pericias["Luta_Briga"]             = (int) ($_POST['luta_briga'] ?? 0);
+    $pericias["Medicina"]               = (int) ($_POST['medicina'] ?? 0);
+    $pericias["Ocultismo"]              = (int) ($_POST['ocultismo'] ?? 0);
+    $pericias["Percepcao"]              = (int) ($_POST['percepcao'] ?? 0);
+    $pericias["Pontaria"]               = (int) ($_POST['pontaria'] ?? 0);
+    $pericias["Reflexos_Iniciativa"]    = (int) ($_POST['reflexos_iniciativa'] ?? 0);
+    $pericias["Religiao"]               = (int) ($_POST['religiao'] ?? 0);
+    $pericias["Tatica"]                 = (int) ($_POST['tatica'] ?? 0);
+    $pericias["Vontade"]                = (int) ($_POST['vontade'] ?? 0);
+
     try {
         $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
-        $repo->salvar($personagem);
+        $repoPersonagem->salvar($personagem);
 
+        $pericia->alterarDados(
+          $pericias["Acrobacia"], $pericias["Adestramento"], $pericias["Artes"], $pericias["Atletismo"], 
+          $pericias["Diplomacia"], $pericias["Enganacao"], $pericias["Fortitude"], $pericias["Furtividade"],
+          $pericias["Intimidacao"], $pericias["Intuicao"], $pericias["Investigacao"], $pericias["Luta_Briga"],
+          $pericias["Medicina"], $pericias["Ocultismo"], $pericias["Percepcao"], $pericias["Pontaria"],
+          $pericias["Reflexos_Iniciativa"], $pericias["Religiao"], $pericias["Tatica"], $pericias["Vontade"]
+        );
+        $repoPericia->salvar($pericia);
         header('Location: index.php');
         exit;
     } catch (InvalidArgumentException $e) {
@@ -261,7 +337,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Acrobacia"] ?>"
         required>
       </div>
 
@@ -275,7 +351,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Adestramento"] ?>"
         required>
       </div>
 
@@ -289,7 +365,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Artes"] ?>"
         required>
       </div>
 
@@ -303,7 +379,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Atletismo"] ?>"
         required>
       </div>
 
@@ -317,7 +393,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Diplomacia"] ?>"
         required>
       </div>
 
@@ -331,7 +407,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Enganacao"] ?>"
         required>
       </div>
 
@@ -345,7 +421,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Fortitude"] ?>"
         required>
       </div>
 
@@ -359,7 +435,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Furtividade"] ?>"
         required>
       </div>
 
@@ -373,7 +449,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Intimidacao"] ?>"
         required>
       </div>
 
@@ -387,7 +463,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Intuicao"] ?>"
         required>
       </div>
 
@@ -401,7 +477,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Investigacao"] ?>"
         required>
       </div>
 
@@ -415,7 +491,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Luta_Briga"] ?>"
         required>
       </div>
 
@@ -429,7 +505,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Medicina"] ?>"
         required>
       </div>
 
@@ -442,7 +518,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Ocultismo"] ?>"
         required>
       </div>
 
@@ -455,7 +531,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Percepcao"] ?>"
         required>
       </div>
 
@@ -468,7 +544,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Pontaria"] ?>"
         required>
       </div>
 
@@ -481,7 +557,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Reflexos_Iniciativa"] ?>"
         required>
       </div>
 
@@ -494,7 +570,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Religiao"] ?>"
         required>
       </div>
 
@@ -507,7 +583,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Tatica"] ?>"
         required>
       </div>
 
@@ -520,7 +596,7 @@ require_once __DIR__ . '/../includes/header.php';
         class="input-pericias"
         min="0"
         max="5"
-        value="<?= $nivel ?>"
+        value="<?= $pericias["Vontade"] ?>"
         required>
       </div>
     </div>

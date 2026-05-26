@@ -2,8 +2,10 @@
 
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../repository/PersonagemRepository.php';
+require_once __DIR__ . '/../repository/PericiaRepository.php';
 
-$repo = new PersonagemRepository();
+$repoPersonagem = new PersonagemRepository();
+$repoPericia = new PericiaRepository();
 
 $id = 0;
 if (isset($_GET['id'])) {
@@ -11,8 +13,10 @@ if (isset($_GET['id'])) {
 }
 
 $personagem = null;
+$pericia = null;
 if ($id > 0) {
-    $personagem = $repo->buscarPorId($id);
+    $personagem = $repoPersonagem->buscarPorId($id);
+    $pericia = $repoPericia->buscarPorId($personagem->getId());
 }
 
 // Personagem não encontrado ou não pertence ao usuário logado
@@ -22,7 +26,8 @@ if ($personagem === null || $personagem->getId_usuario() !== $_SESSION['id_usuar
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $repo->excluir($personagem->getId());
+    $repoPericia->excluir($pericia->getId_Personagem());
+    $repoPersonagem->excluir($personagem->getId());
     header('Location: index.php');
     exit;
 }

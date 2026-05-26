@@ -7,7 +7,7 @@ $repo = new PersonagemRepository();
 $erro = '';
 
 $id_usuario = 0;
-$id = 0;
+$id_personagem = 0;
 $nome = '';
 $idade = 0;
 $raca = '';
@@ -67,26 +67,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($carisma > $intelecto) $pf = $carisma;
     else $pf = $intelecto;
     $id_usuario = $_SESSION['id_usuario'];
-    $pericias["Acrobacia"] = (int) ($_POST['acrobacia'] ?? 0);
-    $pericias["Adestramento"]
-    $pericias["Artes"]
-    $pericias["Atletismo"]
-    $pericias["Diplomacia"]
-    $pericias["Enganacao"]
-    $pericias["Fortitude"]
-    $pericias["Furtividade"]
-    $pericias["Intimidacao"]
-    $pericias["Intuicao"]
-    $pericias["Investigacao"]
-    $pericias["Luta_Briga"]
-    $pericias["Medicina"]
-    $pericias["Ocultismo"]
-    $pericias["Percepcao"]
-    $pericias["Pontaria"]
-    $pericias["Reflexos_Iniciativa"]
-    $pericias["Religiao"]
-    $pericias["Tatica"]
-    $pericias["Vontade"]
+    
+    $pericias["Acrobacia"]              = (int) ($_POST['acrobacia'] ?? 0);
+    $pericias["Adestramento"]           = (int) ($_POST['adestramento'] ?? 0);
+    $pericias["Artes"]                  = (int) ($_POST['artes'] ?? 0);
+    $pericias["Atletismo"]              = (int) ($_POST['atletismo'] ?? 0);
+    $pericias["Diplomacia"]             = (int) ($_POST['diplomacia'] ?? 0);
+    $pericias["Enganacao"]              = (int) ($_POST['enganacao'] ?? 0);
+    $pericias["Fortitude"]              = (int) ($_POST['fortitude'] ?? 0);
+    $pericias["Furtividade"]            = (int) ($_POST['furtividade'] ?? 0);
+    $pericias["Intimidacao"]            = (int) ($_POST['intimidacao'] ?? 0);
+    $pericias["Intuicao"]               = (int) ($_POST['intuicao'] ?? 0);
+    $pericias["Investigacao"]           = (int) ($_POST['investigacao'] ?? 0);
+    $pericias["Luta_Briga"]             = (int) ($_POST['luta_briga'] ?? 0);
+    $pericias["Medicina"]               = (int) ($_POST['medicina'] ?? 0);
+    $pericias["Ocultismo"]              = (int) ($_POST['ocultismo'] ?? 0);
+    $pericias["Percepcao"]              = (int) ($_POST['percepcao'] ?? 0);
+    $pericias["Pontaria"]               = (int) ($_POST['pontaria'] ?? 0);
+    $pericias["Reflexos_Iniciativa"]    = (int) ($_POST['reflexos_iniciativa'] ?? 0);
+    $pericias["Religiao"]               = (int) ($_POST['religiao'] ?? 0);
+    $pericias["Tatica"]                 = (int) ($_POST['tatica'] ?? 0);
+    $pericias["Vontade"]                = (int) ($_POST['vontade'] ?? 0);
 
     try {
         $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);

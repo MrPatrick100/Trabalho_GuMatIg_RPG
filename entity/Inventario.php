@@ -64,30 +64,26 @@ class Inventario {
         $arma2      = trim($arma2);
         $amuleto    = trim($amuleto);
         $itens      = trim($itens);
-
-        if ($nome === '' || $tipo === '' || $estilo === '') {
-            throw new InvalidArgumentException('Nome, tipo e estilo são obrigatórios.');
-        }
-
-        if ($ciclo < 1 || $ciclo > 6) {
-            throw new InvalidArgumentException('O ciclo deve ser entre 1 e 6.');
-        }
+        $moedas     = trim($moedas);
 
         //Colocar as condições de preenchimento
 
-        $this->nome  = $nome;
-        $this->tipo = $tipo;
-        $this->ciclo = $ciclo;
-        $this->estilo  = $estilo;
-        $this->custo  = $custo;
-        $this->descricao = $descricao;
+        $this->cabeca  = $cabeca;
+        $this->peitoral = $peitoral;
+        $this->calca = $calca;
+        $this->calcado = $calcado;
+        $this->arma1 = $arma1;
+        $this->arma2 = $arma2;
+        $this->amuleto = $amuleto;
+        $this->itens = $itens;
+        $this->moedas = $moedas;
     }
 
-    public function registrarIdGerado(int $id): void {
-        if ($id <= 0) {
+    public function registrarIdGerado(int $id_personagem): void {
+        if ($id_personagem <= 0) {
             throw new InvalidArgumentException('ID inválido.');
         }
 
-        $this->id = $id;
+        $this->id_personagem = $id_personagem;
     }
 }

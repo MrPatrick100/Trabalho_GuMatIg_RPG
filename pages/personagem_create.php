@@ -51,7 +51,6 @@ $pericias = [
   "Vontade" => 0
 ];
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = trim($_POST['nome'] ?? '');
     $idade = (int) ($_POST['idade'] ?? 0);

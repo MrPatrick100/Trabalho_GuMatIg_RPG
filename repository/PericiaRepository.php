@@ -104,7 +104,7 @@ class PericiaRepository {
             ':vontade' => $pericia->getVontade(),
         ]);
 
-        $pericia->registrarIdGerado((int) $this->pdo->lastInsertId());
+        $pericia->registrarIdGerado($pericia->getId_personagem());
         $pericia->num_alteracao++;
     }
 

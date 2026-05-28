@@ -91,7 +91,7 @@ class PersonagemRepository {
         $personagem = $this->buscarPorId($id);
 
         if ($personagem === null) {
-            throw new RuntimeException('Pokémon não encontrado.');
+            throw new RuntimeException('Personagem não encontrado.');
         }
 
         $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);

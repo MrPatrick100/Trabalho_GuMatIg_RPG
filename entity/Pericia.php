@@ -78,7 +78,7 @@ class Pericia {
         int $investigacao, int $luta_briga, int $medicina, int $ocultismo, int $percepcao, int $pontaria,
         int $reflexos_iniciativa, int $religiao, int $tatica, int $vontade
     ): Pericia {
-            if ($id_personagem <= 0) {
+        if ($id_personagem <= 0) {
             throw new InvalidArgumentException('Personagem inválido.');
         }
 

@@ -6,6 +6,16 @@ require_once __DIR__ . '/../repository/PersonagemRepository.php';
 $repo = new PersonagemRepository();
 $erro = '';
 
+$id = 0;
+if (isset($_GET['id'])) {
+  $id = (int) $_GET['id'];
+}
+
+$personagem = null;
+if ($id > 0) {
+  $personagem = $repo->buscarPorId($id);
+}
+
 $id_usuario = 0;
 $id_personagem = 0;
 $nome = '';
@@ -23,6 +33,24 @@ $hp = 0;
 $stamina = 0;
 $mana = 0;
 $pf = 0;
+
+if ($personagem !== null) {
+  $nome = $personagem->getNome();
+  $idade = $personagem->getIdade();
+  $raca = $personagem->getRaca();
+  $nivel = $personagem->getNivel();
+  $agilidade = $personagem->getAgilidade();
+  $forca = $personagem->getForca();
+  $intelecto = $personagem->getIntelecto();
+  $constituicao = $personagem->getConstituicao();
+  $carisma = $personagem->getCarisma();
+  $magia = $personagem->getMagia();
+  $aparencia = $personagem->getAparencia();
+  $hp = $personagem->getHp();
+  $stamina = $personagem->getStamina();
+  $mana = $personagem->getMana();
+  $pf = $personagem->getPf();
+}
 
 $racas = ['Humano', 'Elfo', 'Goblin', 'Anao', 'Lefou', 'Demonio', 'Gnomo', 'Orc', 'Troll', 'Tita'];
 $pericias = [
@@ -104,7 +132,7 @@ require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="page-header">
-  <h2>Novo Personagem</h2>
+  <h2><?= $nome ?></h2>
   <a href="index.php" class="btn btn-ghost">← Voltar</a>
 </div>
 

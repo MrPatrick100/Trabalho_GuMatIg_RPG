@@ -648,3 +648,82 @@ a:hover {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+/*BARRA DE PESQUISA*/
+
+.search-bar {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  max-width: 520px;
+  width: 100%;
+  background: var(--paper-soft);
+  border: 2px solid var(--ink);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* input */
+.search-bar input[type="text"],
+.search-bar input[type="search"] {
+  flex: 1;
+  min-height: 44px;
+  padding: 10px 14px;
+
+  border: none;
+  outline: none;
+
+  background: #fffdf7;
+  color: var(--ink);
+
+  font: inherit;
+  font-weight: 700;
+}
+
+.search-bar input:focus {
+  background: #fff;
+}
+
+.search-bar button {
+  min-width: 44px;
+  padding: 0 16px;
+
+  border: none;
+  border-left: 2px solid var(--ink);
+
+  background: var(--red);
+  color: var(--paper-soft);
+
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+
+  cursor: pointer;
+
+  transition: transform .12s ease, background .12s ease;
+}
+
+.search-bar button:hover {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+.search-bar button:active {
+  transform: translate(2px, 2px);
+}
+
+@media (max-width: 760px) {
+  .search-bar {
+    width: 100%;
+  }
+}

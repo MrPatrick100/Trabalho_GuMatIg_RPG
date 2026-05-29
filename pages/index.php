@@ -5,6 +5,15 @@ require_once __DIR__ . '/../repository/PersonagemRepository.php';
 
 $repo = new PersonagemRepository();
 $personagens = $repo->listarPorUsuario($_SESSION['id_usuario']);
+$pesquisa = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pesquisa'])) {
+  $pesquisa = trim($_GET['pesquisa']);
+}
+
+if ($pesquisa !== '') {
+  $personagens = $repo->listarFiltrando($_SESSION['id_usuario'], $pesquisa);
+}
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
@@ -12,6 +21,13 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="page-header">
   <h2>Meus Personagens</h2>
   <a href="personagem_create.php" class="btn btn-primary">+ Novo Personagem</a>
+</div>
+
+<div>
+  <form class="search-bar" method="GET" action="index.php">
+    <input type="search" name="pesquisa" placeholder="Buscar personagem...">
+    <button type="submit">🔍</button>
+  </form>
 </div>
 
 <?php if (empty($personagens)): ?>

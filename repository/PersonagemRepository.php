@@ -24,6 +24,19 @@ class PersonagemRepository {
         return $lista;
     }
 
+    public function listarFiltrando(int $usuarioId, string $nome_pesquisa): array {
+        $pesquisa = '%' . $nome_pesquisa . '%';
+        $stmt = $this->pdo->prepare(
+            'SELECT * FROM personagem WHERE id_usuario = :idu AND nome LIKE :pesquisa ORDER BY nome ASC'
+        );
+        $stmt->execute([':idu' => $usuarioId, ':pesquisa' => $pesquisa]);
+        $lista = [];
+        foreach ($stmt->fetchAll() as $dados) {
+            $lista[] = new Personagem($dados);
+        }
+        return $lista;
+    }
+
     public function buscarPorId(int $id): ?Personagem {
         $stmt = $this->pdo->prepare('SELECT * FROM personagem WHERE id = :id LIMIT 1');
         $stmt->execute([':id' => $id]);

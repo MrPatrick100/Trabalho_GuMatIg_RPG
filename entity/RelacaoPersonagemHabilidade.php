@@ -16,7 +16,7 @@ class RelacaoPersonagemHabilidade {
 
     public static function novo(int $id_personagem, int $id_habilidade): RelacaoPersonagemHabilidade {
 
-        $relacao = new RelacaoPersonagemHabilidade(['id_personagem' => $id_personagem], ['id_habilidade' => $id_habilidade]);
+        $relacao = new RelacaoPersonagemHabilidade([['id_personagem' => $id_personagem], ['id_habilidade' => $id_habilidade]]);
         // $relacao->alterarDados($id_personagem, $id_habilidade);
 
         return $relacao;
@@ -45,11 +45,11 @@ class RelacaoPersonagemHabilidade {
     //     $this->descricao = $descricao;
     // }
 
-    public function registrarIdGerado(int $id): void {
-        if ($id <= 0) {
-            throw new InvalidArgumentException('ID inválido.');
-        }
+    // public function registrarIdGerado(int $id): void {
+    //     if ($id <= 0) {
+    //         throw new InvalidArgumentException('ID inválido.');
+    //     }
 
-        $this->id = $id;
-    }
+    //     $this->id = $id;
+    // }
 }

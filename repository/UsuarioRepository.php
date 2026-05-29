@@ -22,4 +22,9 @@ class UsuarioRepository {
 
         return null;
     }
+
+    public function criarUsuario(string $nome, string $email, string $senha): void {
+        $stmt = $this->pdo->prepare('INSERT INTO usuario (nome, email, senha) VALUES (:nome, :email, :senha)');
+        $stmt->execute([':nome' => $nome, ':email' => $email, ':senha' => $senha]);
+    }
 }

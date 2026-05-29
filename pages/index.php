@@ -15,6 +15,10 @@ if ($pesquisa !== '') {
   $personagens = $repo->listarFiltrando($_SESSION['id_usuario'], $pesquisa);
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['limpar'])) {
+  $personagens = $repo->listarPorUsuario($_SESSION['id_usuario']);
+}
+
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
@@ -27,6 +31,7 @@ require_once __DIR__ . '/../includes/header.php';
   <form class="search-bar" method="GET" action="index.php">
     <input type="search" name="pesquisa" placeholder="Buscar personagem...">
     <button type="submit">🔍</button>
+    <button type="submit" id="limpar" name="limpar">Todos</button>
   </form>
 </div>
 

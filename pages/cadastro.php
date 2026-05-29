@@ -1,38 +1,29 @@
 <?php
-
-session_start();
-
-// Se já estiver logado, vai direto para a página principal
-if (!empty($_SESSION['id_usuario'])) {
-    header('Location: index.php');
-    exit;
-}
-
 require_once __DIR__ . '/../repository/UsuarioRepository.php';
 
 $erro = '';
 $emailFormulario = $_POST['email'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nome = $_POST['nome'] ?? '';
     $email = trim($_POST['email'] ?? '');
     $senha = $_POST['senha'] ?? '';
+    $confirmarSenha = $_POST['confirmar_senha'] ?? '';
 
-    if ($email === '' || $senha === '') {
+    if ($nome === '' || $email === '' || $senha === '' || $confirmarSenha === '') {
         $erro = 'Preencha todos os campos.';
-    } else {
+    }
+
+    else if ($senha !== $confirmarSenha) {
+        $erro = 'As senhas devem ser iguais.';
+    }
+    
+    else {
         $repo = new UsuarioRepository();
-        $usuario = $repo->buscarPorEmail($email);
+        $senha = hash('sha256', $senha);
+        $repo->criarUsuario($nome, $email, $senha);
 
-        // Compara o hash SHA256 da senha digitada com o hash salvo no banco
-        if ($usuario && hash('sha256', $senha) === $usuario->getSenha()) {
-            $_SESSION['id_usuario']   = $usuario->getId();
-            $_SESSION['usuario_nome'] = $usuario->getNome();
-
-            header('Location: index.php');
-            exit;
-        } else {
-            $erro = 'E-mail ou senha inválidos.';
-        }
+        header('Location: login.php');
     }
 }
 ?>
@@ -54,7 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
   <?php endif; ?>
 
-  <form method="POST" action="login.php">
+  <form method="POST" action="cadastro.php">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input
+        type="name"
+        id="nome"
+        name="nome"
+        placeholder="GuMatIg"
+        required
+      />
+    </div>
+
     <div class="form-group">
       <label for="email">E-mail</label>
       <input
@@ -78,10 +80,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       />
     </div>
 
-    <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+    <div class="form-group">
+      <label for="senha">Confirmar Senha</label>
+      <input
+        type="password"
+        id="senha"
+        name="confirmar_senha"
+        placeholder="••••••••"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-full">Criar Conta</button>
     <br>
     <br>
-    <a href="cadastro.php" class="btn btn-secondary btn-full">Criar uma conta</a>
+    <a href="login.php" class="btn btn-secondary btn-full">Fazer Login</a>
   </form>
 
 </div>

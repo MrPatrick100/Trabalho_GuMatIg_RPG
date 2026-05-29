@@ -475,12 +475,13 @@ a:hover {
 .form-group {
   margin-bottom: 20px;
   margin-left: 10%;
-  padding-top: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 7px;
+  margin-bottom: 0px;
   color: var(--ink);
   font-size: .76rem;
   font-weight: 900;
@@ -489,6 +490,7 @@ a:hover {
 }
 
 .form-group input[type="text"],
+.form-group input[type="name"],
 .form-group input[type="email"],
 .form-group input[type="password"],
 .form-group input[type="number"],

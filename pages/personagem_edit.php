@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $pericias["Medicina"], $pericias["Ocultismo"], $pericias["Percepcao"], $pericias["Pontaria"],
           $pericias["Reflexos_Iniciativa"], $pericias["Religiao"], $pericias["Tatica"], $pericias["Vontade"]
         );
-        $repoPericia->salvar($pericia);
+        $repoPericia->alterar($pericia);
         header('Location: index.php');
         exit;
     } catch (InvalidArgumentException $e) {
@@ -200,7 +200,7 @@ require_once __DIR__ . '/../includes/header.php';
         id="idade"
         name="idade"
         placeholder="Ex: 50"
-        value="<?= htmlspecialchars($idade) ?>"
+        value="<?= $idade ?>"
         required
       />
     </div>

@@ -63,11 +63,12 @@ class PersonagemRepository {
         }
 
         $stmt = $this->pdo->prepare(
-            'INSERT INTO personagem (id_usuario, nome, raca, nivel, agilidade, forca, intelecto, constituicao, carisma, magia, aparencia) VALUES (:idu, :nome, :raca, :nivel, :agilidade, :forca, :intelecto, :constituicao, :carisma, :magia, :aparencia)'
+            'INSERT INTO personagem (id_usuario, nome, idade, raca, nivel, agilidade, forca, intelecto, constituicao, carisma, magia, aparencia) VALUES (:idu, :nome, :idade, :raca, :nivel, :agilidade, :forca, :intelecto, :constituicao, :carisma, :magia, :aparencia)'
         );
         $stmt->execute([
             ':idu'   => $personagem->getId_usuario(),
             ':nome'  => $personagem->getNome(),
+            ':idade' => $personagem->getIdade(),
             ':raca'  => $personagem->getRaca(),
             ':nivel' => $personagem->getNivel(),
             ':agilidade'   => $personagem->getAgilidade(),

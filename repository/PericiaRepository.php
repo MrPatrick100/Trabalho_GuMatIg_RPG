@@ -36,42 +36,41 @@ class PericiaRepository {
         return null;
     }
 
+    public function alterar(Pericia $pericia): void {
+        $stmt = $this->pdo->prepare(
+            'UPDATE pericias SET acrobacia = :acrobacia, adestramento = :adestramento, 
+            artes = :artes, atletismo = :atletismo, diplomacia = :diplomacia, enganacao = :enganacao,
+            fortitude = :fortitude, furtividade = :furtividade, intimidacao = :intimidacao, intuicao = :intuicao,
+            investigacao = :investigacao, luta_briga = :luta_briga, medicina = :medicina, ocultismo = :ocultismo,
+            percepcao = :percepcao, pontaria = :pontaria, reflexos_iniciativa = :reflexos_iniciativa,
+            religiao = :religiao, tatica = :tatica, vontade = :vontade WHERE id_personagem = :id_personagem'
+        );
+        $stmt->execute([
+            ':id_personagem' => $pericia->getId_personagem(),
+            ':acrobacia' => $pericia->getAcrobacia(),
+            ':adestramento' => $pericia->getAdestramento(),
+            ':artes' => $pericia->getArtes(),
+            ':atletismo' => $pericia->getAtletismo(),
+            ':diplomacia' => $pericia->getDiplomacia(),
+            ':enganacao' => $pericia->getEnganacao(),
+            ':fortitude'=> $pericia->getFortitude(),
+            ':furtividade' => $pericia->getFurtividade(),
+            ':intimidacao' => $pericia->getIntimidacao(),
+            ':intuicao' => $pericia->getIntuicao(),
+            ':investigacao' => $pericia->getInvestigacao(),
+            ':luta_briga' => $pericia->getLuta_Briga(),
+            ':medicina' => $pericia->getMedicina(),
+            ':ocultismo' => $pericia->getOcultismo(),
+            ':percepcao' => $pericia->getPercepcao(),
+            ':pontaria' => $pericia->getPontaria(),
+            ':reflexos_iniciativa' => $pericia->getReflexos_Iniciativa(),
+            ':religiao' => $pericia->getReligiao(),
+            ':tatica' => $pericia->getTatica(),
+            ':vontade' => $pericia->getVontade(),
+        ]);
+        return;
+    }
     public function salvar(Pericia $pericia): void {
-        if ($pericia->num_alteracao > 0) {
-            $stmt = $this->pdo->prepare(
-                'UPDATE pericias SET acrobacia = :acrobacia, adestramento = :adestramento, 
-                artes = :artes, atletismo = :atletismo, diplomacia = :diplomacia, enganacao = :enganacao,
-                fortitude = :fortitude, furtividade = :furtividade, intimidacao = :intimidacao, intuicao = :intuicao,
-                investigacao = :investigacao, luta_briga = :luta_briga, medicina = :medicina, ocultismo = :ocultismo,
-                percepcao = :percepcao, pontaria = :pontaria, reflexos_iniciativa = :reflexos_iniciativa,
-                religiao = :religiao, tatica = :tatica, vontade = :vontade WHERE id_personagem = :id_personagem'
-            );
-            $stmt->execute([
-                ':id_personagem' => $pericia->getId_personagem(),
-                ':acrobacia' => $pericia->getAcrobacia(),
-                ':adestramento' => $pericia->getAdestramento(),
-                ':artes' => $pericia->getArtes(),
-                ':atletismo' => $pericia->getAtletismo(),
-                ':diplomacia' => $pericia->getDiplomacia(),
-                ':enganacao' => $pericia->getEnganacao(),
-                ':fortitude'=> $pericia->getFortitude(),
-                ':furtividade' => $pericia->getFurtividade(),
-                ':intimidacao' => $pericia->getIntimidacao(),
-                ':intuicao' => $pericia->getIntuicao(),
-                ':investigacao' => $pericia->getInvestigacao(),
-                ':luta_briga' => $pericia->getLuta_Briga(),
-                ':medicina' => $pericia->getMedicina(),
-                ':ocultismo' => $pericia->getOcultismo(),
-                ':percepcao' => $pericia->getPercepcao(),
-                ':pontaria' => $pericia->getPontaria(),
-                ':reflexos_iniciativa' => $pericia->getReflexos_Iniciativa(),
-                ':religiao' => $pericia->getReligiao(),
-                ':tatica' => $pericia->getTatica(),
-                ':vontade' => $pericia->getVontade(),
-            ]);
-            return;
-        }
-
         $stmt = $this->pdo->prepare(
             'INSERT INTO pericias (id_personagem, acrobacia, adestramento, artes, atletismo, diplomacia, enganacao,
             fortitude, furtividade, intimidacao, intuicao, investigacao, luta_briga, medicina, ocultismo, percepcao,
@@ -105,7 +104,6 @@ class PericiaRepository {
         ]);
 
         $pericia->registrarIdGerado($pericia->getId_personagem());
-        $pericia->num_alteracao++;
     }
 
     public function inserir(

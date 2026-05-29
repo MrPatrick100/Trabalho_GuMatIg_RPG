@@ -1,8 +1,6 @@
 <?php
 
 class Pericia {
-
-    public int     $num_alteracao = 0;
     private int    $id_personagem;
     private int    $acrobacia;
     private int    $adestramento;
@@ -89,7 +87,6 @@ class Pericia {
             $investigacao, $luta_briga, $medicina, $ocultismo, $percepcao, $pontaria,
             $reflexos_iniciativa, $religiao, $tatica, $vontade
         );
-
         return $pericia;
     }
 

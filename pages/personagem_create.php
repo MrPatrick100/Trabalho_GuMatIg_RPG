@@ -145,7 +145,7 @@ require_once __DIR__ . '/../includes/header.php';
         id="idade"
         name="idade"
         placeholder="Ex: 50"
-        value="<?= htmlspecialchars($idade) ?>"
+        value="<?= $idade ?>"
         required
       />
     </div>

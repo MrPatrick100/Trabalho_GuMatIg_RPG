@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/05/2026 às 23:39
+-- Tempo de geração: 30/05/2026 às 17:00
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.2.12
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `habilidade` (
+  `id_usuario` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL,
   `nome` varchar(100) DEFAULT NULL,
   `tipo` varchar(100) DEFAULT NULL,
@@ -42,8 +43,10 @@ CREATE TABLE `habilidade` (
 -- Despejando dados para a tabela `habilidade`
 --
 
-INSERT INTO `habilidade` (`id`, `nome`, `tipo`, `ciclo`, `estilo`, `custo`, `descricao`, `deletado`) VALUES
-(1, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, '4', 0);
+INSERT INTO `habilidade` (`id_usuario`, `id`, `nome`, `tipo`, `ciclo`, `estilo`, `custo`, `descricao`, `deletado`) VALUES
+(NULL, 1, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, '4', 0),
+(1, 3, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, 'Buela de fuego', 0),
+(1, 4, 'Uppercut', 'Ativa', 2, 'Física', 6, 'Socão', 0);
 
 -- --------------------------------------------------------
 
@@ -126,19 +129,20 @@ CREATE TABLE `personagem` (
   `carisma` int(11) NOT NULL,
   `magia` int(11) NOT NULL,
   `aparencia` varchar(255) DEFAULT NULL,
-  `deletado` tinyint(1) NOT NULL DEFAULT 0
+  `deletado` tinyint(1) NOT NULL DEFAULT 0,
+  `lore` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `personagem`
 --
 
-INSERT INTO `personagem` (`id_usuario`, `id`, `nome`, `idade`, `raca`, `nivel`, `agilidade`, `forca`, `intelecto`, `constituicao`, `carisma`, `magia`, `aparencia`, `deletado`) VALUES
-(1, 18, 'Raven', 0, 'Elfo', 2, 0, 0, 2, 1, 3, 4, '', 0),
-(1, 30, 'MatFake', 17, 'Elfo', 3, 0, 0, 0, 0, 0, 0, '', 0),
-(1, 31, 'Gustavo Farias Portela Teixeira', 14, 'Humano', 1, 0, 0, 0, 0, 0, 0, '', 0),
-(1, 32, 'Gustavo', 17, 'Humano', 4, 0, 0, 0, 0, 2, 0, '', 0),
-(2, 33, 'Malafaya', 45, 'Humano', 2, 1, 2, 3, 2, 0, 3, '', 0);
+INSERT INTO `personagem` (`id_usuario`, `id`, `nome`, `idade`, `raca`, `nivel`, `agilidade`, `forca`, `intelecto`, `constituicao`, `carisma`, `magia`, `aparencia`, `deletado`, `lore`) VALUES
+(1, 18, 'Raven', 0, 'Elfo', 2, 0, 0, 2, 1, 3, 4, '', 0, NULL),
+(1, 30, 'MatFake', 17, 'Elfo', 3, 0, 0, 0, 0, 0, 0, '', 0, NULL),
+(1, 31, 'Gustavo Farias Portela Teixeira', 14, 'Humano', 1, 0, 0, 0, 0, 0, 0, '', 0, NULL),
+(1, 32, 'Gustavo', 17, 'Humano', 4, 0, 0, 0, 0, 2, 0, '', 0, NULL),
+(2, 33, 'Malafaya', 45, 'Humano', 2, 1, 2, 3, 2, 0, 3, '', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -183,7 +187,8 @@ INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `criado_em`) VALUES
 -- Índices de tabela `habilidade`
 --
 ALTER TABLE `habilidade`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_habilidade_usuario` (`id_usuario`);
 
 --
 -- Índices de tabela `inventario`
@@ -228,7 +233,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `habilidade`
 --
 ALTER TABLE `habilidade`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `personagem`
@@ -251,6 +256,12 @@ ALTER TABLE `usuario`
 --
 -- Restrições para tabelas despejadas
 --
+
+--
+-- Restrições para tabelas `habilidade`
+--
+ALTER TABLE `habilidade`
+  ADD CONSTRAINT `fk_habilidade_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Restrições para tabelas `inventario`

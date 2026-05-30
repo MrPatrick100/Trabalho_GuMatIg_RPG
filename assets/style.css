@@ -472,9 +472,17 @@ a:hover {
   box-shadow: 0 0 0 4px rgba(240,189,47,.35);
 }
 
-.form-group {
+.conteudo{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group,
+.div-pericia {
   margin-bottom: 20px;
-  margin-left: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
   padding-top: 5px;
   padding-bottom: 5px;
 }
@@ -533,9 +541,10 @@ a:hover {
   box-shadow: 0 0 0 4px rgba(240,189,47,.42);
 }
 
-.form-card{
+.form-card,
+.form-pericias{
   max-width: 620px;
-  
+  padding-top: 10px;
 }
 
 .form-actions {

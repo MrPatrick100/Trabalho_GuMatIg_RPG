@@ -60,6 +60,7 @@ require_once __DIR__ . '/../includes/header.php';
   <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
 <?php endif; ?>
 
+<div class="conteudo">
 <div class="form-card">
 
   <div class="form-group">
@@ -112,8 +113,10 @@ require_once __DIR__ . '/../includes/header.php';
         value="<?= $aparencia ?>"
       />
     </div>
+</div>
+<div class="form-card">
 
-    <div class="form-group" class="form-pericias">
+    <div class="form-group">
         <h3>PERÍCIAS</h3>
 
         <div class="form-group2">
@@ -139,6 +142,7 @@ require_once __DIR__ . '/../includes/header.php';
             <label for="vontade">Vontade: <?= $pericias->getVontade() ?></label>
         </div>
     </div>
+</div>
 </div>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

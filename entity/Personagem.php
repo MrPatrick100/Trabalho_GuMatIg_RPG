@@ -76,7 +76,10 @@ class Personagem {
         return $personagem;
     }
 
-    public function alterarDados(string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia, string $lore, bool $deletado): void {
+    public function alterarDados(
+        string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, 
+        int $carisma, int $magia, string $aparencia, string $lore, bool $deletado
+    ): void {
         $nome = trim($nome);
         $raca = trim($raca);
 
@@ -92,24 +95,24 @@ class Personagem {
             throw new InvalidArgumentException('O nível deve ser entre 1 e 5.');
         }
 
-        $this->nome  = $nome;
-        $this->idade = $idade;
-        $this->raca = $raca;
-        $this->nivel  = $nivel;
-        $this->agilidade  = $agilidade;
-        $this->forca = $forca;
-        $this->intelecto  = $intelecto;
-        $this->constituicao  = $constituicao;
-        $this->carisma = $carisma;
-        $this->magia  = $magia;
-        $this->aparencia  = $aparencia;
-        $this->lore  = $lore;
-        $this->deletado  = $deletado;
-        $this->hp = $nivel * 5 + $constituicao * 5;
-        $this->stamina = $forca * 10;
-        $this->mana = $magia * 10;
-        if($this->carisma > $intelecto) $this->pf = $carisma;
-        else $this->pf = $intelecto;
+        $this->nome         = $nome;
+        $this->idade        = $idade;
+        $this->raca         = $raca;
+        $this->nivel        = $nivel;
+        $this->agilidade    = $agilidade;
+        $this->forca        = $forca;
+        $this->intelecto    = $intelecto;
+        $this->constituicao = $constituicao;
+        $this->carisma      = $carisma;
+        $this->magia        = $magia;
+        $this->aparencia    = $aparencia;
+        $this->lore         = $lore;
+        $this->deletado     = $deletado;
+        $this->hp           = $nivel * 5 + $constituicao * 5;
+        $this->stamina      = $forca * 10;
+        $this->mana         = $magia * 10;
+        if($carisma > $intelecto) $this->pf = $carisma;
+        else $this->pf      = $intelecto;
     }
 
     public function registrarIdGerado(int $id): void {

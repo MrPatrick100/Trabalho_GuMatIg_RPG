@@ -22,6 +22,7 @@ $constituicao = 0;
 $carisma = 0;
 $magia = 0;
 $aparencia = '';
+$lore = '';
 $hp = 0;
 $stamina = 0;
 $mana = 0;
@@ -63,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $carisma = (int) ($_POST['carisma'] ?? 0);
     $magia = (int) ($_POST['magia'] ?? 0);
     $aparencia = trim($_POST['aparencia'] ?? '');
+    $lore = trim($_POST['lore'] ?? '');
     $hp = $nivel * 5 + $constituicao * 5;
     $stamina = $forca * 10;
     $mana = $magia * 10;
@@ -92,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pericias["Vontade"]                = (int) ($_POST['vontade'] ?? 0);
 
     try {
-        $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
+        $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, FALSE);
         $repoPersonagem->salvar($personagem);
 
         $pericia = Pericia::novo(
@@ -129,7 +131,7 @@ require_once __DIR__ . '/../includes/header.php';
     <div class="form-group">
       <label for="nome">Nome do Personagem</label>
       <input
-        type="text"
+        type="name"
         id="nome"
         name="nome"
         placeholder="Ex: Dragão"
@@ -543,6 +545,19 @@ require_once __DIR__ . '/../includes/header.php';
         max="5"
         value="<?= $pericias["Vontade"] ?>"
         required>
+      </div>
+      <br>
+      <br>
+      <div class="form-group">
+        <label for="nome">História</label>
+        <input
+          type="text"
+          id="lore"
+          name="lore"
+          placeholder="Ex: Herói de Guerra"
+          value="<?= htmlspecialchars($lore) ?>"
+          required
+        />
       </div>
     </div>
 

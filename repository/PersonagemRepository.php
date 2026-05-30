@@ -52,7 +52,7 @@ class PersonagemRepository {
     public function salvar(Personagem $personagem): void {
         if ($personagem->getId() > 0) {
             $stmt = $this->pdo->prepare(
-                'UPDATE personagem SET nome = :nome, idade = :idade, raca = :raca, nivel = :nivel, agilidade = :agilidade, forca = :forca, intelecto = :intelecto, constituicao = :constituicao, carisma = :carisma, magia = :magia, aparencia = :aparencia WHERE id = :id'
+                'UPDATE personagem SET nome = :nome, idade = :idade, raca = :raca, nivel = :nivel, agilidade = :agilidade, forca = :forca, intelecto = :intelecto, constituicao = :constituicao, carisma = :carisma, magia = :magia, aparencia = :aparencia, lore = :lore, deletado = :deletado WHERE id = :id'
             );
             $stmt->execute([
                 ':id' => $personagem->getId(),
@@ -67,6 +67,8 @@ class PersonagemRepository {
                 ':carisma' => $personagem->getCarisma(),
                 ':magia' => $personagem->getMagia(),
                 ':aparencia' => $personagem->getAparencia(),
+                ':lore' => $personagem->getLore(),
+                ':deletado' => $personagem->getDeletado(),
             ]);
             return;
         }
@@ -76,7 +78,7 @@ class PersonagemRepository {
         }
 
         $stmt = $this->pdo->prepare(
-            'INSERT INTO personagem (id_usuario, nome, idade, raca, nivel, agilidade, forca, intelecto, constituicao, carisma, magia, aparencia) VALUES (:idu, :nome, :idade, :raca, :nivel, :agilidade, :forca, :intelecto, :constituicao, :carisma, :magia, :aparencia)'
+            'INSERT INTO personagem (id_usuario, nome, idade, raca, nivel, agilidade, forca, intelecto, constituicao, carisma, magia, aparencia, lore, deletado) VALUES (:idu, :nome, :idade, :raca, :nivel, :agilidade, :forca, :intelecto, :constituicao, :carisma, :magia, :aparencia, :lore, :deletado)'
         );
         $stmt->execute([
             ':idu'   => $personagem->getId_usuario(),
@@ -91,24 +93,26 @@ class PersonagemRepository {
             ':carisma'   => $personagem->getCarisma(),
             ':magia'  => $personagem->getMagia(),
             ':aparencia'  => $personagem->getAparencia(),
+            ':lore' => $personagem->getLore(),
+            ':deletado' => $personagem->getDeletado(),
         ]);
 
         $personagem->registrarIdGerado((int) $this->pdo->lastInsertId());
     }
 
-    public function inserir(int $id_usuario, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia): void {
-        $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
+    public function inserir(int $id_usuario, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia, string $lore, bool $deletado): void {
+        $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, $deletado);
         $this->salvar($personagem);
     }
 
-    public function atualizar(int $id, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia): void {
+    public function atualizar(int $id, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia, string $lore, bool $deletado): void {
         $personagem = $this->buscarPorId($id);
 
         if ($personagem === null) {
             throw new RuntimeException('Personagem não encontrado.');
         }
 
-        $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia);
+        $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, $deletado);
         $this->salvar($personagem);
     }
 

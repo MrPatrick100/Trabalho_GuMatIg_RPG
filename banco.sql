@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30/05/2026 às 17:00
+-- Tempo de geração: 30/05/2026 às 22:25
 -- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -55,7 +55,6 @@ INSERT INTO `habilidade` (`id_usuario`, `id`, `nome`, `tipo`, `ciclo`, `estilo`,
 --
 
 CREATE TABLE `inventario` (
-  `id_usuario` int(11) DEFAULT NULL,
   `id_personagem` int(11) DEFAULT NULL,
   `cabeca` varchar(255) DEFAULT NULL,
   `peitoral` varchar(255) DEFAULT NULL,
@@ -194,8 +193,7 @@ ALTER TABLE `habilidade`
 -- Índices de tabela `inventario`
 --
 ALTER TABLE `inventario`
-  ADD KEY `id_personagem` (`id_personagem`),
-  ADD KEY `fk_inventario_usuario` (`id_usuario`);
+  ADD KEY `id_personagem` (`id_personagem`);
 
 --
 -- Índices de tabela `pericias`
@@ -267,7 +265,6 @@ ALTER TABLE `habilidade`
 -- Restrições para tabelas `inventario`
 --
 ALTER TABLE `inventario`
-  ADD CONSTRAINT `fk_inventario_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`id_personagem`) REFERENCES `personagem` (`id`);
 
 --

@@ -5,6 +5,19 @@ require_once __DIR__ . '/../repository/HabilidadeRepository.php';
 
 $repo = new HabilidadeRepository();
 $habilidades = $repo->listarPorUsuario($_SESSION['id_usuario']);
+$pesquisa = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pesquisa'])) {
+  $pesquisa = trim($_GET['pesquisa']);
+}
+
+if ($pesquisa !== '') {
+  $habilidades = $repo->listarFiltrando($_SESSION['id_usuario'], $pesquisa);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['limpar'])) {
+  $habilidades = $repo->listarPorUsuario($_SESSION['id_usuario']);
+}
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
@@ -12,6 +25,14 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="page-header">
   <h2>Minhas Habilidades</h2>
   <a href="habilidade_create.php" class="btn btn-primary">+ Nova Habilidade</a>
+</div>
+
+<div>
+  <form class="search-bar" method="GET" action="index2.php">
+    <input type="search" name="pesquisa" placeholder="Buscar habilidade...">
+    <button type="submit">🔍</button>
+    <button type="submit" id="limpar" name="limpar">Todos</button>
+  </form>
 </div>
 
 <?php if (empty($habilidades)): ?>

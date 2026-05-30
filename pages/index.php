@@ -47,7 +47,7 @@ require_once __DIR__ . '/../includes/header.php';
         <tr>
           <th>#</th>
           <th>Nome</th>
-          <th>Tipo</th>
+          <th>Raça</th>
           <th>Nível</th>
           <th>Ações</th>
         </tr>

@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($usuario && hash('sha256', $senha) === $usuario->getSenha()) {
             $_SESSION['id_usuario']   = $usuario->getId();
             $_SESSION['usuario_nome'] = $usuario->getNome();
+            $_SESSION['email']        = $usuario->getEmail();
+            $_SESSION['senha']  = $usuario->getSenha();
 
             header('Location: index.php');
             exit;

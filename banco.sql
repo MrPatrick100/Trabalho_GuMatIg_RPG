@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30/05/2026 às 22:25
+-- Tempo de geração: 31/05/2026 às 00:12
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -106,7 +106,7 @@ INSERT INTO `pericias` (`id_personagem`, `acrobacia`, `adestramento`, `artes`, `
 (30, 1, 0, 0, 1, 0, 2, 0, 3, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (32, 0, 3, 0, 0, 0, 0, 0, 0, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(33, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 2, 0, 0, 2, 0, 0, 1);
+(33, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0, 0, 1, 5, 1, 0, 2, 0, 0, 3);
 
 -- --------------------------------------------------------
 
@@ -141,7 +141,7 @@ INSERT INTO `personagem` (`id_usuario`, `id`, `nome`, `idade`, `raca`, `nivel`, 
 (1, 30, 'MatFake', 17, 'Elfo', 3, 0, 0, 0, 0, 0, 0, '', 0, NULL),
 (1, 31, 'Gustavo Farias Portela Teixeira', 14, 'Humano', 1, 0, 0, 0, 0, 0, 0, '', 0, NULL),
 (1, 32, 'Gustavo', 17, 'Humano', 4, 0, 0, 0, 0, 2, 0, '', 0, NULL),
-(2, 33, 'Malafaya', 45, 'Humano', 2, 1, 2, 3, 2, 0, 3, '', 0, NULL);
+(2, 33, 'Malafaya', 45, 'Humano', 3, 0, 2, 3, 2, 0, 5, '', 0, 'Nasceu em uma família simples no vilarejo de Dregbourn (Bourn), sua mãe morreu no parto e seu pai (Eldrin Corin) teve que cuidar dele sozinho. Malafaya acompanhava seu pai que saia pelo vilarejo ajudando as pessoas, além disso também ia até uma família um pouco mais do interior da vila, a família Arglye. Com o tempo visitando essa família Malafaya acabou se apegando a eles e se tornou um grande amigo de Regan, o pai da família.  Viveu sua vida assim, de maneira feliz e simples durante longos anos. Com o tempo a situação de saúde do seu pai começou a piorar e o Jovem teve que procurar um trabalho que recebesse bem para ajudar Eldrin, por sorte seu grande amigo Regan era um dos magos conselheiros do Rei e fez questão de ajudar e recomendar Malafaya para Aurelian (O Rei) afim de conseguir um bom emprego.  Malafaya conseguiu se tornar um dos magos de Valerion por causa de Regan mas mesmo assim o salário não estava sendo o bastante com a situação de seu pai que só piorava. O irmão do Rei viu a dificuldade e as habilidades do Jovem e lhe ofereceu uma proposta de trabalhar em um projeto secreto do reino chamado \"Projeto Salva-Vidas\", no qual tinha o objetivo de ajudar feridos de guerra e pessoas com doenças terminais com magia. Malafaya preocupado com seu pai e contente que iria ajudar outras pessoas aceita participar do projeto.  Trabalha lá durante anos nesse projeto até seu pai melhorar de saúde, decidindo assim passar o resto da sua vida no vilarejo vivendo com seu pai, indo para lá na virada do ano. No caminho passa na casa do seu amigo e se assusta ao escutar barulhos de magia e briga, chegando lá se depara com tudo destruído, com a esposa de Regan morta e uma criança de frente a um demônio que ia devora-lá. Presenciando essa cena Malafaya fica em shock e surpreendentemente quando o demônio percebe a sua presença ele foge (Aura++;?) . Quando Regan chega em casa você explica a situação e ele, então ele cego por vingança decide caçar o demônio e acaba discutindo com Malafaya. Depois dessa tragédia Malafaya vai encontrar seu pai e todos do vilarejo para ver se estão bem e buscar conselhos, seu pai diz que ele é um grande amigo e que você deveria ir atrás de ajudar ele e quando os dois voltassem poderiam viver em paz na vila. Determinado a salvar seu amigo, Malafaya decide ouvir o conselho do pai e vai atrás do Regan enquanto deixa a criança aos cuidados do homem. Malafaya passa anos viajando a procura de seu amigo e depois de desistir e voltar para casa envergonhado ele se depara com o Vilarejo destruído, sem nenhuma alma viva para contar o que aconteceu. Desde então Malafaya está perdido e não sabe o que deveria fazer agora, vivendo uma vida de viajante.');
 
 -- --------------------------------------------------------
 
@@ -166,17 +166,18 @@ CREATE TABLE `usuario` (
   `nome` varchar(100) NOT NULL,
   `email` varchar(150) NOT NULL,
   `senha` char(64) NOT NULL COMMENT 'Hash SHA256 da senha',
-  `criado_em` datetime NOT NULL DEFAULT current_timestamp()
+  `criado_em` datetime NOT NULL DEFAULT current_timestamp(),
+  `foto_perfil` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `criado_em`) VALUES
-(1, 'Ash Ketchum', 'admin@email.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-19 16:12:18'),
-(2, 'Gustavo Farias', 'gustavofpt3@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-29 17:57:08'),
-(3, 'Iguete', 'iguete@email.com', '33bdf44fd9ec710ad1f944a260a39fae3c9e64017cd77f45218178ecb899bbfd', '2026-05-29 18:03:53');
+INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `criado_em`, `foto_perfil`) VALUES
+(1, 'Ash Ketchum', 'admin@email.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-19 16:12:18', NULL),
+(2, 'Gustavo Farias', 'gustavofpt3@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-29 17:57:08', NULL),
+(3, 'Iguete', 'iguete@email.com', '33bdf44fd9ec710ad1f944a260a39fae3c9e64017cd77f45218178ecb899bbfd', '2026-05-29 18:03:53', NULL);
 
 --
 -- Índices para tabelas despejadas

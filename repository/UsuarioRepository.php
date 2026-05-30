@@ -24,7 +24,12 @@ class UsuarioRepository {
     }
 
     public function criarUsuario(string $nome, string $email, string $senha): void {
-        $stmt = $this->pdo->prepare('INSERT INTO usuario (nome, email, senha) VALUES (:nome, :email, :senha)');
-        $stmt->execute([':nome' => $nome, ':email' => $email, ':senha' => $senha]);
+        $stmt = $this->pdo->prepare('INSERT INTO usuario (nome, email, senha, foto_perfil) VALUES (:nome, :email, :senha, :foto_perfil)');
+        $stmt->execute([':nome' => $nome, ':email' => $email, ':senha' => $senha, ':foto_perfil' => '']);
+    }
+
+    public function atualizarSenha(int $id, string $senha): void {
+        $stmt = $this->pdo->prepare('UPDATE usuario SET senha = :senha WHERE id = :id');
+        $stmt->execute([':senha' => $senha,':id' => $id]);
     }
 }

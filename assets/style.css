@@ -754,3 +754,76 @@ a:hover {
     width: 100%;
   }
 }
+
+#btnMenu {
+  width: 40px;
+  height: 35px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.sidebar {
+  position: fixed;
+  top: 75px;
+  left: -400px;
+  width: 400px;
+  height: calc(100vh - 75px);
+  background-color: #8b1d1d;
+  border-right: 3px solid black;
+  transition: left 0.3s ease;
+  padding: 15px;
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar button {
+  padding: 12px;
+  background-color: #d4a72c;
+  border: 2px solid black;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sidebar button:hover {
+  transform: translateX(5px);
+}
+
+.avatar {
+  display: inline-block;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#avatar-header {
+  align-self: center;
+}
+
+.form-alterar-senha {
+  position: fixed;
+  top: 75px;
+  left: -400px;
+  width: 400px;
+  height: calc(100vh - 75px);
+  background-color: #8b1d1d;
+  border-right: 3px solid black;
+  transition: left 0.3s ease;
+  padding: 15px;
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-alterar-senha.active {
+  left: 0;
+}

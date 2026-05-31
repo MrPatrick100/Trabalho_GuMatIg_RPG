@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome_img = $img['name']; //pega o nome do objeto e guarda em uma variavel
     $caminho_temporario_img = $img['tmp_name']; //pega o caminho temporário do objeto e guarda em uma variavel
 
-    $caminho_final_img = "../img/personagem/" . uniqid() . "_" . $nome_img; //Decide o caminho final de onde vai ficar a img
+    $caminho_final_img = "../assets/img_personagem/" . uniqid() . "_" . $nome_img; //Decide o caminho final de onde vai ficar a img
     move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
 
     $nome = trim($_POST['nome'] ?? '');

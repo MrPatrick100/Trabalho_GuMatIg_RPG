@@ -123,7 +123,7 @@ require_once __DIR__ . '/../includes/header.php';
       <div class="form-group">
         <label for="aparencia">Aparência</label>
         <img src="<?= $personagem->getAparencia() ?>" alt="img">
-        <label for="...">string_img: <?= $personagem->getAparencia() ?></label>
+        <!-- <label for="...">string_img: <?= $personagem->getAparencia() ?></label> -->
       </div>
   </div>
   <div class="form-card">

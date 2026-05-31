@@ -32,4 +32,9 @@ class UsuarioRepository {
         $stmt = $this->pdo->prepare('UPDATE usuario SET senha = :senha WHERE id = :id');
         $stmt->execute([':senha' => $senha,':id' => $id]);
     }
+
+    public function atualizarAvatar(int $id, string $foto_perfil): void {
+        $stmt = $this->pdo->prepare('UPDATE usuario SET foto_perfil = :foto_perfil WHERE id = :id');
+        $stmt->execute([':foto_perfil' => $foto_perfil,':id' => $id]);
+    }
 }

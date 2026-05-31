@@ -822,21 +822,33 @@ a:hover {
   height: 10rem;
   border-radius: 50%;
   object-fit: cover;
+  margin: -20px;
+}
+
+#btn-alterar-avatar {
+  display: inline-block;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 20px;
 }
 
 #avatar-header {
   align-self: center;
 }
 
-.form-alterar-senha {
+.form-alterar-senha,
+.form-alterar-avatar {
   position: fixed;
-  top: 75px;
-  left: -400px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -400px;
   width: 400px;
-  height: calc(100vh - 75px);
+  height: 400px;
   background-color: #8b1d1d;
   border-right: 3px solid black;
-  transition: left 0.3s ease;
+  transition: bottom 0.3s ease;
   padding: 15px;
   z-index: 1000;
 
@@ -845,6 +857,7 @@ a:hover {
   gap: 10px;
 }
 
-.form-alterar-senha.active {
-  left: 0;
+.form-alterar-senha.active,
+.form-alterar-avatar.active {
+  bottom: 400px;
 }

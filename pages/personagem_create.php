@@ -53,6 +53,15 @@ $pericias = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $img = $_FILES['aparencia']; // Guarda o objeto da imagem em img
+
+    $nome_img = $img['name']; //pega o nome do objeto e guarda em uma variavel
+    $caminho_temporario_img = $img['tmp_name']; //pega o caminho temporário do objeto e guarda em uma variavel
+
+    $caminho_final_img = "../img/personagem/" . uniqid() . "_" . $nome_img; //Decide o caminho final de onde vai ficar a img
+    move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
+
     $nome = trim($_POST['nome'] ?? '');
     $idade = (int) ($_POST['idade'] ?? 0);
     $raca = trim($_POST['raca'] ?? '');
@@ -63,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $constituicao = (int) ($_POST['constituicao'] ?? 0);
     $carisma = (int) ($_POST['carisma'] ?? 0);
     $magia = (int) ($_POST['magia'] ?? 0);
-    $aparencia = trim($_POST['aparencia'] ?? '');
+    $aparencia = trim($caminho_final_img ?? '');
     $lore = trim($_POST['lore'] ?? '');
     $hp = $nivel * 5 + $constituicao * 5;
     $stamina = $forca * 10;
@@ -72,22 +81,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     else $pf = $intelecto;
     $id_usuario = $_SESSION['id_usuario'];
 
-    $pericias["Acrobacia"]              = (int) ($_POST['acrobacia'] ?? 0);
+    $pericias["Acrobacia"]              = (int) ($_POST['acrobacia']    ?? 0);
     $pericias["Adestramento"]           = (int) ($_POST['adestramento'] ?? 0);
-    $pericias["Artes"]                  = (int) ($_POST['artes'] ?? 0);
-    $pericias["Atletismo"]              = (int) ($_POST['atletismo'] ?? 0);
-    $pericias["Diplomacia"]             = (int) ($_POST['diplomacia'] ?? 0);
-    $pericias["Enganacao"]              = (int) ($_POST['enganacao'] ?? 0);
-    $pericias["Fortitude"]              = (int) ($_POST['fortitude'] ?? 0);
-    $pericias["Furtividade"]            = (int) ($_POST['furtividade'] ?? 0);
-    $pericias["Intimidacao"]            = (int) ($_POST['intimidacao'] ?? 0);
-    $pericias["Intuicao"]               = (int) ($_POST['intuicao'] ?? 0);
+    $pericias["Artes"]                  = (int) ($_POST['artes']        ?? 0);
+    $pericias["Atletismo"]              = (int) ($_POST['atletismo']    ?? 0);
+    $pericias["Diplomacia"]             = (int) ($_POST['diplomacia']   ?? 0);
+    $pericias["Enganacao"]              = (int) ($_POST['enganacao']    ?? 0);
+    $pericias["Fortitude"]              = (int) ($_POST['fortitude']    ?? 0);
+    $pericias["Furtividade"]            = (int) ($_POST['furtividade']  ?? 0);
+    $pericias["Intimidacao"]            = (int) ($_POST['intimidacao']  ?? 0);
+    $pericias["Intuicao"]               = (int) ($_POST['intuicao']     ?? 0);
     $pericias["Investigacao"]           = (int) ($_POST['investigacao'] ?? 0);
-    $pericias["Luta_Briga"]             = (int) ($_POST['luta_briga'] ?? 0);
-    $pericias["Medicina"]               = (int) ($_POST['medicina'] ?? 0);
-    $pericias["Ocultismo"]              = (int) ($_POST['ocultismo'] ?? 0);
-    $pericias["Percepcao"]              = (int) ($_POST['percepcao'] ?? 0);
-    $pericias["Pontaria"]               = (int) ($_POST['pontaria'] ?? 0);
+    $pericias["Luta_Briga"]             = (int) ($_POST['luta_briga']   ?? 0);
+    $pericias["Medicina"]               = (int) ($_POST['medicina']            ?? 0);
+    $pericias["Ocultismo"]              = (int) ($_POST['ocultismo']           ?? 0);
+    $pericias["Percepcao"]              = (int) ($_POST['percepcao']           ?? 0);
+    $pericias["Pontaria"]               = (int) ($_POST['pontaria']            ?? 0);
     $pericias["Reflexos_Iniciativa"]    = (int) ($_POST['reflexos_iniciativa'] ?? 0);
     $pericias["Religiao"]               = (int) ($_POST['religiao'] ?? 0);
     $pericias["Tatica"]                 = (int) ($_POST['tatica'] ?? 0);
@@ -127,7 +136,7 @@ require_once __DIR__ . '/../includes/header.php';
 
 <div class="form">
   <div class="form-card">
-    <form method="POST" action="personagem_create.php">
+    <form method="POST" action="personagem_create.php" enctype="multipart/form-data">
 
       <div class="form-group">
         <label for="nome">Nome do Personagem</label>
@@ -268,7 +277,7 @@ require_once __DIR__ . '/../includes/header.php';
           type="file"
           id="aparencia"
           name="aparencia"
-          value="<?= $aparencia ?>"
+          accept="image/png, image/jpeg"
         />
       </div>
 

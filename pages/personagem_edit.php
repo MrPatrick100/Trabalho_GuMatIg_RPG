@@ -110,6 +110,15 @@ if ($personagem !== null) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $img = $_FILES['aparencia']; // Guarda o objeto da imagem em img
+
+    $nome_img = $img['name']; //pega o nome do objeto e guarda em uma variavel
+    $caminho_temporario_img = $img['tmp_name']; //pega o caminho temporário do objeto e guarda em uma variavel
+
+    $caminho_final_img = "../img/personagem/" . uniqid() . "_" . $nome_img; //Decide o caminho final de onde vai ficar a img
+    move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
+
     $nome = trim($_POST['nome'] ?? '');
     $idade = (int) ($_POST['idade'] ?? 0);
     $raca = trim($_POST['raca'] ?? '');
@@ -120,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $constituicao = (int) ($_POST['constituicao'] ?? 0);
     $carisma = (int) ($_POST['carisma'] ?? 0);
     $magia = (int) ($_POST['magia'] ?? 0);
-    $aparencia = trim($_POST['aparencia'] ?? '');
+    $aparencia = trim($caminho_final_img ?? '');
     $lore = trim($_POST['lore'] ?? '');
     $hp = $nivel * 5 + $constituicao * 5;
     $stamina = $forca * 10;
@@ -183,7 +192,7 @@ require_once __DIR__ . '/../includes/header.php';
 
 <div class="form">
   <div class="form-card">
-    <form method="POST" action="personagem_edit.php?id=<?= $personagem->getId() ?>">
+    <form method="POST" action="personagem_edit.php?id=<?= $personagem->getId() ?>" enctype="multipart/form-data">
 
       <div class="form-group">
         <label for="nome">Nome do Personagem</label>
@@ -324,7 +333,7 @@ require_once __DIR__ . '/../includes/header.php';
           type="file"
           id="aparencia"
           name="aparencia"
-          value="<?= $aparencia ?>"
+          accept="image/png, image/jpeg"
         />
       </div>
 

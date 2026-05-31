@@ -76,7 +76,7 @@ require_once __DIR__ . '/../includes/header.php';
 <?php endif; ?>
 
 <div class="form-card">
-  <form method="POST" action="habilidade_edit.php?id=<?= $habilidade->getId() ?>">
+  <form method="POST" action="habilidade_edit.php?id=<?= $habilidade->getId() ?>" enctype="multipart/form-data">
 
     <div class="form-group">
       <label for="nome">Nome da Habilidade</label>

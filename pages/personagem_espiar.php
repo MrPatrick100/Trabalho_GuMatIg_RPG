@@ -122,12 +122,8 @@ require_once __DIR__ . '/../includes/header.php';
 
       <div class="form-group">
         <label for="aparencia">Aparência</label>
-        <input
-          type="file"
-          id="aparencia"
-          name="aparencia"
-          value="<?= $aparencia ?>"
-        />
+        <img src="<?= $personagem->getAparencia() ?>" alt="img">
+        <label for="...">string_img: <?= $personagem->getAparencia() ?></label>
       </div>
   </div>
   <div class="form-card">

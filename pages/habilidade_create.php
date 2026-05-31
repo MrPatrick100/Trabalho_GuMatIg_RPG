@@ -52,7 +52,7 @@ require_once __DIR__ . '/../includes/header.php';
 <?php endif; ?>
 
 <div class="form-card">
-  <form method="POST" action="habilidade_create.php">
+  <form method="POST" action="habilidade_create.php" enctype="multipart/form-data">
 
     <div class="form-group">
       <label for="nome">Nome da Habilidade</label>

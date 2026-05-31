@@ -125,452 +125,453 @@ require_once __DIR__ . '/../includes/header.php';
   <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
 <?php endif; ?>
 
-<div class="form-card">
-  <form method="POST" action="personagem_create.php">
+<div class="form">
+  <div class="form-card">
+    <form method="POST" action="personagem_create.php">
 
-    <div class="form-group">
-      <label for="nome">Nome do Personagem</label>
-      <input
-        type="name"
-        id="nome"
-        name="nome"
-        placeholder="Ex: Dragão"
-        value="<?= htmlspecialchars($nome) ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="idade">Idade</label>
-      <input
-        type="number"
-        id="idade"
-        name="idade"
-        placeholder="Ex: 50"
-        value="<?= $idade ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="raca">Raça</label>
-      <select id="raca" name="raca" required>
-        <option value="">Selecione a raça...</option>
-        <?php foreach ($racas as $r): ?>
-          <?php
-            $selecionado = '';
-            if ($raca === $r) {
-                $selecionado = 'selected';
-            }
-          ?>
-          <option value="<?= $r ?>" <?= $selecionado ?>>
-            <?= $r ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="nivel">Nível (1 – 5)</label>
-      <input
-        type="number"
-        id="nivel"
-        name="nivel"
-        min="1"
-        max="5"
-        value="<?= $nivel ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="agilidade">Agilidade</label>
-      <input
-        type="number"
-        id="agilidade"
-        name="agilidade"
-        min="0"
-        max="5"
-        value="<?= $agilidade ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="forca">Força</label>
-      <input
-        type="number"
-        id="forca"
-        name="forca"
-        min="0"
-        max="5"
-        value="<?= $forca ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="intelecto">Intelecto</label>
-      <input
-        type="number"
-        id="intelecto"
-        name="intelecto"
-        min="0"
-        max="5"
-        value="<?= $intelecto ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="constituicao">Constituição</label>
-      <input
-        type="number"
-        id="constituicao"
-        name="constituicao"
-        min="0"
-        max="5"
-        value="<?= $constituicao ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="carisma">Carisma</label>
-      <input
-        type="number"
-        id="carisma"
-        name="carisma"
-        min="0"
-        max="5"
-        value="<?= $carisma ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="magia">Magia</label>
-      <input
-        type="number"
-        id="magia"
-        name="magia"
-        min="0"
-        max="5"
-        value="<?= $magia ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="aparencia">Aparência</label>
-      <input
-        type="file"
-        id="aparencia"
-        name="aparencia"
-        value="<?= $aparencia ?>"
-      />
-    </div>
-
-
-    <div class="form-pericias">
-
-      <h3>Perícias</h3>
-      <div class="div-pericia">
-        <label for="acrobacia">Acrobacia</label>
-        <input
-        type="number"
-        id="acrobacia"
-        name="acrobacia"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Acrobacia"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="adestramento">Adestramento</label>
-        <input
-        type="number"
-        id="adestramento"
-        name="adestramento"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Adestramento"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="artes">Artes</label>
-        <input
-        type="number"
-        id="artes"
-        name="artes"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Artes"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="atletismo">Atletismo</label>
-        <input
-        type="number"
-        id="atletismo"
-        name="atletismo"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Atletismo"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="diplomacia">Diplomacia</label>
-        <input
-        type="number"
-        id="diplomacia"
-        name="diplomacia"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Diplomacia"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="enganacao">Enganação</label>
-        <input
-        type="number"
-        id="enganacao"
-        name="enganacao"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Enganacao"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="fortitude">Fortitude</label>
-        <input
-        type="number"
-        id="fortitude"
-        name="fortitude"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Fortitude"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="furtividade">Furtividade</label>
-        <input
-        type="number"
-        id="furtividade"
-        name="furtividade"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Furtividade"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="intimidacao">Intimidação</label>
-        <input
-        type="number"
-        id="intimidacao"
-        name="intimidacao"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Intimidacao"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="intuicao">Intuição</label>
-        <input
-        type="number"
-        id="intuicao"
-        name="intuicao"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Intuicao"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="investigacao">Investigação</label>
-        <input
-        type="number"
-        id="investigacao"
-        name="investigacao"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Investigacao"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="luta_briga">Luta/Briga</label>
-        <input
-        type="number"
-        id="luta_briga"
-        name="luta_briga"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Luta_Briga"] ?>"
-        required>
-      </div>
-
-
-      <div class="div-pericia">
-        <label for="medicina">Medicina</label>
-        <input
-        type="number"
-        id="medicina"
-        name="medicina"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Medicina"] ?>"
-        required>
-      </div>
-
-      <div class="div-pericia">
-        <label for="ocultismo">Ocultismo</label>
-        <input
-        type="number"
-        id="ocultismo"
-        name="ocultismo"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Ocultismo"] ?>"
-        required>
-      </div>
-
-      <div class="div-pericia">
-        <label for="percepcao">Percepção</label>
-        <input
-        type="number"
-        id="percepcao"
-        name="percepcao"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Percepcao"] ?>"
-        required>
-      </div>
-
-      <div class="div-pericia">
-        <label for="pontaria">Pontaria</label>
-        <input
-        type="number"
-        id="pontaria"
-        name="pontaria"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Pontaria"] ?>"
-        required>
-      </div>
-
-      <div class="div-pericia">
-        <label for="reflexos_iniciativa">Reflexos/Iniciativa</label>
-        <input
-        type="number"
-        id="reflexos_iniciativa"
-        name="reflexos_iniciativa"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Reflexos_Iniciativa"] ?>"
-        required>
-      </div>
-
-      <div class="div-pericia">
-        <label for="religiao">Religião</label>
-        <input
-        type="number"
-        id="religiao"
-        name="religiao"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Religiao"] ?>"
-        required>
-      </div>
-
-      <div class="div-pericia">
-        <label for="tatica">Tática</label>
-        <input
-        type="number"
-        id="tatica"
-        name="tatica"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Tatica"] ?>"
-        required>
-      </div>
-
-      <div class="div-pericia">
-        <label for="vontade">Vontade</label>
-        <input
-        type="number"
-        id="vontade"
-        name="vontade"
-        class="input-pericias"
-        min="0"
-        max="5"
-        value="<?= $pericias["Vontade"] ?>"
-        required>
-      </div>
-      <br>
-      <br>
       <div class="form-group">
-        <label for="nome">História</label>
+        <label for="nome">Nome do Personagem</label>
         <input
-          type="text"
-          id="lore"
-          name="lore"
-          placeholder="Ex: Herói de Guerra"
-          value="<?= htmlspecialchars($lore) ?>"
+          type="name"
+          id="nome"
+          name="nome"
+          placeholder="Ex: Dragão"
+          value="<?= htmlspecialchars($nome) ?>"
           required
         />
       </div>
-    </div>
 
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Cadastrar Personagem</button> <br>
-       
-      <a href="index.php" class="btn btn-ghost">Cancelar</a>
-    </div>
+      <div class="form-group">
+        <label for="idade">Idade</label>
+        <input
+          type="number"
+          id="idade"
+          name="idade"
+          placeholder="Ex: 50"
+          value="<?= $idade ?>"
+          required
+        />
+      </div>
 
-  </form>
-  <form action="inventario_edit.php" method="post">
-    <button type="submit" class="btn btn-primary">Editar inventário</button>
-  </form>
+      <div class="form-group">
+        <label for="raca">Raça</label>
+        <select id="raca" name="raca" required>
+          <option value="">Selecione a raça...</option>
+          <?php foreach ($racas as $r): ?>
+            <?php
+              $selecionado = '';
+              if ($raca === $r) {
+                  $selecionado = 'selected';
+              }
+            ?>
+            <option value="<?= $r ?>" <?= $selecionado ?>>
+              <?= $r ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="nivel">Nível (1 – 5)</label>
+        <input
+          type="number"
+          id="nivel"
+          name="nivel"
+          min="1"
+          max="5"
+          value="<?= $nivel ?>"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="agilidade">Agilidade</label>
+        <input
+          type="number"
+          id="agilidade"
+          name="agilidade"
+          min="0"
+          max="5"
+          value="<?= $agilidade ?>"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="forca">Força</label>
+        <input
+          type="number"
+          id="forca"
+          name="forca"
+          min="0"
+          max="5"
+          value="<?= $forca ?>"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="intelecto">Intelecto</label>
+        <input
+          type="number"
+          id="intelecto"
+          name="intelecto"
+          min="0"
+          max="5"
+          value="<?= $intelecto ?>"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="constituicao">Constituição</label>
+        <input
+          type="number"
+          id="constituicao"
+          name="constituicao"
+          min="0"
+          max="5"
+          value="<?= $constituicao ?>"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="carisma">Carisma</label>
+        <input
+          type="number"
+          id="carisma"
+          name="carisma"
+          min="0"
+          max="5"
+          value="<?= $carisma ?>"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="magia">Magia</label>
+        <input
+          type="number"
+          id="magia"
+          name="magia"
+          min="0"
+          max="5"
+          value="<?= $magia ?>"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="aparencia">Aparência</label>
+        <input
+          type="file"
+          id="aparencia"
+          name="aparencia"
+          value="<?= $aparencia ?>"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="lore">História</label>
+        <textarea
+          id="lore"
+          name="lore"
+          placeholder="Ex: Herói de Guerra"
+          required
+          rows="10"
+          cols="60"
+        ><?= htmlspecialchars($lore) ?></textarea>
+      </div>
+  </div>
+  <div class="form-card">
+      <div class="form-group">
+
+        <h3>Perícias</h3>
+        <div class="div-pericia">
+          <div><label for="acrobacia">Acrobacia</label></div>
+          <div><input
+          type="number"
+          id="acrobacia"
+          name="acrobacia"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Acrobacia"] ?>"
+          required></div>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="adestramento">Adestramento</label>
+          <input
+          type="number"
+          id="adestramento"
+          name="adestramento"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Adestramento"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="artes">Artes</label>
+          <input
+          type="number"
+          id="artes"
+          name="artes"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Artes"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="atletismo">Atletismo</label>
+          <input
+          type="number"
+          id="atletismo"
+          name="atletismo"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Atletismo"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="diplomacia">Diplomacia</label>
+          <input
+          type="number"
+          id="diplomacia"
+          name="diplomacia"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Diplomacia"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="enganacao">Enganação</label>
+          <input
+          type="number"
+          id="enganacao"
+          name="enganacao"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Enganacao"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="fortitude">Fortitude</label>
+          <input
+          type="number"
+          id="fortitude"
+          name="fortitude"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Fortitude"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="furtividade">Furtividade</label>
+          <input
+          type="number"
+          id="furtividade"
+          name="furtividade"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Furtividade"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="intimidacao">Intimidação</label>
+          <input
+          type="number"
+          id="intimidacao"
+          name="intimidacao"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Intimidacao"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="intuicao">Intuição</label>
+          <input
+          type="number"
+          id="intuicao"
+          name="intuicao"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Intuicao"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="investigacao">Investigação</label>
+          <input
+          type="number"
+          id="investigacao"
+          name="investigacao"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Investigacao"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="luta_briga">Luta/Briga</label>
+          <input
+          type="number"
+          id="luta_briga"
+          name="luta_briga"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Luta_Briga"] ?>"
+          required>
+        </div>
+
+
+        <div class="div-pericia">
+          <label for="medicina">Medicina</label>
+          <input
+          type="number"
+          id="medicina"
+          name="medicina"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Medicina"] ?>"
+          required>
+        </div>
+
+        <div class="div-pericia">
+          <label for="ocultismo">Ocultismo</label>
+          <input
+          type="number"
+          id="ocultismo"
+          name="ocultismo"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Ocultismo"] ?>"
+          required>
+        </div>
+
+        <div class="div-pericia">
+          <label for="percepcao">Percepção</label>
+          <input
+          type="number"
+          id="percepcao"
+          name="percepcao"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Percepcao"] ?>"
+          required>
+        </div>
+
+        <div class="div-pericia">
+          <label for="pontaria">Pontaria</label>
+          <input
+          type="number"
+          id="pontaria"
+          name="pontaria"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Pontaria"] ?>"
+          required>
+        </div>
+
+        <div class="div-pericia">
+          <label for="reflexos_iniciativa">Reflexos/Iniciativa</label>
+          <input
+          type="number"
+          id="reflexos_iniciativa"
+          name="reflexos_iniciativa"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Reflexos_Iniciativa"] ?>"
+          required>
+        </div>
+
+        <div class="div-pericia">
+          <label for="religiao">Religião</label>
+          <input
+          type="number"
+          id="religiao"
+          name="religiao"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Religiao"] ?>"
+          required>
+        </div>
+
+        <div class="div-pericia">
+          <label for="tatica">Tática</label>
+          <input
+          type="number"
+          id="tatica"
+          name="tatica"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Tatica"] ?>"
+          required>
+        </div>
+
+        <div class="div-pericia">
+          <label for="vontade">Vontade</label>
+          <input
+          type="number"
+          id="vontade"
+          name="vontade"
+          class="input-pericias"
+          min="0"
+          max="5"
+          value="<?= $pericias["Vontade"] ?>"
+          required>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Cadastrar Personagem</button> <br>
+        
+        <a href="index.php" class="btn btn-ghost">Cancelar</a>
+      </div>
+
+    </form>
+    <form action="inventario_edit.php" method="post">
+      <button type="submit" class="btn btn-primary">Editar inventário</button>
+    </form>
+  </div>
 </div>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

@@ -29,6 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $caminho_final_img = "../assets/img_personagem/" . uniqid() . "_" . $nome_img; //Decide o caminho final de onde vai ficar a img
     move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
 
+    $_SESSION['foto_perfil'] = $caminho_final_img;
+
     $repo->atualizarAvatar($usuario->getId(), $caminho_final_img);
     
     $senha_atual = trim($_POST['senha_atual'] ?? '');
@@ -58,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <img src=<?= $_SESSION['foto_perfil'] ?? '../assets/img_perfil/avatar.png' ?> class="avatar">
         </button>
         <div id="form-alterar-avatar" class="form-alterar-avatar">
-            <form method="POST" action="seguranca_privacidade.php">
+            <form method="POST" action="seguranca_privacidade.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="avatar">Avatar</label>
                     <input
@@ -70,20 +72,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     />
                 </div>
                 <button type="submit" class="btn btn-primary" name="alterar_avatar">Alterar Avatar</button>
-                <button type="button" class="btn btn-ghost" id="btn-cancelar">Cancelar</button>
+                <button type="button" class="btn btn-ghost" id="btn-cancelar1">Cancelar</button>
             </form>
 
             <script>
                 const btnAltAvatar = document.getElementById("btn-alterar-avatar");
                 const formAltAvatar = document.getElementById("form-alterar-avatar");
-                const btnCancelar = document.getElementById("btn-cancelar");
+                const btnCancelar1 = document.getElementById("btn-cancelar1");
 
                 btnAltAvatar.addEventListener("click", () => {
                     btnAltAvatar.classList.toggle("active");
                     formAltAvatar.classList.toggle("active");
                 });
 
-                btnCancelar.addEventListener("click", () => {
+                btnCancelar1.addEventListener("click", () => {
                     btnAltAvatar.classList.remove("active");
                     formAltAvatar.classList.remove("active");
                 })
@@ -120,19 +122,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
 
                         <button type="submit" class="btn btn-primary" name="alterar_senha">Alterar Senha</button>
-                        <button type="button" class="btn btn-ghost" id="btn-cancelar">Cancelar</button>
+                        <button type="button" class="btn btn-ghost" id="btn-cancelar2">Cancelar</button>
                     </form>
                     <script>
                         const btnAltSenha = document.getElementById("btn-alterar-senha");
                         const formAltSenha = document.getElementById("form-alterar-senha");
-                        const btnCancelar = document.getElementById("btn-cancelar");
+                        const btnCancelar2 = document.getElementById("btn-cancelar2");
 
                         btnAltSenha.addEventListener("click", () => {
                             btnAltSenha.classList.toggle("active");
                             formAltSenha.classList.toggle("active");
                         });
 
-                        btnCancelar.addEventListener("click", () => {
+                        btnCancelar2.addEventListener("click", () => {
                             btnAltSenha.classList.remove("active");
                             formAltSenha.classList.remove("active");
                         });

@@ -312,7 +312,7 @@ a:hover {
 
 .alert-sucesso {
   color: var(--ink);
-  background: var(--yellow-soft);
+  background: var(--green);
 }
 
 /* Tables */

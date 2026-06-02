@@ -4,44 +4,44 @@ require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../repository/UsuarioRepository.php';
 
 $erro = '';
+$sucesso = '';
 $repo = new UsuarioRepository();
 $usuario = $repo->buscarPorEmail($_SESSION['email']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // $img = $_FILES['avatar']; // Guarda o objeto da imagem em img
+    if ($_POST['acao'] === 'alterar_avatar')
+    {
+        $img = $_FILES['avatar']; // Guarda o objeto da imagem em img
 
-    // $nome_img = $img['name']; //pega o nome do objeto e guarda em uma variavel
-    // $caminho_temporario_img = $img['tmp_name']; //pega o caminho temporário do objeto e guarda em uma variavel
+        $nome_img = $img['name']; //pega o nome do objeto e guarda em uma variavel
+        $caminho_temporario_img = $img['tmp_name']; //pega o caminho temporário do objeto e guarda em uma variavel
 
-    // $caminho_final_img = "../assets/img_perfil/" . uniqid() . "_" . $nome_img ?? ''; //Decide o caminho final de onde vai ficar a img
-    // move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
-    // if ($caminho_final_img === '') {
-    //     $_SESSION['foto_perfil'] = "../assets/img_perfil/avatar.png";
-    // }
-    // else {
-    //     $_SESSION['foto_perfil'] = $caminho_final_img;
-    // }
-    $img = $_FILES['avatar']; // Guarda o objeto da imagem em img
+        $caminho_final_img = "../assets/img_perfil/" . $nome_img; //Decide o caminho final de onde vai ficar a img
+        move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
 
-    $nome_img = $img['name']; //pega o nome do objeto e guarda em uma variavel
-    $caminho_temporario_img = $img['tmp_name']; //pega o caminho temporário do objeto e guarda em uma variavel
+        $_SESSION['foto_perfil'] = $caminho_final_img;
 
-    $caminho_final_img = "../assets/img_personagem/" . uniqid() . "_" . $nome_img; //Decide o caminho final de onde vai ficar a img
-    move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
-
-    $_SESSION['foto_perfil'] = $caminho_final_img;
-
-    $repo->atualizarAvatar($usuario->getId(), $caminho_final_img);
-    
-    $senha_atual = trim($_POST['senha_atual'] ?? '');
-    $senha_nova = trim($_POST['senha_nova'] ?? '');
-    
-    if($_SESSION['senha'] !== hash('sha256', $senha_atual) && (isset($senha_nova) || isset($senha_nova))) {
-        $erro = 'Senha atual incorreta.';
+        $repo->atualizarAvatar($usuario->getId(), $caminho_final_img);
+        $sucesso = 'Imagem alterada com sucesso';
+        $erro = '';
     }
-    else {
-        $_SESSION['senha'] = hash('sha256', $senha_nova);
-        $repo->atualizarSenha($usuario->getId(), $_SESSION['senha']);
+    if ($_POST['acao'] === 'alterar_senha')
+    {
+        $senha_atual = trim($_POST['senha_atual'] ?? '');
+        $senha_nova = trim($_POST['senha_nova'] ?? '');
+    
+        if($_SESSION['senha'] !== hash('sha256', $senha_atual) && $senha_nova !== '') {
+            $erro = 'Senha atual incorreta.';
+            $sucesso = '';
+        }
+        else {
+            $_SESSION['senha'] = hash('sha256', $senha_nova);
+            $repo->atualizarSenha($usuario->getId(), $_SESSION['senha']);
+            $senha_atual = '';
+            $senha_nova = '';
+            $sucesso = 'Senha alterada com sucesso';
+            $erro = '';
+        }
     }
 }
 ?>
@@ -52,6 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php if ($erro !== ''): ?>
   <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
+<?php endif; ?>
+
+<?php if ($sucesso !== ''): ?>
+  <div class="alert alert-sucesso"><?= htmlspecialchars($sucesso) ?></div>
 <?php endif; ?>
 
 <div class="conteudo">
@@ -71,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         required
                     />
                 </div>
-                <button type="submit" class="btn btn-primary" name="alterar_avatar">Alterar Avatar</button>
+                <button type="submit" class="btn btn-primary" name="acao" value="alterar_avatar">Alterar Avatar</button>
                 <button type="button" class="btn btn-ghost" id="btn-cancelar1">Cancelar</button>
             </form>
 
@@ -121,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             />
                         </div>
 
-                        <button type="submit" class="btn btn-primary" name="alterar_senha">Alterar Senha</button>
+                        <button type="submit" class="btn btn-primary" name="acao" value="alterar_senha">Alterar Senha</button>
                         <button type="button" class="btn btn-ghost" id="btn-cancelar2">Cancelar</button>
                     </form>
                     <script>

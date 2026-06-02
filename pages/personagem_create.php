@@ -54,55 +54,55 @@ $pericias = [
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $img = $_FILES['aparencia']; // Guarda o objeto da imagem em img
+  $img = $_FILES['aparencia']; // Guarda o objeto da imagem em img
 
-    $nome_img = $img['name']; //pega o nome do objeto e guarda em uma variavel
-    $caminho_temporario_img = $img['tmp_name']; //pega o caminho temporário do objeto e guarda em uma variavel
+  $nome_img = $img['name']; //pega o nome do objeto e guarda em uma variavel
+  $caminho_temporario_img = $img['tmp_name']; //pega o caminho temporário do objeto e guarda em uma variavel
 
-    $caminho_final_img = "../assets/img_personagem/" . uniqid() . "_" . $nome_img; //Decide o caminho final de onde vai ficar a img
-    move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
+  $caminho_final_img = "../assets/img_personagem/" . $nome_img; //Decide o caminho final de onde vai ficar a img
+  move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
 
-    $nome = trim($_POST['nome'] ?? '');
-    $idade = (int) ($_POST['idade'] ?? 0);
-    $raca = trim($_POST['raca'] ?? '');
-    $nivel = (int) ($_POST['nivel'] ?? 1);
-    $agilidade = (int) ($_POST['agilidade'] ?? 0);
-    $forca = (int) ($_POST['forca'] ?? 0);
-    $intelecto = (int) ($_POST['intelecto'] ?? 0);
-    $constituicao = (int) ($_POST['constituicao'] ?? 0);
-    $carisma = (int) ($_POST['carisma'] ?? 0);
-    $magia = (int) ($_POST['magia'] ?? 0);
-    $aparencia = trim($caminho_final_img ?? '');
-    $lore = trim($_POST['lore'] ?? '');
-    $hp = $nivel * 5 + $constituicao * 5;
-    $stamina = $forca * 10;
-    $mana = $magia * 10;
-    if($carisma > $intelecto) $pf = $carisma;
-    else $pf = $intelecto;
-    $id_usuario = $_SESSION['id_usuario'];
+  $nome = trim($_POST['nome'] ?? '');
+  $idade = (int) ($_POST['idade'] ?? 0);
+  $raca = trim($_POST['raca'] ?? '');
+  $nivel = (int) ($_POST['nivel'] ?? 1);
+  $agilidade = (int) ($_POST['agilidade'] ?? 0);
+  $forca = (int) ($_POST['forca'] ?? 0);
+  $intelecto = (int) ($_POST['intelecto'] ?? 0);
+  $constituicao = (int) ($_POST['constituicao'] ?? 0);
+  $carisma = (int) ($_POST['carisma'] ?? 0);
+  $magia = (int) ($_POST['magia'] ?? 0);
+  $aparencia = trim($caminho_final_img ?? '');
+  $lore = trim($_POST['lore'] ?? '');
+  $hp = $nivel * 5 + $constituicao * 5;
+  $stamina = $forca * 10;
+  $mana = $magia * 10;
+  if($carisma > $intelecto) $pf = $carisma;
+  else $pf = $intelecto;
+  $id_usuario = $_SESSION['id_usuario'];
 
-    $pericias["Acrobacia"]              = (int) ($_POST['acrobacia']    ?? 0);
-    $pericias["Adestramento"]           = (int) ($_POST['adestramento'] ?? 0);
-    $pericias["Artes"]                  = (int) ($_POST['artes']        ?? 0);
-    $pericias["Atletismo"]              = (int) ($_POST['atletismo']    ?? 0);
-    $pericias["Diplomacia"]             = (int) ($_POST['diplomacia']   ?? 0);
-    $pericias["Enganacao"]              = (int) ($_POST['enganacao']    ?? 0);
-    $pericias["Fortitude"]              = (int) ($_POST['fortitude']    ?? 0);
-    $pericias["Furtividade"]            = (int) ($_POST['furtividade']  ?? 0);
-    $pericias["Intimidacao"]            = (int) ($_POST['intimidacao']  ?? 0);
-    $pericias["Intuicao"]               = (int) ($_POST['intuicao']     ?? 0);
-    $pericias["Investigacao"]           = (int) ($_POST['investigacao'] ?? 0);
-    $pericias["Luta_Briga"]             = (int) ($_POST['luta_briga']   ?? 0);
-    $pericias["Medicina"]               = (int) ($_POST['medicina']            ?? 0);
-    $pericias["Ocultismo"]              = (int) ($_POST['ocultismo']           ?? 0);
-    $pericias["Percepcao"]              = (int) ($_POST['percepcao']           ?? 0);
-    $pericias["Pontaria"]               = (int) ($_POST['pontaria']            ?? 0);
-    $pericias["Reflexos_Iniciativa"]    = (int) ($_POST['reflexos_iniciativa'] ?? 0);
-    $pericias["Religiao"]               = (int) ($_POST['religiao'] ?? 0);
-    $pericias["Tatica"]                 = (int) ($_POST['tatica'] ?? 0);
-    $pericias["Vontade"]                = (int) ($_POST['vontade'] ?? 0);
+  $pericias["Acrobacia"]              = (int) ($_POST['acrobacia']    ?? 0);
+  $pericias["Adestramento"]           = (int) ($_POST['adestramento'] ?? 0);
+  $pericias["Artes"]                  = (int) ($_POST['artes']        ?? 0);
+  $pericias["Atletismo"]              = (int) ($_POST['atletismo']    ?? 0);
+  $pericias["Diplomacia"]             = (int) ($_POST['diplomacia']   ?? 0);
+  $pericias["Enganacao"]              = (int) ($_POST['enganacao']    ?? 0);
+  $pericias["Fortitude"]              = (int) ($_POST['fortitude']    ?? 0);
+  $pericias["Furtividade"]            = (int) ($_POST['furtividade']  ?? 0);
+  $pericias["Intimidacao"]            = (int) ($_POST['intimidacao']  ?? 0);
+  $pericias["Intuicao"]               = (int) ($_POST['intuicao']     ?? 0);
+  $pericias["Investigacao"]           = (int) ($_POST['investigacao'] ?? 0);
+  $pericias["Luta_Briga"]             = (int) ($_POST['luta_briga']   ?? 0);
+  $pericias["Medicina"]               = (int) ($_POST['medicina']            ?? 0);
+  $pericias["Ocultismo"]              = (int) ($_POST['ocultismo']           ?? 0);
+  $pericias["Percepcao"]              = (int) ($_POST['percepcao']           ?? 0);
+  $pericias["Pontaria"]               = (int) ($_POST['pontaria']            ?? 0);
+  $pericias["Reflexos_Iniciativa"]    = (int) ($_POST['reflexos_iniciativa'] ?? 0);
+  $pericias["Religiao"]               = (int) ($_POST['religiao'] ?? 0);
+  $pericias["Tatica"]                 = (int) ($_POST['tatica'] ?? 0);
+  $pericias["Vontade"]                = (int) ($_POST['vontade'] ?? 0);
 
-    try {
+  try {
         $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, FALSE);
         $repoPersonagem->salvar($personagem);
 
@@ -117,9 +117,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         header('Location: index.php');
         exit;
-    } catch (InvalidArgumentException $e) {
+  } catch (InvalidArgumentException $e) {
         $erro = $e->getMessage();
-    }
+  }
 }
 
 require_once __DIR__ . '/../includes/header.php';

@@ -1,8 +1,9 @@
 <?php 
     require_once __DIR__ . '/../includes/auth.php';
     require_once __DIR__ . '/../repository/PersonagemRepository.php';
-    $repo = new PersonagemRepository();
     require_once __DIR__ . '/../includes/header.php';
+
+    $repo = new PersonagemRepository();
 ?>
      
     <div class="page-header">

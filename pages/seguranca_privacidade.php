@@ -127,6 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="form-card">
         <div class="form-group">
+            <h1>Alterar Dados:</h1>
             <br>
             <div class="form-group2">
                 <button type="button" id="btn-alterar-senha" class="btn">Alterar Senha</button>

@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php endif; ?>
 
 <?php if ($sucesso !== ''): ?>
-    <div class="alert alert-erro"><?= htmlspecialchars($sucesso) ?></div>
+    <div class="alert alert-sucesso"><?= htmlspecialchars($sucesso) ?></div>
 <?php endif; ?>
 
 <div class="conteudo">

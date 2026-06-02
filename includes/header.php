@@ -13,7 +13,8 @@
   <button id="btnMenu" class="btn">+</button>
 
   <div id="sidebar" class="sidebar">
-    <img src=<?= $_SESSION['foto_perfil'] ?? '../assets/avatar.png' ?> class="avatar" id="avatar-header">
+    <br>
+    <img src=<?= $_SESSION['foto_perfil'] ?? '../assets/img_perfil/avatar.png' ?> class="avatar" id="avatar-header">
     <br>
     <a href="../pages/perfil.php" class="btn">Perfil</a> <br>
     <a href="../pages/seguranca_privacidade.php" class="btn">Segurança e Privacidade</a> <br>

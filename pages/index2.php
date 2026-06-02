@@ -53,9 +53,9 @@ require_once __DIR__ . '/../includes/header.php';
         </tr>
       </thead>
       <tbody>
-        <?php foreach ($habilidades as $h): ?>
+        <?php foreach ($habilidades as $indice => $h): ?>
           <tr>
-            <td><?= $h->getId() ?></td>
+            <td><?= $indice + 1 ?></td>
             <td><strong><?= htmlspecialchars($h->getNome()) ?></strong></td>
             <td><span class="badge badge-raça"><?= htmlspecialchars($h->getEstilo()) ?></span></td>
             <td><?= $h->getCiclo() ?>°</td>

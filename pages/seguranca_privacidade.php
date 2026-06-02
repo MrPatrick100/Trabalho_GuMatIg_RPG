@@ -8,6 +8,35 @@ $sucesso = '';
 $repo = new UsuarioRepository();
 $usuario = $repo->buscarPorEmail($_SESSION['email']);
 
+if($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    if($_POST['acao'] === 'alterar_email')
+    {
+        $email_novo = trim($_POST['email_novo'] ?? '');
+
+        if($email_novo !== '')
+        {
+            try
+            {
+                $repo->atualizarEmail($usuario->getId(), $email_novo);
+                $_SESSION['email'] = $email_novo;
+                $sucesso = 'E-mail alterado com sucesso';
+                $erro = '';
+            }
+            catch(Exception $e)
+            {
+                $erro = 'E-mail já existente';
+            }
+        }
+        else
+        {
+            $erro = 'E-mail inexistente';
+        }
+    }
+}
+
+$usuario = $repo->buscarPorEmail($_SESSION['email']);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['acao'] === 'alterar_avatar')
     {
@@ -47,15 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div class="page-header">
-  <h2>Segurança e Privacidade</h2>
+    <h2>Segurança e Privacidade</h2>
 </div>
 
 <?php if ($erro !== ''): ?>
-  <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
+    <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
 <?php endif; ?>
 
 <?php if ($sucesso !== ''): ?>
-  <div class="alert alert-sucesso"><?= htmlspecialchars($sucesso) ?></div>
+    <div class="alert alert-sucesso"><?= htmlspecialchars($sucesso) ?></div>
 <?php endif; ?>
 
 <div class="conteudo">
@@ -141,6 +170,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         btnCancelar2.addEventListener("click", () => {
                             btnAltSenha.classList.remove("active");
                             formAltSenha.classList.remove("active");
+                        });
+                    </script>
+                </div>
+            </div>
+            <br>
+            <div class="form-group2">
+                <button type="button" id="btn-alterar-email" class="btn">Alterar E-mail</button>
+                <div id="form-alterar-email" class="form-alterar-email">
+                    <form method="POST" action="seguranca_privacidade.php">
+                        <div class="form-group">
+                            <label for="senha_atual">Email desejado</label>
+                            <input
+                                type="email"
+                                id="email_novo"
+                                name="email_novo"
+                                placeholder="email@email.com"
+                                required
+                            />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" name="acao" value="alterar_email">Alterar Email</button>
+                        <button type="button" class="btn btn-ghost" id="btn-cancelar3">Cancelar</button>
+                    </form>
+                    <script>
+                        const btnAltEmail = document.getElementById("btn-alterar-email");
+                        const formAltEmail = document.getElementById("form-alterar-email");
+                        const btnCancelar3 = document.getElementById("btn-cancelar3");
+
+                        btnAltEmail.addEventListener("click", () => {
+                            btnAltEmail.classList.toggle("active");
+                            formAltEmail.classList.toggle("active");
+                        });
+
+                        btnCancelar3.addEventListener("click", () => {
+                            btnAltEmail.classList.remove("active");
+                            formAltEmail.classList.remove("active");
                         });
                     </script>
                 </div>

@@ -29,15 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div class="page-header">
-  <h2>Meu Perfil</h2>
+    <h2>Meu Perfil</h2>
 </div>
 
 <?php if ($erro !== ''): ?>
-  <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
+    <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
 <?php endif; ?>
 
 <?php if ($sucesso !== ''): ?>
-  <div class="alert alert-erro"><?= htmlspecialchars($sucesso) ?></div>
+    <div class="alert alert-erro"><?= htmlspecialchars($sucesso) ?></div>
 <?php endif; ?>
 
 <div class="conteudo">

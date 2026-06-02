@@ -37,4 +37,9 @@ class UsuarioRepository {
         $stmt = $this->pdo->prepare('UPDATE usuario SET foto_perfil = :foto_perfil WHERE id = :id');
         $stmt->execute([':foto_perfil' => $foto_perfil,':id' => $id]);
     }
+
+    public function atualizarEmail(int $id, string $email): void {
+        $stmt = $this->pdo->prepare('UPDATE usuario SET email = :email WHERE id = :id');
+        $stmt->execute([':email' => $email,':id' => $id]);
+    }
 }

@@ -839,7 +839,8 @@ a:hover {
 }
 
 .form-alterar-senha,
-.form-alterar-avatar {
+.form-alterar-avatar,
+.form-alterar-email {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
@@ -858,6 +859,7 @@ a:hover {
 }
 
 .form-alterar-senha.active,
-.form-alterar-avatar.active {
+.form-alterar-avatar.active,
+.form-alterar-email.active {
   bottom: 400px;
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Habilidade {
+class Item {
 
     private int    $id_personagem;
     private int    $id;

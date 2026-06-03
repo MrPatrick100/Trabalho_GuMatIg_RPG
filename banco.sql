@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Jun-2026 às 18:38
--- Versão do servidor: 10.4.28-MariaDB
--- versão do PHP: 8.2.4
+-- Tempo de geração: 04/06/2026 às 01:12
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `habilidade`
+-- Estrutura para tabela `habilidade`
 --
 
 CREATE TABLE `habilidade` (
@@ -40,7 +40,7 @@ CREATE TABLE `habilidade` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `habilidade`
+-- Despejando dados para a tabela `habilidade`
 --
 
 INSERT INTO `habilidade` (`id_usuario`, `id`, `nome`, `tipo`, `ciclo`, `estilo`, `custo`, `descricao`, `deletado`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `habilidade` (`id_usuario`, `id`, `nome`, `tipo`, `ciclo`, `estilo`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `inventario`
+-- Estrutura para tabela `inventario`
 --
 
 CREATE TABLE `inventario` (
@@ -70,12 +70,12 @@ CREATE TABLE `inventario` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `item`
+-- Estrutura para tabela `item`
 --
 
 CREATE TABLE `item` (
   `id` int(11) NOT NULL,
-  `id_personagem` int(11) NOT NULL,
+  `id_personagem` int(11) DEFAULT NULL,
   `nome` varchar(32) DEFAULT NULL,
   `tipo` varchar(32) DEFAULT NULL,
   `descricao` text DEFAULT NULL,
@@ -83,10 +83,19 @@ CREATE TABLE `item` (
   `deletado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `item`
+--
+
+INSERT INTO `item` (`id`, `id_personagem`, `nome`, `tipo`, `descricao`, `equipado`, `deletado`) VALUES
+(1, 18, 'Capacete', 'Cabeça', 'de ferro', 0, 0),
+(2, 18, 'Peitoral', 'Peitoral', 'de ferro', 0, 0),
+(3, 18, 'Botas', 'Calçado', 'de ferro', 0, 0);
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pericias`
+-- Estrutura para tabela `pericias`
 --
 
 CREATE TABLE `pericias` (
@@ -114,7 +123,7 @@ CREATE TABLE `pericias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `pericias`
+-- Despejando dados para a tabela `pericias`
 --
 
 INSERT INTO `pericias` (`id_personagem`, `acrobacia`, `adestramento`, `artes`, `atletismo`, `diplomacia`, `enganacao`, `fortitude`, `furtividade`, `intimidacao`, `intuicao`, `investigacao`, `luta_briga`, `medicina`, `ocultismo`, `percepcao`, `pontaria`, `reflexos_iniciativa`, `religiao`, `tatica`, `vontade`) VALUES
@@ -127,7 +136,7 @@ INSERT INTO `pericias` (`id_personagem`, `acrobacia`, `adestramento`, `artes`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `personagem`
+-- Estrutura para tabela `personagem`
 --
 
 CREATE TABLE `personagem` (
@@ -149,7 +158,7 @@ CREATE TABLE `personagem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `personagem`
+-- Despejando dados para a tabela `personagem`
 --
 
 INSERT INTO `personagem` (`id_usuario`, `id`, `nome`, `idade`, `raca`, `nivel`, `agilidade`, `forca`, `intelecto`, `constituicao`, `carisma`, `magia`, `aparencia`, `deletado`, `lore`) VALUES
@@ -162,7 +171,7 @@ INSERT INTO `personagem` (`id_usuario`, `id`, `nome`, `idade`, `raca`, `nivel`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `personagem_habilidade`
+-- Estrutura para tabela `personagem_habilidade`
 --
 
 CREATE TABLE `personagem_habilidade` (
@@ -174,7 +183,7 @@ CREATE TABLE `personagem_habilidade` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario`
+-- Estrutura para tabela `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -187,7 +196,7 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `usuario`
+-- Despejando dados para a tabela `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `criado_em`, `foto_perfil`) VALUES
@@ -201,40 +210,40 @@ INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `criado_em`, `foto_perfil
 --
 
 --
--- Índices para tabela `habilidade`
+-- Índices de tabela `habilidade`
 --
 ALTER TABLE `habilidade`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_habilidade_usuario` (`id_usuario`);
 
 --
--- Índices para tabela `inventario`
+-- Índices de tabela `inventario`
 --
 ALTER TABLE `inventario`
   ADD KEY `id_personagem` (`id_personagem`);
 
 --
--- Índices para tabela `item`
+-- Índices de tabela `item`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_personagem` (`id_personagem`);
+  ADD KEY `id_personagem` (`id_personagem`);
 
 --
--- Índices para tabela `pericias`
+-- Índices de tabela `pericias`
 --
 ALTER TABLE `pericias`
   ADD KEY `id_personagem` (`id_personagem`);
 
 --
--- Índices para tabela `personagem`
+-- Índices de tabela `personagem`
 --
 ALTER TABLE `personagem`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_personagem_usuario` (`id_usuario`);
 
 --
--- Índices para tabela `personagem_habilidade`
+-- Índices de tabela `personagem_habilidade`
 --
 ALTER TABLE `personagem_habilidade`
   ADD PRIMARY KEY (`id`),
@@ -242,14 +251,14 @@ ALTER TABLE `personagem_habilidade`
   ADD KEY `id_habilidade` (`id_habilidade`);
 
 --
--- Índices para tabela `usuario`
+-- Índices de tabela `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `uq_email` (`email`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -262,7 +271,7 @@ ALTER TABLE `habilidade`
 -- AUTO_INCREMENT de tabela `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `personagem`
@@ -283,41 +292,41 @@ ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `habilidade`
+-- Restrições para tabelas `habilidade`
 --
 ALTER TABLE `habilidade`
   ADD CONSTRAINT `fk_habilidade_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
 
 --
--- Limitadores para a tabela `inventario`
+-- Restrições para tabelas `inventario`
 --
 ALTER TABLE `inventario`
   ADD CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`id_personagem`) REFERENCES `personagem` (`id`);
 
 --
--- Limitadores para a tabela `item`
+-- Restrições para tabelas `item`
 --
 ALTER TABLE `item`
-  ADD CONSTRAINT `item_ibfk_1` FOREIGN KEY (`id_personagem`) REFERENCES `personagem` (`id`);
+  ADD CONSTRAINT `fk_item_personagem` FOREIGN KEY (`id_personagem`) REFERENCES `personagem` (`id`);
 
 --
--- Limitadores para a tabela `pericias`
+-- Restrições para tabelas `pericias`
 --
 ALTER TABLE `pericias`
   ADD CONSTRAINT `pericias_ibfk_1` FOREIGN KEY (`id_personagem`) REFERENCES `personagem` (`id`);
 
 --
--- Limitadores para a tabela `personagem`
+-- Restrições para tabelas `personagem`
 --
 ALTER TABLE `personagem`
   ADD CONSTRAINT `fk_personagem_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
 
 --
--- Limitadores para a tabela `personagem_habilidade`
+-- Restrições para tabelas `personagem_habilidade`
 --
 ALTER TABLE `personagem_habilidade`
   ADD CONSTRAINT `personagem_habilidade_ibfk_1` FOREIGN KEY (`id_personagem`) REFERENCES `personagem` (`id`),

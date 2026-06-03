@@ -188,44 +188,6 @@ require_once __DIR__ . '/../includes/header.php';
     </div>
 
       <div class="form-group">
-        <h3 for="status">STATUS</h3>
-        <div class="form-group2">
-          <label for="agilidade">Agilidade: <?= $personagem->getAgilidade() ?></label>
-        </div>
-        <div class="form-group2">
-          <label for="forca">Força: <?= $personagem->getForca() ?></label>
-        </div>
-        <div class="form-group2">
-          <label for="intelecto">Intelecto: <?= $personagem->getIntelecto() ?></label>
-        </div>
-        <div class="form-group2">
-          <label for="constituicao">Constituição: <?= $personagem->getConstituicao() ?></label>
-        </div>
-        <div class="form-group2">
-          <label for="carisma">Carisma: <?= $personagem->getCarisma() ?></label>
-        </div>
-        <div class="form-group2">
-          <label for="magia">Magia: <?= $personagem->getMagia() ?></label>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <h3 for="status">ATRIBUTOS</h3>
-        <div class="form-group2">
-          <label for="hp">HP: <?= $personagem->getHp() ?>/<?= $personagem->getHp() ?></label>
-        </div>
-        <div class="form-group2">
-          <label for="mana">Mana: <?= $personagem->getMana() ?>/<?= $personagem->getMana() ?></label>
-        </div>
-        <div class="form-group2">
-          <label for="stamina">Stamina: <?= $personagem->getStamina() ?>/<?= $personagem->getStamina() ?></label>
-        </div>
-        <div class="form-group2">
-          <label for="pf">PF: <?= $personagem->getPf() ?>/<?= $personagem->getPf() ?></label>
-        </div>
-      </div>
-
-      <div class="form-group">
         <label for="aparencia">Aparência</label>
         <img src="<?= $personagem->getAparencia() ?>" alt="img">
         <!-- <label for="...">string_img: <?= $personagem->getAparencia() ?></label> -->

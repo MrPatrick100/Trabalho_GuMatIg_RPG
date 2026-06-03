@@ -60,7 +60,7 @@ require_once __DIR__ . '/../includes/header.php';
             <td><span class="badge badge-raça"><?= htmlspecialchars($personagem->getRaca()) ?></span></td>
             <td>Lv. <?= $personagem->getNivel() ?></td>
             <td class="acoes">
-              <a href="inventario_edit.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar Inventário</a>
+              <a href="item_create.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar Inventário</a>
               <a href="personagem_edit.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar Personagem</a>
               <a href="personagem_delete.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
               <a href="personagem_espiar.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>

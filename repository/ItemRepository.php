@@ -66,11 +66,11 @@ class ItemRepository {
         }
 
         if ($item->getId_personagem() <= 0) {
-            throw new InvalidArgumentException('Usuário inválido.');
+            throw new InvalidArgumentException('Personagem inválido. (Erro Banco)');
         }
 
         $stmt = $this->pdo->prepare(
-            'INSERT INTO item (id_personagem, nome, tipo, descricao, equipado, deletado) VALUES (:idu, :nome, :tipo, :descricao, :equipado, :deletado)'
+            'INSERT INTO item (id_personagem, nome, tipo, descricao, equipado, deletado) VALUES (:id_p, :nome, :tipo, :descricao, :equipado, :deletado)'
         );
         $stmt->execute([
             ':id_p' => $item->getId_personagem(),

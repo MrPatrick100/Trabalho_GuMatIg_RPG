@@ -12,7 +12,7 @@ class Item {
 
     public function __construct(array $dados) {
 
-        $this->id_personagem        = (int) ($dados['id_usuario']  ?? 0);
+        $this->id_personagem        = (int) ($dados['id_personagem']  ?? 0);
         $this->id                = (int) ($dados['id']             ?? 0);
         $this->nome              =        $dados['nome']           ?? '';
         $this->tipo              =        $dados['tipo']           ?? '';
@@ -22,7 +22,7 @@ class Item {
         $this->deletado          =        FALSE;
     }
 
-    public function Id_personagem():      int    { return $this->id_personagem; }
+    public function getId_personagem():      int    { return $this->id_personagem; }
     public function getId():              int    { return $this->id; }
     public function getNome():            string { return $this->nome; }
     public function getTipo():            string { return $this->tipo; }
@@ -32,7 +32,7 @@ class Item {
 
     public static function novo(int $id_personagem, string $nome, string $tipo, string $descricao, bool $equipado, bool $deletado): Item {
             if ($id_personagem <= 0) {
-            throw new InvalidArgumentException('Usuário inválido.');
+            throw new InvalidArgumentException('Personagem inválido. (Erro no entity)');
         }
 
         $item = new Item(['id_personagem' => $id_personagem]);

@@ -18,24 +18,27 @@ if ($id_personagem > 0) {
   $personagem = $repo_personagem->buscarPorId($id_personagem);
 }
 
+$inventario = $repo_item->listarPorPersonagem($id_personagem);
+
 $id = 0;
 $nome = '';
+$tipo = '';
 $descricao = '';
 $equipado = FALSE;
-$deletado = FALSE;
+
+$tipos = ['Cabeça', 'Peitoral', 'Calça', 'Calçado', 'Arma', 'Amuleto', 'Extra'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome       = trim  ($_POST['nome']      ?? '');
     $tipo       = trim  ($_POST['tipo']      ?? '');
     $descricao  = trim  ($_POST['descricao'] ?? '');
 
-    $id_usuario = $_SESSION['id_usuario'];
-
     try {
-        $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $custo, $descricao);
-        $repo->salvar($habilidade);
+        $item = Item::novo($id_personagem, $nome, $tipo, $descricao, $equipado, FALSE);
+        echo $item->getId_Personagem();
+        $repo_item->salvar($item);
 
-        header('Location: index2.php');
+        header('Location: item_create.php' . '?id=' . $id_personagem);
         exit;
     } catch (InvalidArgumentException $e) {
         $erro = $e->getMessage();
@@ -46,109 +49,93 @@ require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="page-header">
-  <h2>Novo Item</h2>
-  <a href="index2.php" class="btn btn-ghost">← Voltar</a>
+  <h2>Novo Item (<?= $id_personagem ?>)</h2>
+  <a href="index.php" class="btn btn-ghost">← Voltar</a>
 </div>
 
 <?php if ($erro !== ''): ?>
   <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
 <?php endif; ?>
 
-<div class="form-card">
-  <form method="POST" action="habilidade_create.php" enctype="multipart/form-data">
+<div class="form">
+  <div class="form-card">
+    <form method="POST" action="item_create.php?id=<?=$id_personagem?>" enctype="multipart/form-data">
 
-    <div class="form-group">
-      <label for="nome">Nome da Habilidade</label>
-      <input
-        type="text"
-        id="nome"
-        name="nome"
-        placeholder="Ex: Bola de Fogo"
-        value="<?= htmlspecialchars($nome) ?>"
-        required
-      />
-    </div>
+      <div class="form-group">
+        <label for="nome">Nome do Item</label>
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          placeholder="Ex: Capacete de ferro"
+          value="<?= htmlspecialchars($nome) ?>"
+          required
+        />
+      </div>
 
+      <div class="form-group">
+        <label for="tipo">Tipo</label>
+        <select id="tipo" name="tipo" required>
+          <option value="">Selecione o tipo...</option>
+          <?php foreach ($tipos as $t): ?>
+            <?php
+              $selecionado = '';
+              if ($tipo === $t) {
+                  $selecionado = 'selected';
+              }
+            ?>
+            <option value="<?= $t ?>" <?= $selecionado ?>>
+              <?= $t ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input
+          type="text"
+          id="descricao"
+          name="descricao"
+          value="<?= htmlspecialchars($descricao) ?>"
+          required
+        />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Adicionar Item</button>
+        <a href="index.php" class="btn btn-ghost">Cancelar</a>
+      </div>
+    </form>
+  </div>
+
+  <div class="form-card">
     <div class="form-group">
-      <label for="tipo">Tipo</label>
-      <select id="tipo" name="tipo" required>
-        <option value="">Selecione o tipo...</option>
-        <?php foreach ($tipos as $t): ?>
-          <?php
-            $selecionado = '';
-            if ($tipo === $t) {
-                $selecionado = 'selected';
-            }
-          ?>
-          <option value="<?= $t ?>" <?= $selecionado ?>>
-            <?= $t ?>
-          </option>
+        <h3 for="inventario">Inventário</h3>
+        <?php foreach ($inventario as $indice => $it): ?>
+        <div class="form-group2">
+          <label for="nome">Nome: <?= $it->getNome() ?></label>
+        </div>
+
+        <div class="form-group2">
+          <label for="tipo">Tipo: <?= $it->getTipo() ?></label>
+        </div>
+
+        <div class="form-group2">
+          <label for="equipado">Equipado: <?= $it->getEquipado() ?></label>
+        </div>
+
+        <div class="form-group2">
+          <label for="deletado">Deletado: <?= $it->getDeletado() ?></label>
+        </div>
+
+        <div class="form-group2">
+          <label for="descricao">Descrição: <?= $it->getDescricao() ?></label>
+        </div>
+        <br>
         <?php endforeach; ?>
-      </select>
     </div>
-
-    <div class="form-group">
-      <label for="ciclo">Ciclo (1 – 6)</label>
-      <input
-        type="number"
-        id="ciclo"
-        name="ciclo"
-        min="1"
-        max="6"
-        value="<?= $ciclo ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="estilo">Estilo</label>
-      <select id="estilo" name="estilo" required>
-        <option value="">Selecione o estilo...</option>
-        <?php foreach ($estilos as $e): ?>
-          <?php
-            $selecionado = '';
-            if ($estilo === $e) {
-                $selecionado = 'selected';
-            }
-          ?>
-          <option value="<?= $e ?>" <?= $selecionado ?>>
-            <?= $e ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="custo">Custo</label>
-      <input
-        type="number"
-        id="custo"
-        name="custo"
-        min="2"
-        max="18"
-        step="2"
-        value="<?= $custo ?>"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="descricao">Descrição</label>
-      <input
-        type="text"
-        id="descricao"
-        name="descricao"
-        value="<?= htmlspecialchars($descricao) ?>"
-        required
-      />
-    </div>
-
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Cadastrar Habilidade</button>
-      <a href="index2.php" class="btn btn-ghost">Cancelar</a>
-    </div>
-
-  </form>
+  </div>
 </div>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

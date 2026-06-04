@@ -15,7 +15,7 @@ $erro = '';
 $personagem = null;
 $pericias = null;
 $habilidades = null;
-$items = null;
+$inventario = null;
 
 $id_personagem = 0;
 if (isset($_GET['id'])) {
@@ -30,8 +30,8 @@ if (isset($_SESSION['id_usuario'])) {
 if ($id_personagem > 0) {
   $personagem = $repo_personagem->buscarPorId($id_personagem);
   $pericias = $repo_pericia->buscarPorId($id_personagem);
-  $habilidades[] = $repo_habilidade->listarPorUsuario($id_usuario);
-  $items[] = $repo_item->listarPorPersonagem($id_personagem);
+  $habilidades = $repo_habilidade->listarPorUsuario($id_usuario);
+  $inventario = $repo_item->listarPorPersonagem($id_personagem);
 }
 
 // if ($personagem !== null) {
@@ -164,34 +164,30 @@ require_once __DIR__ . '/../includes/header.php';
   <div class="form-card">
     <div class="form-group">
         <h3 for="inventario">Inventário</h3>
-        <?php foreach ($items as $indice => $it): ?>
+        <?php foreach ($inventario as $indice => $item): ?>
+          
         <div class="form-group2">
-          <label for="nome">Nome: <?= $it->getNome() ?></label>
+          <label for="nome">Nome: <?= $item->getNome() ?></label>
         </div>
 
         <div class="form-group2">
-          <label for="tipo">Tipo: <?= $it->getTipo() ?></label>
+          <label for="tipo">Tipo: <?= $item->getTipo() ?></label>
         </div>
 
         <div class="form-group2">
-          <label for="equipado">Equipado: <?= $it->getEquipado() ?></label>
+          <label for="equipado">Equipado: <?= $item->getEquipado() ?></label>
         </div>
 
         <div class="form-group2">
-          <label for="deletado">Deletado: <?= $it->getDeletado() ?></label>
+          <label for="deletado">Deletado: <?= $item->getDeletado() ?></label>
         </div>
 
         <div class="form-group2">
-          <label for="descricao">Descrição: <?= $it->getDescricao() ?></label>
+          <label for="descricao">Descrição: <?= $item->getDescricao() ?></label>
         </div>
+        <br>
         <?php endforeach; ?>
     </div>
-
-      <div class="form-group">
-        <label for="aparencia">Aparência</label>
-        <img src="<?= $personagem->getAparencia() ?>" alt="img">
-        <!-- <label for="...">string_img: <?= $personagem->getAparencia() ?></label> -->
-      </div>
   </div>
 </div>
 

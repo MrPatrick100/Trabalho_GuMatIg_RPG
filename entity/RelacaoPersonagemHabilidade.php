@@ -25,35 +25,22 @@ class RelacaoPersonagemHabilidade {
         if ($id_usuario <= 0) {
             throw new InvalidArgumentException('Usuário inválido.');
         }
+
+        if ($id_personagem <= 0) {
+            throw new InvalidArgumentException('Personagem inválido.');
+        }
     
         $relacao = new RelacaoPersonagemHabilidade(['id_usuario' => $id_usuario]);
-        // $relacao->alterarDados($id_personagem, $id_habilidade);
+        $relacao->alterarDados($id_personagem, $id_habilidade);
 
         return $relacao;
     }
 
-    // public function alterarDados(string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao): void {
-    //     $nome = trim($nome);
-    //     $tipo = trim($tipo);
-    //     $estilo = trim($estilo);
+    public function alterarDados(int $id_personagem, int $id_habilidade): void {
 
-    //     if ($nome === '' || $tipo === '' || $estilo === '') {
-    //         throw new InvalidArgumentException('Nome, tipo e estilo são obrigatórios.');
-    //     }
-
-    //     if ($ciclo < 1 || $ciclo > 6) {
-    //         throw new InvalidArgumentException('O ciclo deve ser entre 1 e 6.');
-    //     }
-
-    //     //Colocar as condições de preenchimento
-
-    //     $this->nome  = $nome;
-    //     $this->tipo = $tipo;
-    //     $this->ciclo = $ciclo;
-    //     $this->estilo  = $estilo;
-    //     $this->custo  = $custo;
-    //     $this->descricao = $descricao;
-    // }
+        $this->id_personagem  = $id_personagem;
+        $this->id_habilidade = $id_habilidade;
+    }
 
     public function registrarIdGerado(int $id): void {
         if ($id <= 0) {

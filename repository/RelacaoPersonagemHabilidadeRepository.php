@@ -52,7 +52,7 @@ class RelacaoPersonagemHabilidadeRepository {
         if ($relacao->getId_usuario() <= 0) {
             throw new InvalidArgumentException('Usuário inválido.');
         }
-
+        
         $stmt = $this->pdo->prepare(
             'INSERT INTO personagem_habilidade (id_usuario, id_personagem, id_habilidade) VALUES (:id_usuario, :id_personagem, :id_habilidade)'
         );

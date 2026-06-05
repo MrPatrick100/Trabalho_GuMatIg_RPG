@@ -13,22 +13,22 @@ class Item {
     public function __construct(array $dados) {
 
         $this->id_personagem        = (int) ($dados['id_personagem']  ?? 0);
-        $this->id                = (int) ($dados['id']             ?? 0);
-        $this->nome              =        $dados['nome']           ?? '';
-        $this->tipo              =        $dados['tipo']           ?? '';
-        $this->ciclo             = (int) ($dados['ciclo']          ?? 0);
-        $this->descricao         =        $dados['descricao']      ?? '';
-        $this->equipado          =        $dados['equipado']       ?? FALSE;
+        $this->id                = (int) ($dados['id']                ?? 0);
+        $this->nome              =        $dados['nome']              ?? '';
+        $this->tipo              =        $dados['tipo']              ?? '';
+        $this->ciclo             = (int) ($dados['ciclo']             ?? 0);
+        $this->descricao         =        $dados['descricao']         ?? '';
+        $this->equipado          =        $dados['equipado']          ?? FALSE;
         $this->deletado          =        FALSE;
     }
 
-    public function getId_personagem():      int    { return $this->id_personagem; }
+    public function getId_personagem():   int    { return $this->id_personagem; }
     public function getId():              int    { return $this->id; }
     public function getNome():            string { return $this->nome; }
     public function getTipo():            string { return $this->tipo; }
     public function getDescricao():       string { return $this->descricao; }
-    public function getEquipado():        bool { return $this->equipado; }
-    public function getDeletado():        bool { return $this->deletado; }
+    public function getEquipado():        bool   { return $this->equipado; }
+    public function getDeletado():        bool   { return $this->deletado; }
 
     public static function novo(int $id_personagem, string $nome, string $tipo, string $descricao, bool $equipado, bool $deletado): Item {
             if ($id_personagem <= 0) {

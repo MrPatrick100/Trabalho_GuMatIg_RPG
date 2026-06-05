@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04/06/2026 às 01:12
+-- Tempo de geração: 05/06/2026 às 05:33
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -45,8 +45,10 @@ CREATE TABLE `habilidade` (
 
 INSERT INTO `habilidade` (`id_usuario`, `id`, `nome`, `tipo`, `ciclo`, `estilo`, `custo`, `descricao`, `deletado`) VALUES
 (NULL, 1, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, '4', 0),
-(1, 3, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, 'Buela de fuego', 0),
-(1, 4, 'Uppercut', 'Ativa', 2, 'Física', 6, 'Socão', 0);
+(1, 4, 'Uppercut', 'Ativa', 2, 'Física', 6, 'Socão', 0),
+(1, 13, 'Bola de água', 'Ativa', 1, 'Mágica', 2, 'Lança água', 0),
+(1, 28, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, 'a', 0),
+(1, 29, 'Soco Forte', 'Ativa', 1, 'Física', 2, 'g', 0);
 
 -- --------------------------------------------------------
 
@@ -175,10 +177,20 @@ INSERT INTO `personagem` (`id_usuario`, `id`, `nome`, `idade`, `raca`, `nivel`, 
 --
 
 CREATE TABLE `personagem_habilidade` (
+  `id_usuario` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL,
   `id_personagem` int(11) DEFAULT NULL,
   `id_habilidade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `personagem_habilidade`
+--
+
+INSERT INTO `personagem_habilidade` (`id_usuario`, `id`, `id_personagem`, `id_habilidade`) VALUES
+(1, 18, 18, 13),
+(1, 19, 18, 28),
+(1, 20, 32, 29);
 
 -- --------------------------------------------------------
 
@@ -248,7 +260,8 @@ ALTER TABLE `personagem`
 ALTER TABLE `personagem_habilidade`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_personagem` (`id_personagem`),
-  ADD KEY `id_habilidade` (`id_habilidade`);
+  ADD KEY `id_habilidade` (`id_habilidade`),
+  ADD KEY `fk_personagem_habilidade_usuario` (`id_usuario`);
 
 --
 -- Índices de tabela `usuario`
@@ -265,7 +278,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `habilidade`
 --
 ALTER TABLE `habilidade`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `item`
@@ -283,7 +296,7 @@ ALTER TABLE `personagem`
 -- AUTO_INCREMENT de tabela `personagem_habilidade`
 --
 ALTER TABLE `personagem_habilidade`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
@@ -329,6 +342,7 @@ ALTER TABLE `personagem`
 -- Restrições para tabelas `personagem_habilidade`
 --
 ALTER TABLE `personagem_habilidade`
+  ADD CONSTRAINT `fk_personagem_habilidade_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `personagem_habilidade_ibfk_1` FOREIGN KEY (`id_personagem`) REFERENCES `personagem` (`id`),
   ADD CONSTRAINT `personagem_habilidade_ibfk_2` FOREIGN KEY (`id_habilidade`) REFERENCES `habilidade` (`id`);
 COMMIT;

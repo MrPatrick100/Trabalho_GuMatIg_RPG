@@ -24,7 +24,8 @@ require_once __DIR__ . '/../includes/header.php';
 
 <div class="page-header">
   <h2>Meus Personagens</h2>
-  <a href="personagem_create.php" class="btn btn-primary">+ Novo Personagem</a>
+  <a href="personagem_create.php" class="btn btn-primary" id="btn-novo-personagem">+ Novo Personagem</a>
+  <a href="deletados.php" class="btn btn-primary" id="btn-deletados">Deletados</a>
 </div>
 
 <div>
@@ -54,18 +55,20 @@ require_once __DIR__ . '/../includes/header.php';
       </thead>
       <tbody>
         <?php foreach ($personagens as $indice => $personagem): ?>
-          <tr>
-            <td><?= $indice + 1 ?></td>
-            <td><strong><?= htmlspecialchars($personagem->getNome()) ?></strong></td>
-            <td><span class="badge badge-raça"><?= htmlspecialchars($personagem->getRaca()) ?></span></td>
-            <td>Lv. <?= $personagem->getNivel() ?></td>
-            <td class="acoes">
-              <a href="item_create.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar Inventário</a>
-              <a href="personagem_edit.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar Personagem</a>
-              <a href="personagem_delete.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
-              <a href="personagem_espiar.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
-            </td>
-          </tr>
+          <?php if ($personagem->getDeletado() !== 1): ?>
+            <tr>
+              <td><?= $indice + 1 ?></td>
+              <td><strong><?= htmlspecialchars($personagem->getNome()) ?></strong></td>
+              <td><span class="badge badge-raça"><?= htmlspecialchars($personagem->getRaca()) ?></span></td>
+              <td>Lv. <?= $personagem->getNivel() ?></td>
+              <td class="acoes">
+                <a href="item_create.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar Inventário</a>
+                <a href="personagem_edit.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar Personagem</a>
+                <a href="personagem_delete.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
+                <a href="personagem_espiar.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
+              </td>
+            </tr>
+          <?php endif; ?>
         <?php endforeach; ?>
       </tbody>
     </table>

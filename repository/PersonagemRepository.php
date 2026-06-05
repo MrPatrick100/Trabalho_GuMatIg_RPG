@@ -100,12 +100,12 @@ class PersonagemRepository {
         $personagem->registrarIdGerado((int) $this->pdo->lastInsertId());
     }
 
-    public function inserir(int $id_usuario, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia, string $lore, bool $deletado): void {
+    public function inserir(int $id_usuario, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia, string $lore, int $deletado): void {
         $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, $deletado);
         $this->salvar($personagem);
     }
 
-    public function atualizar(int $id, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia, string $lore, bool $deletado): void {
+    public function atualizar(int $id, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia, string $lore, int $deletado): void {
         $personagem = $this->buscarPorId($id);
 
         if ($personagem === null) {

@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $pericias["Vontade"]                = (int) ($_POST['vontade'] ?? 0);
 
   try {
-        $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, FALSE);
+        $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, 0);
         $repoPersonagem->salvar($personagem);
 
         $pericia = Pericia::novo(

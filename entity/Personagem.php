@@ -16,7 +16,7 @@ class Personagem {
     private int    $magia;
     private string $aparencia;
     private string $lore;
-    private bool   $deletado;
+    private int    $deletado;
     private int    $hp;
     private int    $stamina;
     private int    $mana;
@@ -24,20 +24,20 @@ class Personagem {
 
     public function __construct(array $dados) {
         $this->id_usuario        = (int) ($dados['id_usuario']        ?? 0);
-        $this->id                = (int) ($dados['id']                ?? 0);
-        $this->nome              =        $dados['nome']              ?? '';
-        $this->idade             = (int) ($dados['idade']             ?? 0);
-        $this->raca              =        $dados['raca']              ?? '';
-        $this->nivel             = (int) ($dados['nivel']             ?? 0);
-        $this->agilidade         = (int) ($dados['agilidade']         ?? 0);
-        $this->forca             = (int) ($dados['forca']             ?? 0);
-        $this->intelecto         = (int) ($dados['intelecto']         ?? 0);
-        $this->constituicao      = (int) ($dados['constituicao']      ?? 0);
-        $this->carisma           = (int) ($dados['carisma']           ?? 0);
-        $this->magia             = (int) ($dados['magia']             ?? 0);
-        $this->aparencia         =        $dados['aparencia']         ?? '';
-        $this->lore              =        $dados['lore']              ?? '';
-        $this->deletado          =        FALSE;
+        $this->id                = (int) ($dados['id']       ?? 0);
+        $this->nome              =        $dados['nome']       ?? '';
+        $this->idade             = (int) ($dados['idade']      ?? 0);
+        $this->raca              =        $dados['raca'] ?? '';
+        $this->nivel             = (int) ($dados['nivel']        ?? 0);
+        $this->agilidade         = (int) ($dados['agilidade']       ?? 0);
+        $this->forca             = (int) ($dados['forca']       ?? 0);
+        $this->intelecto         = (int) ($dados['intelecto']      ?? 0);
+        $this->constituicao      = (int) ($dados['constituicao'] ?? 0);
+        $this->carisma           = (int) ($dados['carisma']        ?? 0);
+        $this->magia             = (int) ($dados['magia']       ?? 0);
+        $this->aparencia         =        $dados['aparencia']       ?? '';
+        $this->lore              =        $dados['lore'] ?? '';
+        $this->deletado          = (int) ($dados['deletado'] ?? 0);
         $this->hp                = $this->nivel * 5 + $this->constituicao * 5;
         $this->stamina           = $this->forca * 10;
         $this->mana              = $this->magia * 10;
@@ -59,13 +59,17 @@ class Personagem {
     public function getMagia():           int    { return $this->magia; }
     public function getAparencia():       string { return $this->aparencia; }
     public function getLore():            string { return $this->lore; }
-    public function getDeletado():        bool   { return $this->deletado; }
+    public function getDeletado():        int   { return $this->deletado; }
     public function getHp():              int    { return $this->hp; }
     public function getStamina():         int    { return $this->stamina; }
     public function getMana():            int    { return $this->mana; }
     public function getPf():              int    { return $this->pf; }
 
-    public static function novo(int $id_usuario, string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, string $aparencia, string $lore, bool $deletado): Personagem {
+    public static function novo(
+        int $id_usuario, string $nome, int $idade, string $raca, int $nivel, 
+        int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, 
+        string $aparencia, string $lore, int $deletado
+    ): Personagem {
         if ($id_usuario <= 0) {
             throw new InvalidArgumentException('Usuário inválido.');
         }
@@ -78,7 +82,7 @@ class Personagem {
 
     public function alterarDados(
         string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, 
-        int $carisma, int $magia, string $aparencia, string $lore, bool $deletado
+        int $carisma, int $magia, string $aparencia, string $lore, int $deletado
     ): void {
         $nome = trim($nome);
         $raca = trim($raca);

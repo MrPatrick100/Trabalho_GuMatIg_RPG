@@ -52,21 +52,33 @@ require_once __DIR__ . '/../includes/header.php';
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody>
-        <?php foreach ($habilidades as $indice => $h): ?>
-          <tr>
-            <td><?= $indice + 1 ?></td>
-            <td><strong><?= htmlspecialchars($h->getNome()) ?></strong></td>
-            <td><span class="badge badge-raça"><?= htmlspecialchars($h->getEstilo()) ?></span></td>
-            <td><?= $h->getCiclo() ?>°</td>
-            <td class="acoes">
-              <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
-              <a href="habilidade_delete.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
-              <a href="habilidade_espiar.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-      </tbody>
+      <!-- <div class="personagem">
+        <button class="btn-personagem">
+          ▶ <?= $personagem->getNome() ?>
+        </button>
+        <div class="habilidades">
+          <ul>
+              <li>Habilidade 1</li>
+              <li>Habilidade 2</li>
+              <li>Habilidade 3</li>
+          </ul> -->
+          <tbody>
+            <?php foreach ($habilidades as $indice => $h): ?>
+              <tr>
+                <td><?= $indice + 1 ?></td>
+                <td><strong><?= htmlspecialchars($h->getNome()) ?></strong></td>
+                <td><span class="badge badge-raça"><?= htmlspecialchars($h->getEstilo()) ?></span></td>
+                <td><?= $h->getCiclo() ?>°</td>
+                <td class="acoes">
+                  <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
+                  <a href="habilidade_delete.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
+                  <a href="habilidade_espiar.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        <!-- </div> -->
+      <!-- </div> -->
     </table>
   </div>
 <?php endif; ?>

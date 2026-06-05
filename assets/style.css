@@ -7,26 +7,26 @@
   padding: 0;
 }
 
-:root {
-  --paper: #f4efe8; /* cor de fundo */
+ :root { 
+ --paper: #f4efe8; /* cor de fundo */
   --paper-soft: #fffaf1; /* cor de fundo suave */
-  --ink: #121719;  /* o contorno, os botoões de excluir*/ 
+  --ink: #032330;  /* o contorno, os botoões de excluir */
   --ink-soft: #4b433b; /* cor de contorno suave */
   --line: #1f1b16; /* cor da linha */
-  --muted: #776f63; /* cor de texto secundário */ 
+  --muted: #776f63; /* cor de texto secundário */
   --orange: #c4572b; /* cor botoões de ação */
-  --orange-dark: #8f3425; /* cor botoões de ação hover */ 
+  --orange-dark: #8f3425; /* cor botoões de ação hover */
   --green: #69785a; /* cor de sucesso */
   --green-dark: #3f4c36; /* cor de sucesso hover */
-  --yellow: #622ff0; /* cor botoões de editar */
+  --yellow: #0806649f; /* cor botoões de editar */
   --yellow-soft: #f7dfa0; /* cor de destaque suave */
-  --red: #02063a; /* cor header */
-  --red-dark: #0916c4; /* cor footer */
+  --red: #040835; /* cor header */
+  --red-dark: #002f75; /* cor footer */
   --red-soft: #f0d4c9; /* cor de erro */
   --cream: #ede0cf; /* cor de fundo alternativo */
   --radius: 2px;
   --shadow: 8px 8px 0 var(--ink);
-  --shadow-sm: 4px 4px 0 var(--ink);
+  --shadow-sm: 4px 4px 0 var(--ink); 
 }
 
 html {
@@ -789,7 +789,7 @@ a:hover {
   left: -400px;
   width: 400px;
   height: calc(100vh - 75px);
-  background-color: #8b1d1d;
+  background-color: #040835;
   border-right: 3px solid black;
   transition: left 0.3s ease;
   padding: 15px;
@@ -847,7 +847,7 @@ a:hover {
   bottom: -400px;
   width: 400px;
   height: 400px;
-  background-color: #8b1d1d;
+  background-color: #040835;
   border-right: 3px solid black;
   transition: bottom 0.3s ease;
   padding: 15px;

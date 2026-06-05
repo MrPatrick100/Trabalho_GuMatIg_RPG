@@ -25,27 +25,27 @@ class Pericia {
 
     public function __construct(array $dados) {
 
-        $this->id_personagem        = (int) ($dados['id_personagem']  ?? 0);
-        $this->acrobacia            = (int) ($dados['acrobacia']  ?? 0);
-        $this->adestramento         = (int) ($dados['adestramento']  ?? 0);
-        $this->artes                = (int) ($dados['artes']  ?? 0);
-        $this->atletismo            = (int) ($dados['atletismo']  ?? 0);
-        $this->diplomacia           = (int) ($dados['diplomacia']  ?? 0);
-        $this->enganacao            = (int) ($dados['enganacao']  ?? 0);
-        $this->fortitude            = (int) ($dados['fortitude']  ?? 0);
-        $this->furtividade          = (int) ($dados['furtividade']  ?? 0);
-        $this->intimidacao          = (int) ($dados['intimidacao']  ?? 0);
-        $this->intuicao             = (int) ($dados['intuicao']  ?? 0);
-        $this->investigacao         = (int) ($dados['investigacao']  ?? 0);
-        $this->luta_briga           = (int) ($dados['luta_briga']  ?? 0);
-        $this->medicina             = (int) ($dados['medicina']  ?? 0);
-        $this->ocultismo            = (int) ($dados['ocultismo']  ?? 0);
-        $this->percepcao            = (int) ($dados['percepcao']  ?? 0);
-        $this->pontaria             = (int) ($dados['pontaria']  ?? 0);
+        $this->id_personagem        = (int) ($dados['id_personagem']        ?? 0);
+        $this->acrobacia            = (int) ($dados['acrobacia']            ?? 0);
+        $this->adestramento         = (int) ($dados['adestramento']         ?? 0);
+        $this->artes                = (int) ($dados['artes']                ?? 0);
+        $this->atletismo            = (int) ($dados['atletismo']            ?? 0);
+        $this->diplomacia           = (int) ($dados['diplomacia']           ?? 0);
+        $this->enganacao            = (int) ($dados['enganacao']            ?? 0);
+        $this->fortitude            = (int) ($dados['fortitude']            ?? 0);
+        $this->furtividade          = (int) ($dados['furtividade']          ?? 0);
+        $this->intimidacao          = (int) ($dados['intimidacao']          ?? 0);
+        $this->intuicao             = (int) ($dados['intuicao']             ?? 0);
+        $this->investigacao         = (int) ($dados['investigacao']         ?? 0);
+        $this->luta_briga           = (int) ($dados['luta_briga']           ?? 0);
+        $this->medicina             = (int) ($dados['medicina']             ?? 0);
+        $this->ocultismo            = (int) ($dados['ocultismo']            ?? 0);
+        $this->percepcao            = (int) ($dados['percepcao']            ?? 0);
+        $this->pontaria             = (int) ($dados['pontaria']             ?? 0);
         $this->reflexos_iniciativa  = (int) ($dados['reflexos_iniciativa']  ?? 0);
-        $this->religiao             = (int) ($dados['religiao']  ?? 0);
-        $this->tatica               = (int) ($dados['tatica']  ?? 0);
-        $this->vontade              = (int) ($dados['vontade']  ?? 0);
+        $this->religiao             = (int) ($dados['religiao']             ?? 0);
+        $this->tatica               = (int) ($dados['tatica']               ?? 0);
+        $this->vontade              = (int) ($dados['vontade']              ?? 0);
     }
 
     public function getId_personagem():             int    { return $this->id_personagem; }

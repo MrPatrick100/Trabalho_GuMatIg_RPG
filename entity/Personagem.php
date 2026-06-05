@@ -24,19 +24,19 @@ class Personagem {
 
     public function __construct(array $dados) {
         $this->id_usuario        = (int) ($dados['id_usuario']        ?? 0);
-        $this->id                = (int) ($dados['id']       ?? 0);
-        $this->nome              =        $dados['nome']       ?? '';
-        $this->idade             = (int) ($dados['idade']      ?? 0);
-        $this->raca              =        $dados['raca'] ?? '';
-        $this->nivel             = (int) ($dados['nivel']        ?? 0);
-        $this->agilidade         = (int) ($dados['agilidade']       ?? 0);
-        $this->forca             = (int) ($dados['forca']       ?? 0);
-        $this->intelecto         = (int) ($dados['intelecto']      ?? 0);
-        $this->constituicao      = (int) ($dados['constituicao'] ?? 0);
-        $this->carisma           = (int) ($dados['carisma']        ?? 0);
-        $this->magia             = (int) ($dados['magia']       ?? 0);
-        $this->aparencia         =        $dados['aparencia']       ?? '';
-        $this->lore              =        $dados['lore'] ?? '';
+        $this->id                = (int) ($dados['id']                ?? 0);
+        $this->nome              =        $dados['nome']              ?? '';
+        $this->idade             = (int) ($dados['idade']             ?? 0);
+        $this->raca              =        $dados['raca']              ?? '';
+        $this->nivel             = (int) ($dados['nivel']             ?? 0);
+        $this->agilidade         = (int) ($dados['agilidade']         ?? 0);
+        $this->forca             = (int) ($dados['forca']             ?? 0);
+        $this->intelecto         = (int) ($dados['intelecto']         ?? 0);
+        $this->constituicao      = (int) ($dados['constituicao']      ?? 0);
+        $this->carisma           = (int) ($dados['carisma']           ?? 0);
+        $this->magia             = (int) ($dados['magia']             ?? 0);
+        $this->aparencia         =        $dados['aparencia']         ?? '';
+        $this->lore              =        $dados['lore']              ?? '';
         $this->deletado          =        FALSE;
         $this->hp                = $this->nivel * 5 + $this->constituicao * 5;
         $this->stamina           = $this->forca * 10;

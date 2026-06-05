@@ -1,9 +1,15 @@
 <?php
 
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../repository/PersonagemRepository.php';
 require_once __DIR__ . '/../repository/HabilidadeRepository.php';
+require_once __DIR__ . '/../repository/RelacaoPersonagemHabilidadeRepository.php';
 
-$repo = new HabilidadeRepository();
+$repo_habilidade = new HabilidadeRepository();
+$repo_personagem = new PersonagemRepository();
+$repo_relacao = new RelacaoPersonagemHabilidadeRepository();
+$personagens = $repo_personagem->listarPorUsuario($_SESSION['id_usuario']);
+$personagem = null;
 $erro = '';
 
 $id_usuario = 0;
@@ -30,7 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $custo, $descricao);
-        $repo->salvar($habilidade);
+        $repo_habilidade->salvar($habilidade);
+
+        $id_habilidade = $habilidade->getId();
+        $id_personagem  = (int)  ($_POST['personagem'] ?? 0);
+
+        $relacao = RelacaoPersonagemHabilidade::novo($id_usuario, $id_personagem, $id_habilidade);
+        $repo_relacao->salvar($relacao);
 
         header('Location: index2.php');
         exit;
@@ -138,6 +150,24 @@ require_once __DIR__ . '/../includes/header.php';
         value="<?= htmlspecialchars($descricao) ?>"
         required
       />
+    </div>
+
+    <div class="form-group">
+      <label for="personagem">Personagens</label>
+      <select id="personagem" name="personagem" required>
+        <option value="">Selecione o personagem que possuí essa habilidade...</option>
+        <?php foreach ($personagens as $p): ?>
+          <?php
+            $selecionado = '';
+            if ($personagem === $p) {
+                $selecionado = 'selected';
+            }
+          ?>
+          <option value="<?= $p->getId() ?>" <?= $selecionado ?>>
+            <?= $p->getNome(); ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
     </div>
 
     <div class="form-actions">

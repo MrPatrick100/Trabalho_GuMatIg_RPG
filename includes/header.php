@@ -16,9 +16,9 @@
     <br>
     <img src=<?= $_SESSION['foto_perfil'] ?? '../assets/img_perfil/avatar.png' ?> class="avatar" id="avatar-header">
     <br>
-    <a href="../pages/perfil.php" class="btn">Perfil</a> <br>
-    <a href="../pages/seguranca_privacidade.php" class="btn">Segurança e Privacidade</a> <br>
-    <a href="../pages/index.php" class="btn">Configurações</a> <br>
+    <a href="../pages/menu_perfil.php" class="btn">Perfil</a> <br>
+    <a href="../pages/menu_seguranca_privacidade.php" class="btn">Segurança e Privacidade</a> <br>
+    <a href="../pages/menu_configuracoes.php" class="btn">Configurações</a> <br>
     <a href="../pages/tutorial.php" class="btn">Tutorial</a> <br>
     <script>
       const btnMenu = document.getElementById("btnMenu");
@@ -34,7 +34,7 @@
       <?php
         $nomeUser = $_SESSION['usuario_nome'] ?? 'Usuário';
       ?>
-      <a href="../pages/perfil.php" class="user-name">
+      <a href="../pages/menu_perfil.php" class="user-name">
         <?= htmlspecialchars($nomeUser) ?>
       </a>
       <a href="../pages/logout.php" class="btn-logout">Sair</a>

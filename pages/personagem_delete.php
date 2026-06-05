@@ -5,31 +5,33 @@ require_once __DIR__ . '/../repository/PersonagemRepository.php';
 require_once __DIR__ . '/../repository/PericiaRepository.php';
 
 $repoPersonagem = new PersonagemRepository();
-$repoPericia = new PericiaRepository();
 
 $id = 0;
 if (isset($_GET['id'])) {
-    $id = (int) $_GET['id'];
+  $id = (int) $_GET['id'];
 }
 
 $personagem = null;
 $pericia = null;
 if ($id > 0) {
-    $personagem = $repoPersonagem->buscarPorId($id);
-    $pericia = $repoPericia->buscarPorId($personagem->getId());
+  $personagem = $repoPersonagem->buscarPorId($id);
 }
 
 // Personagem não encontrado ou não pertence ao usuário logado
 if ($personagem === null || $personagem->getId_usuario() !== $_SESSION['id_usuario']) {
-    header('Location: index.php');
-    exit;
+  header('Location: index.php');
+  exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $repoPericia->excluir($pericia->getId_Personagem());
-    $repoPersonagem->excluir($personagem->getId());
-    header('Location: index.php');
-    exit;
+  $personagem->alterarDados(
+    $personagem->getNome(), $personagem->getIdade(), $personagem->getRaca(), $personagem->getNivel(),
+    $personagem->getAgilidade(), $personagem->getForca(), $personagem->getIntelecto(), $personagem->getConstituicao(),
+    $personagem->getCarisma(), $personagem->getMagia(), $personagem->getAparencia(), $personagem->getLore(), 1
+  );
+  $repoPersonagem->salvar($personagem);
+  header('Location: index.php');
+  exit;
 }
 
 require_once __DIR__ . '/../includes/header.php';

@@ -7,19 +7,18 @@ class Item {
     private string $nome;
     private string $tipo;
     private string $descricao;
-    private bool   $equipado;
-    private bool   $deletado;
+    private int   $equipado;
+    private int   $deletado;
 
     public function __construct(array $dados) {
 
-        $this->id_personagem        = (int) ($dados['id_personagem']  ?? 0);
+        $this->id_personagem     = (int) ($dados['id_personagem']     ?? 0);
         $this->id                = (int) ($dados['id']                ?? 0);
         $this->nome              =        $dados['nome']              ?? '';
         $this->tipo              =        $dados['tipo']              ?? '';
-        $this->ciclo             = (int) ($dados['ciclo']             ?? 0);
         $this->descricao         =        $dados['descricao']         ?? '';
-        $this->equipado          =        $dados['equipado']          ?? FALSE;
-        $this->deletado          =        FALSE;
+        $this->equipado          = (int)  $dados['equipado']          ?? 0;
+        $this->deletado          = (int) ($dados['deletado'] ?? 0);
     }
 
     public function getId_personagem():   int    { return $this->id_personagem; }
@@ -30,7 +29,7 @@ class Item {
     public function getEquipado():        bool   { return $this->equipado; }
     public function getDeletado():        bool   { return $this->deletado; }
 
-    public static function novo(int $id_personagem, string $nome, string $tipo, string $descricao, bool $equipado, bool $deletado): Item {
+    public static function novo(int $id_personagem, string $nome, string $tipo, string $descricao, int $equipado, int $deletado): Item {
             if ($id_personagem <= 0) {
             throw new InvalidArgumentException('Personagem inválido. (Erro no entity)');
         }
@@ -41,7 +40,7 @@ class Item {
         return $item;
     }
 
-    public function alterarDados(string $nome, string $tipo, string $descricao, bool $equipado, bool $deletado): void {
+    public function alterarDados(string $nome, string $tipo, string $descricao, int $equipado, int $deletado): void {
         $nome = trim($nome);
         $tipo = trim($tipo);
 

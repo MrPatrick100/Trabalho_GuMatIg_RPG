@@ -8,22 +8,22 @@
 }
 
 :root {
-  --paper: #f4efe8;
-  --paper-soft: #fffaf1;
-  --ink: #191512;
-  --ink-soft: #4b433b;
-  --line: #1f1b16;
-  --muted: #776f63;
-  --orange: #c4572b;
-  --orange-dark: #8f3425;
-  --green: #69785a;
-  --green-dark: #3f4c36;
-  --yellow: #f0bd2f;
-  --yellow-soft: #f7dfa0;
-  --red: #b9332e;
-  --red-dark: #7e211d;
-  --red-soft: #f0d4c9;
-  --cream: #ede0cf;
+  --paper: #f4efe8; /* cor de fundo */
+  --paper-soft: #fffaf1; /* cor de fundo suave */
+  --ink: #121719;  /* o contorno, os botoões de excluir*/ 
+  --ink-soft: #4b433b; /* cor de contorno suave */
+  --line: #1f1b16; /* cor da linha */
+  --muted: #776f63; /* cor de texto secundário */ 
+  --orange: #c4572b; /* cor botoões de ação */
+  --orange-dark: #8f3425; /* cor botoões de ação hover */ 
+  --green: #69785a; /* cor de sucesso */
+  --green-dark: #3f4c36; /* cor de sucesso hover */
+  --yellow: #622ff0; /* cor botoões de editar */
+  --yellow-soft: #f7dfa0; /* cor de destaque suave */
+  --red: #02063a; /* cor header */
+  --red-dark: #0916c4; /* cor footer */
+  --red-soft: #f0d4c9; /* cor de erro */
+  --cream: #ede0cf; /* cor de fundo alternativo */
   --radius: 2px;
   --shadow: 8px 8px 0 var(--ink);
   --shadow-sm: 4px 4px 0 var(--ink);

@@ -19,6 +19,7 @@
     <a href="../pages/perfil.php" class="btn">Perfil</a> <br>
     <a href="../pages/seguranca_privacidade.php" class="btn">Segurança e Privacidade</a> <br>
     <a href="../pages/index.php" class="btn">Configurações</a> <br>
+    <a href="../pages/tutorial.php" class="btn">Tutorial</a> <br>
     <script>
       const btnMenu = document.getElementById("btnMenu");
       const sidebar = document.getElementById("sidebar");

@@ -120,4 +120,9 @@ class PersonagemRepository {
         $stmt = $this->pdo->prepare('DELETE FROM personagem WHERE id = :id');
         $stmt->execute([':id' => $id]);
     }
+
+    public function recuperar(int $id): void {
+        $stmt = $this->pdo->prepare('UPDATE personagem SET deletado = 0 WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+    }
 }

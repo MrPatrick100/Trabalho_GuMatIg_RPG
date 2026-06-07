@@ -3,9 +3,11 @@
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../repository/PersonagemRepository.php';
 require_once __DIR__ . '/../repository/PericiaRepository.php';
+require_once __DIR__ . '/../repository/ItemRepository.php';
 
 $repoPersonagem = new PersonagemRepository();
 $repoPericia = new PericiaRepository();
+$repoItem = new ItemRepository();
 
 $personagens = $repoPersonagem->listarPorUsuario($_SESSION['id_usuario']);
 $pesquisa = '';
@@ -27,11 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['personagens'])) {
         $pericia = $repoPericia->listarPorPersonagem($id_personagem);
         if($_POST['acao'] === 'excluir') {
             $repoPericia->excluir($id_personagem);
+            $repoItem->excluirPorPersonagem($id_personagem);
             $repoPersonagem->excluir($id_personagem);
         }
         else if ($_POST['acao'] === 'recuperar')
         {
-
+            $repoItem->recuperarTodos($id_personagem);
+            $repoPersonagem->recuperar($id_personagem);
         }
     }
 }

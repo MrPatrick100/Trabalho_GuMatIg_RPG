@@ -37,15 +37,14 @@ class ItemRepository {
     //     return $lista;
     // }
 
-    public function buscarPorIdPersonagem(int $id_personagem): ?Habilidade {
-        $stmt = $this->pdo->prepare('SELECT * FROM item WHERE id = :id_p LIMIT 1');
-        $stmt->execute([':id_p' => $id_personagem]);
+    public function buscarPorId(int $id): ?Item {
+        $stmt = $this->pdo->prepare('SELECT * FROM item WHERE id = :id LIMIT 1');
+        $stmt->execute([':id' => $id]);
         $dados = $stmt->fetch();
 
         if ($dados) {
             return new Item($dados);
         }
-
         return null;
     }
 
@@ -103,5 +102,14 @@ class ItemRepository {
     public function excluir(int $id): void {
         $stmt = $this->pdo->prepare('DELETE FROM item WHERE id = :id');
         $stmt->execute([':id' => $id]);
+    }
+    public function excluirPorPersonagem(int $id_personagem): void {
+        $stmt = $this->pdo->prepare('DELETE FROM item WHERE id_personagem = :id_personagem');
+        $stmt->execute([':id_personagem' => $id_personagem]);
+    }
+
+    public function recuperarTodos(int $id_personagem): void {
+        $stmt = $this->pdo->prepare('UPDATE item SET deletado = 0 WHERE id_personagem = :id_personagem');
+        $stmt->execute([':id_personagem' => $id_personagem]);
     }
 }

@@ -17,8 +17,8 @@ class Item {
         $this->nome              =        $dados['nome']              ?? '';
         $this->tipo              =        $dados['tipo']              ?? '';
         $this->descricao         =        $dados['descricao']         ?? '';
-        $this->equipado          = (int)  $dados['equipado']          ?? 0;
-        $this->deletado          = (int) ($dados['deletado'] ?? 0);
+        $this->equipado          = (int) ($dados['equipado']          ?? 0);
+        $this->deletado          = (int) ($dados['deletado']          ?? 0);
     }
 
     public function getId_personagem():   int    { return $this->id_personagem; }
@@ -26,8 +26,8 @@ class Item {
     public function getNome():            string { return $this->nome; }
     public function getTipo():            string { return $this->tipo; }
     public function getDescricao():       string { return $this->descricao; }
-    public function getEquipado():        bool   { return $this->equipado; }
-    public function getDeletado():        bool   { return $this->deletado; }
+    public function getEquipado():        int   { return $this->equipado; }
+    public function getDeletado():        int   { return $this->deletado; }
 
     public static function novo(int $id_personagem, string $nome, string $tipo, string $descricao, int $equipado, int $deletado): Item {
             if ($id_personagem <= 0) {

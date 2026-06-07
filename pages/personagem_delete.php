@@ -3,8 +3,10 @@
 require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../repository/PersonagemRepository.php';
 require_once __DIR__ . '/../repository/PericiaRepository.php';
+require_once __DIR__ . '/../repository/ItemRepository.php';
 
 $repoPersonagem = new PersonagemRepository();
+$repoItem = new ItemRepository();
 
 $id = 0;
 if (isset($_GET['id'])) {
@@ -13,8 +15,10 @@ if (isset($_GET['id'])) {
 
 $personagem = null;
 $pericia = null;
+$itens = [];
 if ($id > 0) {
   $personagem = $repoPersonagem->buscarPorId($id);
+  $itens = $repoItem->listarPorPersonagem($id);
 }
 
 // Personagem não encontrado ou não pertence ao usuário logado
@@ -30,6 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $personagem->getCarisma(), $personagem->getMagia(), $personagem->getAparencia(), $personagem->getLore(), 1
   );
   $repoPersonagem->salvar($personagem);
+  foreach($itens as $item) {
+    $item->alterarDados($item->getNome(), $item->getTipo(), $item->getDescricao(), $item->getEquipado(), 1);
+    $repoItem->salvar($item);
+  }
   header('Location: index.php');
   exit;
 }

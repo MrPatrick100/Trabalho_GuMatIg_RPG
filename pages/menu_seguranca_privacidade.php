@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <img src=<?= $_SESSION['foto_perfil'] ?? '../assets/img_perfil/avatar.png' ?> class="avatar">
         </button>
         <div id="form-alterar-avatar" class="form-alterar-avatar">
-            <form method="POST" action="seguranca_privacidade.php" enctype="multipart/form-data">
+            <form method="POST" action="menu_seguranca_privacidade.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="avatar">Avatar</label>
                     <input
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group2">
                 <button type="button" id="btn-alterar-senha" class="btn">Alterar Senha</button>
                 <div id="form-alterar-senha" class="form-alterar-senha">
-                    <form method="POST" action="seguranca_privacidade.php">
+                    <form method="POST" action="menu_seguranca_privacidade.php">
                         <div class="form-group">
                             <label for="senha_atual">Senha Atual</label>
                             <input
@@ -179,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group2">
                 <button type="button" id="btn-alterar-email" class="btn">Alterar E-mail</button>
                 <div id="form-alterar-email" class="form-alterar-email">
-                    <form method="POST" action="seguranca_privacidade.php">
+                    <form method="POST" action="menu_seguranca_privacidade.php">
                         <div class="form-group">
                             <label for="senha_atual">Email desejado</label>
                             <input

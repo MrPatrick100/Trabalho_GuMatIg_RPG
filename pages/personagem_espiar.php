@@ -182,6 +182,9 @@ require_once __DIR__ . '/../includes/header.php';
               <label for="vontade">Vontade: <?= $pericias->getVontade() ?></label>
           </div>
       </div>
+      <canvas id="meuGrafico"></canvas>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script src="../includes/radar_chart.js"></script>
   </div>
 
   <div class="form-card">

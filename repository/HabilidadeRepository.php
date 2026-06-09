@@ -72,7 +72,8 @@ class HabilidadeRepository {
         }
 
         $stmt = $this->pdo->prepare(
-            'INSERT INTO habilidade (id_usuario, nome, tipo, ciclo, estilo, custo, descricao, deletado) VALUES (:idu, :nome, :tipo, :ciclo, :estilo, :custo, :descricao)'
+            'INSERT INTO habilidade (id_usuario, nome, tipo, ciclo, estilo, custo, descricao, deletado) 
+            VALUES (:idu, :nome, :tipo, :ciclo, :estilo, :custo, :descricao, :deletado)'
         );
         $stmt->execute([
             ':idu' => $habilidade->getId_usuario(),

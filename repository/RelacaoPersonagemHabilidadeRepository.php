@@ -14,7 +14,7 @@ class RelacaoPersonagemHabilidadeRepository {
     /** @return RelacaoPersonagemHabilidade[] */ // Lista todas as habilidades salvas no Banco daquele usuário
     public function listarPorUsuario(int $usuarioId): array {
         $stmt = $this->pdo->prepare(
-            'SELECT * FROM personagem_habilidade WHERE id_usuario = :idu ORDER BY nome ASC'
+            'SELECT * FROM personagem_habilidade WHERE id_usuario = :idu'
         );
         $stmt->execute([':idu' => $usuarioId]);
         $lista = [];

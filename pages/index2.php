@@ -9,6 +9,8 @@ $repoPersonagem = new PersonagemRepository();
 $personagens = $repoPersonagem->listarPorUsuario($_SESSION['id_usuario']);
 $repoHabilidade = new HabilidadeRepository();
 $habilidades = $repoHabilidade->listarPorUsuario($_SESSION['id_usuario']);
+$repoRelacao = new RelacaoPersonagemHabilidadeRepository();
+$relacao = $repoRelacao->listarPorUsuario($_SESSION['id_usuario']);
 $pesquisa = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pesquisa'])) {
@@ -88,23 +90,6 @@ require_once __DIR__ . '/../includes/header.php';
             <?php endif; ?>
           <?php endforeach; ?>
         <?php endforeach; ?>
-        <!-- <div class="habilidades">
-          <tbody>
-            <?php foreach ($habilidades as $indice => $h): ?>
-              <tr>
-                <td><?= $indice + 1 ?></td>
-                <td><strong><?= htmlspecialchars($h->getNome()) ?></strong></td>
-                <td><span class="badge badge-raça"><?= htmlspecialchars($h->getEstilo()) ?></span></td>
-                <td><?= $h->getCiclo() ?>°</td>
-                <td class="acoes">
-                  <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
-                  <a href="habilidade_delete.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
-                  <a href="habilidade_espiar.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </div> -->
       </div>
     </table>
   </div>

@@ -65,7 +65,7 @@ class RelacaoPersonagemHabilidadeRepository {
         $relacao->registrarIdGerado((int) $this->pdo->lastInsertId());
     }
 
-    public function inserir(int $id_personagem, int $id_habilidade): void {
+    public function inserir(int $id_usuario, int $id_personagem, int $id_habilidade): void {
         $relacao = RelacaoPersonagemHabilidade::novo($id_usuario, $id_personagem, $id_habilidade);
         $this->salvar($relacao);
     }
@@ -81,8 +81,8 @@ class RelacaoPersonagemHabilidadeRepository {
     //     $this->salvar($habilidade);
     // }
 
-    // public function excluir(int $id): void {
-    //     $stmt = $this->pdo->prepare('DELETE FROM habilidade WHERE id = :id');
-    //     $stmt->execute([':id' => $id]);
-    // }
+    public function excluirPorHabilidade(int $id_habilidade): void {
+        $stmt = $this->pdo->prepare('DELETE FROM personagem_habilidade WHERE id_habilidade = :id_habilidade');
+        $stmt->execute([':id_habilidade' => $id_habilidade]);
+    }
 }

@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['personagens'])) {
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
-<form action="deletados.php" method="POST">
+<form action="personagens_deletados.php" method="POST">
 
     <div class="page-header">
         <h2>Personagens Deletados</h2>
@@ -91,7 +91,7 @@ require_once __DIR__ . '/../includes/header.php';
     <?php endif; ?>
 
 </form>
-<!-- <form action="deletados.php" method="POST"></form>
+<!-- <form action="personagens_deletados.php" method="POST"></form>
     <div class="page-header">
         <h2>Personagens Deletados</h2>
             <button type="submit" class="btn btn-primary" name="acao" value="recuperar">Recuperar</button>

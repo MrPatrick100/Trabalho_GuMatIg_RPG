@@ -1,10 +1,14 @@
 <?php
 
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../repository/PersonagemRepository.php';
 require_once __DIR__ . '/../repository/HabilidadeRepository.php';
+require_once __DIR__ . '/../repository/RelacaoPersonagemHabilidadeRepository.php';
 
-$repo = new HabilidadeRepository();
-$habilidades = $repo->listarPorUsuario($_SESSION['id_usuario']);
+$repoPersonagem = new PersonagemRepository();
+$personagens = $repoPersonagem->listarPorUsuario($_SESSION['id_usuario']);
+$repoHabilidade = new HabilidadeRepository();
+$habilidades = $repoHabilidade->listarPorUsuario($_SESSION['id_usuario']);
 $pesquisa = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pesquisa'])) {
@@ -12,11 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pesquisa'])) {
 }
 
 if ($pesquisa !== '') {
-  $habilidades = $repo->listarFiltrando($_SESSION['id_usuario'], $pesquisa);
+  $habilidades = $repoHabilidade->listarFiltrando($_SESSION['id_usuario'], $pesquisa);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['limpar'])) {
-  $habilidades = $repo->listarPorUsuario($_SESSION['id_usuario']);
+  $habilidades = $repoHabilidade->listarPorUsuario($_SESSION['id_usuario']);
 }
 
 require_once __DIR__ . '/../includes/header.php';
@@ -25,6 +29,7 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="page-header">
   <h2>Minhas Habilidades</h2>
   <a href="habilidade_create.php" class="btn btn-primary">+ Nova Habilidade</a>
+  <a href="habilidades_deletadas.php" class="btn btn-primary" id="btn-deletados">Deletados</a>
 </div>
 
 <div>
@@ -52,16 +57,38 @@ require_once __DIR__ . '/../includes/header.php';
           <th>Ações</th>
         </tr>
       </thead>
-      <!-- <div class="personagem">
-        <button class="btn-personagem">
-          ▶ <?= $personagem->getNome() ?>
-        </button>
-        <div class="habilidades">
-          <ul>
-              <li>Habilidade 1</li>
-              <li>Habilidade 2</li>
-              <li>Habilidade 3</li>
-          </ul> -->
+      <div class="personagem">
+        <?php foreach ($personagens as $p): ?>
+          <?php if ($p->getDeletado() !== 1): ?>
+            <button class="btn btn-personagem">
+              ▶ <?= $p->getNome() ?>
+            </button>
+          <?php endif; ?>
+          <?php foreach ($habilidades as $indice => $h): ?>
+            <?php if ($h->getDeletado() !== 1): ?>
+              <ul>
+                <li>
+                  <div class="habilidades">
+                    <tbody>
+                      <tr>
+                        <td><?= $indice + 1 ?></td>
+                        <td><strong><?= htmlspecialchars($h->getNome()) ?></strong></td>
+                        <td><span class="badge badge-raça"><?= htmlspecialchars($h->getEstilo()) ?></span></td>
+                        <td><?= $h->getCiclo() ?>°</td>
+                        <td class="acoes">
+                          <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
+                          <a href="habilidade_delete.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
+                          <a href="habilidade_espiar.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </div>
+                </li>
+              </ul>
+            <?php endif; ?>
+          <?php endforeach; ?>
+        <?php endforeach; ?>
+        <!-- <div class="habilidades">
           <tbody>
             <?php foreach ($habilidades as $indice => $h): ?>
               <tr>
@@ -77,8 +104,8 @@ require_once __DIR__ . '/../includes/header.php';
               </tr>
             <?php endforeach; ?>
           </tbody>
-        <!-- </div> -->
-      <!-- </div> -->
+        </div> -->
+      </div>
     </table>
   </div>
 <?php endif; ?>

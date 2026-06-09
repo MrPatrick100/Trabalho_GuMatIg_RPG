@@ -22,7 +22,10 @@ if ($habilidade === null || $habilidade->getId_usuario() !== $_SESSION['id_usuar
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $repo->excluir($habilidade->getId());
+    $habilidade->alterarDados($habilidade->getNome(), $habilidade->getTipo(), $habilidade->getCiclo(),
+    $habilidade->getEstilo(), $habilidade->getCusto(), $habilidade->getDescricao(), 1);
+    
+    $repo->salvar($habilidade);
     header('Location: index2.php');
     exit;
 }

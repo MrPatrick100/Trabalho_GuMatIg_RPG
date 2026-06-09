@@ -37,7 +37,6 @@ class RelacaoPersonagemHabilidade {
     }
 
     public function alterarDados(int $id_personagem, int $id_habilidade): void {
-
         $this->id_personagem  = $id_personagem;
         $this->id_habilidade = $id_habilidade;
     }

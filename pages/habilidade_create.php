@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_usuario = $_SESSION['id_usuario'];
 
     try {
-        $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $custo, $descricao);
+        $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $custo, $descricao, 0);
         $repo_habilidade->salvar($habilidade);
 
         $id_habilidade = $habilidade->getId();

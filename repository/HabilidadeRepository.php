@@ -52,7 +52,7 @@ class HabilidadeRepository {
     public function salvar(Habilidade $habilidade): void {
         if ($habilidade->getId() > 0) {
             $stmt = $this->pdo->prepare(
-                'UPDATE habilidade SET nome = :nome, tipo = :tipo, ciclo = :ciclo, estilo = :estilo, custo = :custo, descricao = :descricao WHERE id = :id'
+                'UPDATE habilidade SET nome = :nome, tipo = :tipo, ciclo = :ciclo, estilo = :estilo, custo = :custo, descricao = :descricao, deletado = :deletado WHERE id = :id'
             );
             $stmt->execute([
                 ':id' => $habilidade->getId(),
@@ -62,6 +62,7 @@ class HabilidadeRepository {
                 ':estilo' => $habilidade->getEstilo(),
                 ':custo' => $habilidade->getCusto(),
                 ':descricao' => $habilidade->getDescricao(),
+                ':deletado' => $habilidade->getDeletado(),
             ]);
             return;
         }
@@ -71,7 +72,7 @@ class HabilidadeRepository {
         }
 
         $stmt = $this->pdo->prepare(
-            'INSERT INTO habilidade (id_usuario, nome, tipo, ciclo, estilo, custo, descricao) VALUES (:idu, :nome, :tipo, :ciclo, :estilo, :custo, :descricao)'
+            'INSERT INTO habilidade (id_usuario, nome, tipo, ciclo, estilo, custo, descricao, deletado) VALUES (:idu, :nome, :tipo, :ciclo, :estilo, :custo, :descricao)'
         );
         $stmt->execute([
             ':idu' => $habilidade->getId_usuario(),
@@ -81,29 +82,35 @@ class HabilidadeRepository {
             ':estilo' => $habilidade->getEstilo(),
             ':custo' => $habilidade->getCusto(),
             ':descricao' => $habilidade->getDescricao(),
+            ':deletado' => $habilidade->getDeletado(),
         ]);
 
         $habilidade->registrarIdGerado((int) $this->pdo->lastInsertId());
     }
 
-    public function inserir(int $id_usuario, string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao): void {
-        $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $custo, $descricao);
+    public function inserir(int $id_usuario, string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao, $deletado): void {
+        $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $custo, $descricao, $deletado);
         $this->salvar($habilidade);
     }
 
-    public function atualizar(int $id, string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao): void {
+    public function atualizar(int $id, string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao, $deletado): void {
         $habilidade = $this->buscarPorId($id);
 
         if ($habilidade === null) {
             throw new RuntimeException('Habilidade não encontrado.');
         }
 
-        $habilidade->alterarDados($nome, $tipo, $ciclo, $estilo, $custo, $descricao);
+        $habilidade->alterarDados($nome, $tipo, $ciclo, $estilo, $custo, $descricao, $deletado);
         $this->salvar($habilidade);
     }
 
     public function excluir(int $id): void {
         $stmt = $this->pdo->prepare('DELETE FROM habilidade WHERE id = :id');
+        $stmt->execute([':id' => $id]);
+    }
+
+    public function recuperar(int $id): void {
+        $stmt = $this->pdo->prepare('UPDATE habilidade SET deletado = 0 WHERE id = :id');
         $stmt->execute([':id' => $id]);
     }
 }

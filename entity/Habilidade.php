@@ -10,6 +10,7 @@ class Habilidade {
     private string $estilo;
     private int    $custo;
     private string $descricao;
+    private int $deletado;
 
     public function __construct(array $dados) {
 
@@ -21,6 +22,7 @@ class Habilidade {
         $this->estilo            =        $dados['estilo']      ?? '';
         $this->custo             = (int) ($dados['custo']       ?? 0);
         $this->descricao         =        $dados['descricao']   ?? '';
+        $this->deletado          = (int) ($dados['deletado']    ?? 0);
     }
 
     public function getId_usuario():      int    { return $this->id_usuario; }
@@ -31,19 +33,20 @@ class Habilidade {
     public function getEstilo():          string { return $this->estilo; }
     public function getCusto():           int    { return $this->custo; }
     public function getDescricao():       string { return $this->descricao; }
+    public function getDeletado():        int    { return $this->deletado; }
 
-    public static function novo(int $id_usuario, string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao): Habilidade {
+    public static function novo(int $id_usuario, string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao, $deletado): Habilidade {
             if ($id_usuario <= 0) {
             throw new InvalidArgumentException('Usuário inválido.');
         }
 
         $habilidade = new Habilidade(['id_usuario' => $id_usuario]);
-        $habilidade->alterarDados($nome, $tipo, $ciclo, $estilo, $custo, $descricao);
+        $habilidade->alterarDados($nome, $tipo, $ciclo, $estilo, $custo, $descricao, $deletado);
 
         return $habilidade;
     }
 
-    public function alterarDados(string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao): void {
+    public function alterarDados(string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao, $deletado): void {
         $nome = trim($nome);
         $tipo = trim($tipo);
         $estilo = trim($estilo);
@@ -64,6 +67,7 @@ class Habilidade {
         $this->estilo  = $estilo;
         $this->custo  = $custo;
         $this->descricao = $descricao;
+        $this->deletado = $deletado;
     }
 
     public function registrarIdGerado(int $id): void {

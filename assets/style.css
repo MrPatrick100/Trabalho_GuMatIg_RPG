@@ -475,6 +475,11 @@ padding: 6px 12px;
 font-size: .72rem;
 }
 
+#btn-ver-mais {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
 /* =================================================
 ALERTS
 ================================================= */
@@ -911,6 +916,32 @@ transition:
 border-color .2s ease,
 box-shadow .2s ease;
 }
+
+.lore {
+    position: relative;
+}
+
+#texto-lore {
+    position: relative;
+    max-height: 200px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+#texto-lore.aberto {
+    max-height: 2000px;
+}
+
+#texto-lore:not(.aberto)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(transparent, #111);
+}
+
 
 /* =================================================
 PERÍCIAS

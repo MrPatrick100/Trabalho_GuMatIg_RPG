@@ -129,6 +129,29 @@ require_once __DIR__ . '/../includes/header.php';
         <img src="<?= $personagem->getAparencia() ?>" alt="img">
         <!-- <label for="...">string_img: <?= $personagem->getAparencia() ?></label> -->
       </div>
+
+      <div class="form-group">
+        <div class="lore">
+          <label for="lore">História</label>
+          <p id="texto-lore"><?= nl2br(htmlspecialchars($personagem->getLore())) ?></p>
+          <button type="button" id="btn-ver-mais" class="btn">
+            Ver mais
+          </button>
+        </div>
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const texto = document.getElementById("texto-lore");
+            const botao = document.getElementById("btn-ver-mais");
+
+            botao.addEventListener("click", () => {
+              texto.classList.toggle("aberto");
+              botao.textContent = texto.classList.contains("aberto")
+                ? "Ver menos"
+                : "Ver mais";
+            });
+          });
+        </script>
+      </div>
   </div>
 
   <div class="form-card">

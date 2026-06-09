@@ -85,6 +85,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="nome"><?= $_SESSION['usuario_nome'] ?? 'Usuário' ?></label>
             </div>
             <br>
+            <div class="form-group2">
+                <h3 for="email">E-mail:</h3>
+                <label for="email"><?= $_SESSION['email'] ?? 'E-mail' ?></label>
+            </div>
+            <br>
+            <div class="form-group2">
+                <h3 for="senha">Senha:</h3>
+                <label for="senha"><?= $_SESSION['senha'] ?? 'Senha' ?></label>
+                <h4>OBS: FAZER MOSTRAR SENHA NO FUTURO</h4>
+            </div>
         </div>
     </div>
 </div>

@@ -184,7 +184,7 @@ require_once __DIR__ . '/../includes/header.php';
       </div>
       <canvas id="meuGrafico"></canvas>
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <script src="../includes/radar_chart.js"></script>
+      <?php require_once __DIR__ . '/../includes/radar_chart.php'; ?>
   </div>
 
   <div class="form-card">

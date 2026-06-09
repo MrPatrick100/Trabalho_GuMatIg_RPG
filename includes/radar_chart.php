@@ -2,7 +2,13 @@
     require_once __DIR__ . "../repository/PericiaRepository.php";
 ?>
 <script>
-    function graficoPericias(acrobacia, adestramento, artes, atletismo)
+    function graficoPericias(
+        acrobacia, adestramento, artes, atletismo, diplomacia, enganacao, fortitude, furtividade,
+        intimidacao, intuicao, investigacao, luta_briga, medicina, ocultismo, percepcao, pontaria,
+        reflexos_iniciativa, religiao, tatica, vontade 
+    ) {
+        
+    }
 
     const grafico = document.getElementById('meuGrafico');
 

@@ -2,6 +2,8 @@
 
 session_start();
 
+require_once __DIR__ . '/../includes/costumizacao.php';
+
 // Se já estiver logado, vai direto para a página principal
 if (!empty($_SESSION['id_usuario'])) {
     header('Location: index.php');

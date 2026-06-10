@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/costumizacao.php';
 require_once __DIR__ . '/../repository/PersonagemRepository.php';
 
 $repo = new PersonagemRepository();

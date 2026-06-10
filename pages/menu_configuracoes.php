@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/costumizacao.php';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../repository/UsuarioRepository.php';
 
@@ -8,7 +9,11 @@ $sucesso = '';
 $repo = new UsuarioRepository();
 $usuario = new Usuario($_SESSION);
 
-$cor1 = null;
+$cor1 = '#c9a45c';
+if (isset($_SESSION['cor_principal'])) {
+  $cor1 = trim  ($_SESSION['cor_principal']      ?? '#c9a45c');
+}
+
 $cor2 = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -34,8 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['acao'] === 'alterar_cor1')
     {
-        $_SESSION['cor1']       = trim  ($_POST['cor1']      ?? '#000000');
-        echo "a" . $_SESSION['cor1'];
+        $_SESSION['cor_principal']       = trim  ($_POST['cor1']      ?? '#c9a45c');
+
+        header('Location: menu_configuracoes.php');
+        exit;
     }
 }
 ?>

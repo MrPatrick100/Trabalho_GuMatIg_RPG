@@ -14,7 +14,7 @@ $repo_item = new ItemRepository();
 $erro = '';
 
 $personagem = null;
-$pericias = null;
+$pericias = [];
 $habilidades = null;
 $inventario = null;
 

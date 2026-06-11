@@ -1,4 +1,5 @@
 <?php
+    require_once __DIR__ . "/costumizacao.php";
     require_once __DIR__ . "/../repository/PericiaRepository.php";
     require_once __DIR__ . "/../repository/PersonagemRepository.php";
     require_once __DIR__ . "/../pages/personagem_espiar.php";
@@ -15,20 +16,20 @@
             "Artes",
             "Atletismo",
             "Diplomacia",
-            "Enganacao",
+            "Enganação",
             "Fortitude",
             "Furtividade",
-            "Intimidacao",
-            "Intuicao",
-            "Investigacao",
-            "Luta_Briga",
+            "Intimidação",
+            "Intuição",
+            "Investigação",
+            "Luta/Briga",
             "Medicina",
             "Ocultismo",
-            "Percepcao",
+            "Percepção",
             "Pontaria",
-            "Reflexos_Iniciativa",
-            "Religiao",
-            "Tatica",
+            "Reflexos/Iniciativa",
+            "Religião",
+            "Tática",
             "Vontade"
         ],
         datasets: [{
@@ -56,10 +57,10 @@
                 <?= $pericias->getVontade(); ?>
             ],
 
-            borderColor: '#c9a45c',
+            borderColor: '<?= $cor_principal; ?>',
             backgroundColor: 'rgba(0,120,255,0.45)',
-            pointBackgroundColor: '#c9a45c',
-            pointBorderColor: '#e3c98c',
+            pointBackgroundColor: '<?= $cor_principal; ?>',
+            pointBorderColor: '<?= $cor_principal_clara; ?>',
             pointRadius: (ctx) => ctx.raw <= 0 ? 0 : 3,
             pointHoverRadius: (ctx) => ctx.raw <= 0 ? 0 : 6,
             borderWidth: 3,
@@ -67,31 +68,6 @@
 
             
         },
-        
-        {
-            label: 'Status',
-            data: 
-            [
-                <?= $personagem->getForca(); ?>,
-                null, null,
-                <?= $personagem->getAgilidade(); ?>,
-                null,null,null,
-                <?= $personagem->getConstituicao(); ?>,
-                null,null,
-                <?= $personagem->getMagia(); ?>,
-                null,null,
-                <?= $personagem->getIntelecto(); ?>,
-                null,null,null,
-                <?= $personagem->getCarisma(); ?>,
-                null,null,null
-            ],
-
-            borderColor: '#0625c1',
-            backgroundColor: 'rgba(201,164,92,0.15)',
-            pointBackgroundColor: '#131b63',
-            borderWidth: 3,
-            fill: true
-        }
     ],
 },
 
@@ -99,14 +75,14 @@
         plugins: {
             legend: {
                 labels: {
-                    color: '#c9a45c'
+                    color: '<?= $cor_principal; ?>'
                 }
             }
         },
 
         scales: {
             r: {
-                min: -1.5,
+                min: -1,
                 max: 5,
 
                 ticks: {
@@ -114,12 +90,12 @@
                 },
 
                 angleLines: {
-                    color: '#c9a45c',
+                    color: '<?= $cor_principal; ?>',
                     lineWidth: 2
                 },
 
                 grid: {
-                    color: '#c9a45c',
+                    color: '<?= $cor_principal; ?>',
                     lineWidth: 1
                 },
 
@@ -144,7 +120,7 @@ const glowPlugin = {
         const ctx = chart.ctx;
 
         ctx.save();
-        ctx.shadowColor = '#c9a45c';
+        ctx.shadowColor = '<?= $cor_principal; ?>';
         ctx.shadowBlur = 15;
     },
     afterDatasetDraw(chart) {
@@ -153,4 +129,31 @@ const glowPlugin = {
 };
 
 Chart.register(glowPlugin);
+
+const centerHolePlugin = {
+    id: 'centerHole',
+
+    afterDraw(chart) {
+        const { ctx } = chart;
+        const scale = chart.scales.r;
+
+        ctx.save();
+
+        ctx.beginPath();
+        ctx.arc(
+            scale.xCenter - 0.25,
+            scale.yCenter,
+            22.5, // tamanho do buraco
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle = 'rgba(0,120,255,0.45)'; // mesma cor do fundo
+        ctx.fill();
+
+        ctx.restore();
+    }
+};
+
+Chart.register(centerHolePlugin);
 </script>

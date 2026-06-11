@@ -16,10 +16,11 @@ function ajustarCor($hex, $percentual) {
 
 $cor_principal = '#c9a45c';
 if (isset($_SESSION['cor_principal'])) {
-  $cor_principal = trim  ($_SESSION['cor_principal']      ?? '#c9a45c');
+    $cor_principal = trim  ($_SESSION['cor_principal']      ?? '#c9a45c');
 }
 $cor_principal_clara = ajustarCor($cor_principal, 20); // 20% mais clara
 $cor_principal_escura  = ajustarCor($cor_principal, -30); // 30% mais escura
+$cor_fundo_botoes_editar = ajustarCor($cor_principal, -50);
 
 ?>
 

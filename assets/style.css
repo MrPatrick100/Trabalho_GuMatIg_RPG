@@ -382,16 +382,16 @@ color: #111;
 
 .btn-editar {
 
-background: #47371a;
+background: --cor-principal-escura;
 
 color: var(--cor-principal-light);
 
-border-color: #6e5426;
+border-color: --cor-principal;
 }
 
 .btn-editar:hover {
 
-background: #614a21;
+background: --cor-principal;
 
 color: white;
 }

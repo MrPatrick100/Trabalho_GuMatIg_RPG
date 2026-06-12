@@ -66,30 +66,32 @@ require_once __DIR__ . '/../includes/header.php';
             <button class="btn btn-personagem">
               ▶ <?= $p->getNome() ?>
             </button>
+            <?php foreach ($habilidades as $indice => $h): ?>
+              <?php foreach ($relacao as $r): ?>
+                <?php if ($h->getDeletado() !== 1 && $r->getId_personagem() === $p->getId()): ?>
+                  <ul>
+                    <li>
+                      <div class="habilidades">
+                        <tbody>
+                          <tr>
+                            <td><?= $indice + 1 ?></td>
+                            <td><strong><?= htmlspecialchars($h->getNome()) ?></strong></td>
+                            <td><span class="badge badge-raça"><?= htmlspecialchars($h->getEstilo()) ?></span></td>
+                            <td><?= $h->getCiclo() ?>°</td>
+                            <td class="acoes">
+                              <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
+                              <a href="habilidade_delete.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
+                              <a href="habilidade_espiar.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </div>
+                    </li>
+                  </ul>
+                <?php endif; ?>
+              <?php endforeach; ?>
+            <?php endforeach; ?>
           <?php endif; ?>
-          <?php foreach ($habilidades as $indice => $h): ?>
-            <?php if ($h->getDeletado() !== 1): ?>
-              <ul>
-                <li>
-                  <div class="habilidades">
-                    <tbody>
-                      <tr>
-                        <td><?= $indice + 1 ?></td>
-                        <td><strong><?= htmlspecialchars($h->getNome()) ?></strong></td>
-                        <td><span class="badge badge-raça"><?= htmlspecialchars($h->getEstilo()) ?></span></td>
-                        <td><?= $h->getCiclo() ?>°</td>
-                        <td class="acoes">
-                          <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
-                          <a href="habilidade_delete.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
-                          <a href="habilidade_espiar.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </div>
-                </li>
-              </ul>
-            <?php endif; ?>
-          <?php endforeach; ?>
         <?php endforeach; ?>
       </div>
     </table>

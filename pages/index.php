@@ -57,7 +57,7 @@ require_once __DIR__ . '/../includes/header.php';
       <tbody>
         <?php foreach ($personagens as $indice => $personagem): ?>
           <?php if ($personagem->getDeletado() !== 1): ?>
-            <tr>
+            <tr class="tr-personagem">
               <td><?= $indice + 1 ?></td>
               <td><strong><?= htmlspecialchars($personagem->getNome()) ?></strong></td>
               <td><span class="badge badge-raça"><?= htmlspecialchars($personagem->getRaca()) ?></span></td>

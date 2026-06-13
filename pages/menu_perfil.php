@@ -7,7 +7,6 @@ require_once __DIR__ . '/../repository/UsuarioRepository.php';
 $erro = '';
 $sucesso = '';
 $repo = new UsuarioRepository();
-$usuario = new Usuario($_SESSION);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['acao'] === 'alterar_avatar')
@@ -22,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $_SESSION['foto_perfil'] = $caminho_final_img;
 
-        $repo->atualizarAvatar($usuario->getId(), $caminho_final_img);
+        $repo->atualizarAvatar($_SESSION['id_usuario'], $caminho_final_img);
         $sucesso = 'Imagem alterada com sucesso';
         $erro = '';
     }

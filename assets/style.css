@@ -25,7 +25,7 @@ color: var(--ink);
 background:
 radial-gradient(
 circle at top,
-rgba(201,164,92,.08),
+color-mix(in srgb, var(--cor-principal) 8%, transparent),
 transparent 30%
 ),
 #0f0f0f;
@@ -539,7 +539,7 @@ background: #222222;
 
 .data-table tr:hover td {
 
-background: rgba(201,164,92,.12);
+background: color-mix(in srgb, var(--cor-principal) 10%, transparent) /*COR DO FUNDO TABELA PERSONAGENS*/
 }
 
 .data-table tr:last-child td {
@@ -584,7 +584,7 @@ padding: 4px 10px;
 
 border-radius: 999px;
 
-background: rgba(201,164,92,.18);
+background: color-mix(in srgb, var(--cor-principal) 18%, transparent); /*COR DO FUNDO TABELA PERSONAGENS RAÇA*/
 
 border: 1px solid var(--cor-principal-dark);
 
@@ -964,8 +964,8 @@ FOCUS
 border-color: var(--cor-principal);
 
 box-shadow:
-0 0 0 2px rgba(201,164,92,.15),
-0 0 14px rgba(201,164,92,.25);
+0 0 0 2px color-mix(in srgb, var(--cor-principal) 15%, transparent),
+0 0 14px color-mix(in srgb, var(--cor-principal) 25%, transparent);
 
 background: #151515;
 }
@@ -1012,7 +1012,7 @@ padding: 24px;
 background:
 radial-gradient(
 circle at top,
-rgba(201,164,92,.08),
+color-mix(in srgb, var(--cor-principal) 8%, transparent),
 transparent 35%
 ),
 #0f0f0f;
@@ -1374,7 +1374,7 @@ margin: -20px;
 border: 3px solid var(--cor-principal);
 
 box-shadow:
-0 0 20px rgba(201,164,92,.25);
+0 0 20px color-mix(in srgb, var(--cor-principal) 25%, transparent);
 }
 
 #btn-alterar-avatar {
@@ -1402,7 +1402,7 @@ transition: .2s;
 transform: scale(1.03);
 
 box-shadow:
-0 0 20px rgba(201,164,92,.35);
+0 0 20px color-mix(in srgb, var(--cor-principal) 35%, transparent);
 }
 
 #avatar-header {
@@ -1554,7 +1554,7 @@ background: var(--cor-principal);
 .logo {
 
 text-shadow:
-0 0 12px rgba(201,164,92,.15);
+0 0 12px color-mix(in srgb, var(--cor-principal) 15%, transparent);
 }
 
 /* cards */

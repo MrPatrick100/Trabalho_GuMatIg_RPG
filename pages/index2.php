@@ -51,6 +51,7 @@ require_once __DIR__ . '/../includes/header.php';
 <?php else: ?>
   <div class="personagens-container">
     <?php foreach ($personagens as $p): ?>
+      <br>
       <button class="btn btn-personagem">
         ▶ <?= $p->getNome() ?>
       </button>

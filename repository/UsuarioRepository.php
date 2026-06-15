@@ -42,4 +42,9 @@ class UsuarioRepository {
         $stmt = $this->pdo->prepare('UPDATE usuario SET email = :email WHERE id = :id');
         $stmt->execute([':email' => $email,':id' => $id]);
     }
+
+    public function atualizarCor(int $id, string $cor): void {
+        $stmt = $this->pdo->prepare('UPDATE usuario SET cor_principal = :cor_principal WHERE id = :id');
+        $stmt->execute([':cor_principal' => $cor,':id' => $id]);
+    }
 }

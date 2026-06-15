@@ -41,6 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     {
         $_SESSION['cor_principal']       = trim  ($_POST['cor1']      ?? '#c9a45c');
 
+
+        $repo->atualizarCor($usuario->getId(), $_SESSION['cor_principal']);
+        $sucesso = 'Cor alterada com sucesso';
+        $erro = '';
+
         header('Location: menu_configuracoes.php');
         exit;
     }

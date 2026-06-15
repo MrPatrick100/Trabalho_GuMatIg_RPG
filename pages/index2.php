@@ -51,47 +51,47 @@ require_once __DIR__ . '/../includes/header.php';
 <?php else: ?>
   <div class="personagens-container">
     <?php foreach ($personagens as $p): ?>
-      <?php foreach ($habilidades as $indice => $h): ?>
-        <?php foreach ($relacao as $r): ?>
-          <?php if (
-            $h->getDeletado() !== 1 &&
-            $r->getId_personagem() === $p->getId() &&
-            $r->getId_habilidade() === $h->getId()
-          ): ?>
-          <button class="btn btn-personagem">
-            ▶ <?= $p->getNome() ?>
-          </button>
-          <div class="habilidades">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nome</th>
-                  <th>Estilo</th>
-                  <th>Ciclo</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><?= $indice + 1 ?></td>
-                  <td><?= $h->getNome() ?></td>
-                  <td><?= $h->getEstilo() ?></td>
-                  <td><?= $h->getCiclo() ?>°</td>
-                  <td class="acoes">
-                    <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
-                    <a href="habilidade_delete.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
-                    <a href="habilidade_espiar.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
-                  </td>
-                </tr>
-          <?php endif; ?>
-        <?php endforeach; ?>
-      <?php endforeach; ?>
-              </tbody>
-            </table>
-          </div>
+      <button class="btn btn-personagem">
+        ▶ <?= $p->getNome() ?>
+      </button>
+      <div class="habilidades">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Estilo</th>
+              <th>Ciclo</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <?php foreach ($habilidades as $indice => $h): ?>
+            <?php foreach ($relacao as $r): ?>
+              <?php if (
+                $h->getDeletado() !== 1 &&
+                $r->getId_personagem() === $p->getId() &&
+                $r->getId_habilidade() === $h->getId()
+              ): ?>
+                <tbody>
+                  <tr>
+                    <td>#</td>
+                    <td><?= $h->getNome() ?></td>
+                    <td><?= $h->getEstilo() ?></td>
+                    <td><?= $h->getCiclo() ?>°</td>
+                    <td class="acoes">
+                      <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
+                      <a href="habilidade_delete.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
+                      <a href="habilidade_espiar.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
+                    </td>
+                  </tr>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          <?php endforeach; ?>
+          </tbody>  
+        </table>
       </div>
     <?php endforeach; ?>
+  </div>
     <script>
       document.querySelectorAll(".btn-personagem").forEach(botao => {
         botao.addEventListener("click", () => {

@@ -46,7 +46,7 @@ class Habilidade {
         return $habilidade;
     }
 
-    public function alterarDados(string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao, $deletado): void {
+    public function alterarDados(string $nome, string $tipo, int $ciclo, string $estilo, int $custo, string $descricao, int $deletado): void {
         $nome = trim($nome);
         $tipo = trim($tipo);
         $estilo = trim($estilo);

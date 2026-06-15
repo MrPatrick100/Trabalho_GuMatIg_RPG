@@ -26,30 +26,35 @@ $tipos = ['Passiva', 'Ativa'];
 $estilos = ['Física', 'Mágica', 'Híbrida'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome       = trim  ($_POST['nome']      ?? '');
-    $tipo       = trim  ($_POST['tipo']      ?? '');
-    $ciclo      = (int) ($_POST['ciclo']     ?? 0);
-    $estilo     = trim  ($_POST['estilo']    ?? '');
-    $custo      = (int) ($_POST['custo']     ?? 0);
-    $descricao  = trim  ($_POST['descricao'] ?? '');
+  $nome       = trim  ($_POST['nome']      ?? '');
+  $tipo       = trim  ($_POST['tipo']      ?? '');
+  $ciclo      = (int) ($_POST['ciclo']     ?? 0);
+  $estilo     = trim  ($_POST['estilo']    ?? '');
+  $custo      = (int) ($_POST['custo']     ?? 0);
+  $descricao  = trim  ($_POST['descricao'] ?? '');
 
-    $id_usuario = $_SESSION['id_usuario'];
+  $id_usuario = $_SESSION['id_usuario'];
 
+  if($_POST['acao'] === 'cadastrar') {
     try {
-        $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $custo, $descricao, 0);
-        $repo_habilidade->salvar($habilidade);
+      $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $custo, $descricao, 0);
+      $repo_habilidade->salvar($habilidade);
+      $id_habilidade = $habilidade->getId();
 
-        $id_habilidade = $habilidade->getId();
-        $id_personagem  = (int)  ($_POST['personagem'] ?? 0);
+      $personagensSelecionados = $_POST['personagens'] ?? [];
 
-        $relacao = RelacaoPersonagemHabilidade::novo($id_usuario, $id_personagem, $id_habilidade);
+      foreach($personagensSelecionados as $id_personagem) {
+        $relacao = RelacaoPersonagemHabilidade::novo($id_usuario, (int)$id_personagem, $id_habilidade);
         $repo_relacao->salvar($relacao);
+      }
 
-        header('Location: index2.php');
-        exit;
-    } catch (InvalidArgumentException $e) {
-        $erro = $e->getMessage();
+      header('Location: index2.php');
+      exit;
+    } 
+    catch (InvalidArgumentException $e) {
+      $erro = $e->getMessage();
     }
+  }
 }
 
 require_once __DIR__ . '/../includes/header.php';
@@ -154,25 +159,114 @@ require_once __DIR__ . '/../includes/header.php';
     </div>
 
     <div class="form-group">
-      <label for="personagem">Personagens</label>
-      <select id="personagem" name="personagem" required>
-        <option value="">Selecione o personagem que possuí essa habilidade...</option>
-        <?php foreach ($personagens as $p): ?>
-          <?php
-            $selecionado = '';
-            if ($personagem === $p) {
-                $selecionado = 'selected';
-            }
-          ?>
-          <option value="<?= $p->getId() ?>" <?= $selecionado ?>>
-            <?= $p->getNome(); ?>
-          </option>
-        <?php endforeach; ?>
-      </select>
+      <label for="add-relacao">Relacionar com Personagem</label>
+      <button type="button" id="btn-add-relacao" class="btn btn-primary" name="acao" value="add-relacao">+</button>
+    </div>
+
+    <div id="lista-personagens">
+      <div class="form-group">
+        <label for="select-personagem-base">Personagem</label>
+        <select id="select-personagem-base" name="personagens[]" required>
+          <option value="">Selecione um personagem...</option>
+          <?php foreach ($personagens as $p): ?>
+            <option value="<?= $p->getId() ?>"><?= $p->getNome() ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+
+      <script>
+        const personagens = [
+          <?php foreach ($personagens as $p): ?>
+            {
+              id: <?= $p->getId() ?>,
+              nome: "<?= addslashes($p->getNome()) ?>"
+            },
+          <?php endforeach; ?>
+        ];
+        const select_base = document.getElementById('select-personagem-base');
+        const lista = document.getElementById('lista-personagens');
+        const btnAdicionar = document.getElementById('btn-add-relacao');
+
+        select_base.addEventListener('change', atualizarTodosOsSelects);
+
+        function personagensSelecionados() {
+          return Array.from(
+            document.querySelectorAll('select[name="personagens[]"]')
+          )
+          .map(select => select.value)
+          .filter(valor => valor !== '');
+        }
+
+        function atualizarTodosOsSelects() {
+          const selecionados = personagensSelecionados();
+          document.querySelectorAll('select[name="personagens[]"]').forEach(select => {
+
+            const valorAtual = select.value;
+            select.innerHTML = '<option value="">Selecione um personagem...</option>';
+            personagens.forEach(personagem => {
+              if (
+                !selecionados.includes(String(personagem.id)) ||
+                String(personagem.id) === valorAtual
+              ) 
+              {
+                const option = document.createElement('option');
+                option.value = personagem.id;
+                option.textContent = personagem.nome;
+                if (String(personagem.id) === valorAtual) {
+                  option.selected = true;
+                }
+                select.appendChild(option);
+              }
+            });
+          });
+          if (personagensSelecionados().length >= personagens.length) {
+            btnAdicionar.disabled = true;
+          }
+          else {
+            btnAdicionar.disabled = false;
+          }
+        }
+
+        function criarSelect() {
+          if (
+            document.querySelectorAll('select[name="personagens[]"]').length
+            >= personagens.length
+          ) {
+            return;
+          }
+
+          const div = document.createElement('div');
+          div.classList.add('form-group');
+
+          const select = document.createElement('select');
+          select.name = 'personagens[]';
+          select.required = true;
+
+          select.addEventListener('change', atualizarTodosOsSelects);
+
+          const btnRemover = document.createElement('button');
+          btnRemover.type = 'button';
+          btnRemover.classList.add('btn', 'btn-ghost');
+          btnRemover.textContent = 'Remover';
+
+          btnRemover.addEventListener('click', () => {
+            div.remove();
+            atualizarTodosOsSelects();
+          });
+
+          div.appendChild(select);
+          div.appendChild(btnRemover);
+
+          lista.appendChild(div);
+          atualizarTodosOsSelects();
+        }
+
+        btnAdicionar.addEventListener('click', criarSelect);
+      </script>
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Cadastrar Habilidade</button>
+      <button type="submit" class="btn btn-primary" name="acao" value="cadastrar">Cadastrar Habilidade</button>
       <a href="index2.php" class="btn btn-ghost">Cancelar</a>
     </div>
 

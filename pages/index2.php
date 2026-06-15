@@ -31,8 +31,8 @@ require_once __DIR__ . '/../includes/header.php';
 
 <div class="page-header">
   <h2>Minhas Habilidades</h2>
-  <a href="habilidade_create.php" class="btn btn-primary">+ Nova Habilidade</a>
-  <a href="habilidades_deletadas.php" class="btn btn-primary" id="btn-deletados">Deletados</a>
+  <a href="habilidade_create.php" class="btn btn-primary btn-inicial">+ Nova Habilidade</a>
+  <a href="habilidades_deletadas.php" class="btn" id="btn-deletados">🗑️</a>
 </div>
 
 <!-- <div>

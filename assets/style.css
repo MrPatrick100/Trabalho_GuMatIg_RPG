@@ -268,6 +268,10 @@ padding-bottom: 18px;
 border-bottom: 1px solid var(--cor-principal-dark);
 }
 
+.btn-inicial {
+    margin-left:auto;
+}
+
 .page-header h2 {
 
 position: relative;

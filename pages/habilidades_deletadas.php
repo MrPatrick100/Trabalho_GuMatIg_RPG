@@ -43,13 +43,15 @@ require_once __DIR__ . '/../includes/header.php';
     <div class="page-header">
         <h2>Habilidades Deletados</h2>
 
-        <button type="submit" class="btn btn-primary" name="acao" value="recuperar">
+        <button type="submit" class="btn btn-primary btn-inicial" name="acao" value="recuperar">
             Recuperar
         </button>
 
         <button type="submit" class="btn btn-primary" name="acao" value="excluir">
             Excluir permanentemente
         </button>
+
+        <a href="../pages/index2.php" class="btn">←</a>
     </div>
 
     <?php if (!empty($habilidades)): ?>

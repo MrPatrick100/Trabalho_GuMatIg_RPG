@@ -10,7 +10,7 @@
 
 <header class="site-header">
   <div class="header-inner">
-  <button id="btnMenu" class="btn">+</button>
+  <button id="btnMenu" class="btn">⚙️</button>
 
   <div id="sidebar" class="sidebar">
     <br>

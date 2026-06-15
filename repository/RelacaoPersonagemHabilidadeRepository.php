@@ -24,6 +24,18 @@ class RelacaoPersonagemHabilidadeRepository {
         return $lista;
     }
 
+    public function listarPorHabilidade(int $id_habilidade): array {
+        $stmt = $this->pdo->prepare(
+            'SELECT * FROM personagem_habilidade WHERE id_habilidade = :idh'
+        );
+        $stmt->execute([':idh' => $id_habilidade]);
+        $lista = [];
+        foreach ($stmt->fetchAll() as $dados) {
+            $lista[] = new RelacaoPersonagemHabilidade($dados);
+        }
+        return $lista;
+    }
+
     public function buscarPorId(int $id): ?RelacaoPersonagemHabilidade {
         $stmt = $this->pdo->prepare('SELECT * FROM personagem_habilidade WHERE id = :id LIMIT 1');
         $stmt->execute([':id' => $id]);
@@ -84,5 +96,29 @@ class RelacaoPersonagemHabilidadeRepository {
     public function excluirPorHabilidade(int $id_habilidade): void {
         $stmt = $this->pdo->prepare('DELETE FROM personagem_habilidade WHERE id_habilidade = :id_habilidade');
         $stmt->execute([':id_habilidade' => $id_habilidade]);
+    }
+
+    public function excluirPorPersonagem(int $id_personagem): void {
+        $stmt = $this->pdo->prepare('DELETE FROM personagem_habilidade WHERE id_personagem = :id_personagem');
+        $stmt->execute([':id_personagem' => $id_personagem]);
+    }
+
+    public function excluirPorPersonagem_Habilidade(int $id_personagem, int $id_habilidade): void {
+        $stmt = $this->pdo->prepare('DELETE FROM personagem_habilidade WHERE id_personagem = :id_personagem and id_habilidade = :id_habilidade');
+        $stmt->execute
+        ([
+            ':id_personagem' => $id_personagem,
+            ':id_habilidade' => $id_habilidade
+        ]);
+    }
+
+    public function verificarExistencia(int $id_habilidade): bool {
+        $stmt = $this->pdo->prepare('SELECT * FROM personagem_habilidade WHERE id_habilidade = :id_habilidade HAVING COUNT(*) > 0');
+        $stmt->execute([ ':id_habilidade' => $id_habilidade ]);
+
+        if ($stmt->rowCount() > 0) {
+            return true;
+        }
+        return false;
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/06/2026 às 05:33
+-- Tempo de geração: 15/06/2026 às 22:09
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -35,6 +35,12 @@ CREATE TABLE `habilidade` (
   `ciclo` int(11) DEFAULT NULL,
   `estilo` varchar(40) DEFAULT NULL,
   `custo` int(11) DEFAULT NULL,
+  `dano` varchar(30) DEFAULT NULL,
+  `buff` varchar(30) DEFAULT NULL,
+  `alcance` varchar(30) DEFAULT NULL,
+  `area` varchar(30) DEFAULT NULL,
+  `duracao` tinyint(4) DEFAULT NULL,
+  `pontos` int(3) DEFAULT NULL,
   `descricao` text DEFAULT NULL,
   `deletado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -43,12 +49,13 @@ CREATE TABLE `habilidade` (
 -- Despejando dados para a tabela `habilidade`
 --
 
-INSERT INTO `habilidade` (`id_usuario`, `id`, `nome`, `tipo`, `ciclo`, `estilo`, `custo`, `descricao`, `deletado`) VALUES
-(NULL, 1, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, '4', 0),
-(1, 4, 'Uppercut', 'Ativa', 2, 'Física', 6, 'Socão', 0),
-(1, 13, 'Bola de água', 'Ativa', 1, 'Mágica', 2, 'Lança água', 0),
-(1, 28, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, 'a', 0),
-(1, 29, 'Soco Forte', 'Ativa', 1, 'Física', 2, 'g', 0);
+INSERT INTO `habilidade` (`id_usuario`, `id`, `nome`, `tipo`, `ciclo`, `estilo`, `custo`, `dano`, `buff`, `alcance`, `area`, `duracao`, `pontos`, `descricao`, `deletado`) VALUES
+(NULL, 1, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, NULL, NULL, NULL, NULL, NULL, NULL, '4', 0),
+(1, 4, 'Uppercut', 'Ativa', 2, 'Física', 6, NULL, NULL, NULL, NULL, NULL, NULL, 'Socão', 0),
+(1, 13, 'Bola de água', 'Ativa', 1, 'Mágica', 2, NULL, NULL, NULL, NULL, NULL, NULL, 'Lança água', 0),
+(1, 28, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, NULL, NULL, NULL, NULL, NULL, NULL, 'a', 0),
+(1, 29, 'Soco Forte', 'Ativa', 1, 'Física', 2, NULL, NULL, NULL, NULL, NULL, NULL, 'g', 0),
+(1, 30, 'Bola de Fogo', 'Ativa', 1, 'Mágica', 2, NULL, NULL, NULL, NULL, NULL, NULL, '1', 0);
 
 -- --------------------------------------------------------
 
@@ -190,7 +197,8 @@ CREATE TABLE `personagem_habilidade` (
 INSERT INTO `personagem_habilidade` (`id_usuario`, `id`, `id_personagem`, `id_habilidade`) VALUES
 (1, 18, 18, 13),
 (1, 19, 18, 28),
-(1, 20, 32, 29);
+(1, 20, 32, 29),
+(1, 21, 18, 30);
 
 -- --------------------------------------------------------
 
@@ -204,18 +212,20 @@ CREATE TABLE `usuario` (
   `email` varchar(150) NOT NULL,
   `senha` char(64) NOT NULL COMMENT 'Hash SHA256 da senha',
   `criado_em` datetime NOT NULL DEFAULT current_timestamp(),
-  `foto_perfil` text DEFAULT NULL
+  `foto_perfil` text DEFAULT NULL,
+  `cor_principal` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `criado_em`, `foto_perfil`) VALUES
-(1, 'Ash Ketchum', 'admin@email.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-19 16:12:18', NULL),
-(2, 'Gustavo Farias', 'gustavofpt3@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-29 17:57:08', NULL),
-(3, 'Iguete', 'iguete@email.com', '33bdf44fd9ec710ad1f944a260a39fae3c9e64017cd77f45218178ecb899bbfd', '2026-05-29 18:03:53', NULL),
-(4, 'GuMatIg', 'gumatig@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-06-02 13:23:06', '');
+INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `criado_em`, `foto_perfil`, `cor_principal`) VALUES
+(1, 'Ash Ketchum', 'admin@email.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-19 16:12:18', '../assets/img_perfil/Boneco.png', NULL),
+(2, 'Gustavo Farias', 'gustavofpt3@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-29 17:57:08', NULL, NULL),
+(3, 'Iguete', 'iguete@email.com', '33bdf44fd9ec710ad1f944a260a39fae3c9e64017cd77f45218178ecb899bbfd', '2026-05-29 18:03:53', NULL, NULL),
+(4, 'GuMatIg', 'gumatig@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-06-02 13:23:06', '', NULL),
+(5, 'teste', 'teste@email.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '2026-06-13 10:12:11', '../assets/img_perfil/Valen_Token.png', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -278,7 +288,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `habilidade`
 --
 ALTER TABLE `habilidade`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de tabela `item`
@@ -296,13 +306,13 @@ ALTER TABLE `personagem`
 -- AUTO_INCREMENT de tabela `personagem_habilidade`
 --
 ALTER TABLE `personagem_habilidade`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restrições para tabelas despejadas

@@ -25,8 +25,8 @@ require_once __DIR__ . '/../includes/header.php';
 
 <div class="page-header">
   <h2>Meus Personagens</h2>
-  <a href="personagem_create.php" class="btn btn-primary" id="btn-novo-personagem">+ Novo Personagem</a>
-  <a href="personagens_deletados.php" class="btn btn-primary" id="btn-deletados">Deletados</a>
+  <a href="personagem_create.php" class="btn btn-primary btn-inicial" id="btn-novo-personagem">+ Novo Personagem</a>
+  <a href="personagens_deletados.php" class="btn" id="btn-deletados">🗑️</a>
 </div>
 
 <div>

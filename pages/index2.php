@@ -32,7 +32,7 @@ require_once __DIR__ . '/../includes/header.php';
 <div class="page-header">
   <h2>Minhas Habilidades</h2>
   <a href="habilidade_create.php" class="btn btn-primary btn-inicial">+ Nova Habilidade</a>
-  <a href="habilidades_deletadas.php" class="btn" id="btn-deletados">🗑️</a>
+  <a href="habilidades_deletadas.php" class="btn" id="btn-deletados"><img src="../assets/images/reciclagem.png" width="20px" class="img-reciclagem"></a>
 </div>
 
 <!-- <div>

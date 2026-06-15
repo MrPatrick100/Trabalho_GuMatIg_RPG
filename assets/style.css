@@ -1607,3 +1607,18 @@ HABILIDADES
     cursor: pointer;
     margin: 10px 0;
 }
+
+
+#img-engrenagem {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    margin: -10px;
+}
+
+.img-reciclagem {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    margin: -10px;
+}

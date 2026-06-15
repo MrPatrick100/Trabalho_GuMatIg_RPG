@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <img src=<?= $_SESSION['foto_perfil'] ?? '../assets/img_perfil/avatar.png' ?> class="avatar">
         </button>
         <div id="form-alterar-avatar" class="form-alterar-avatar">
-            <form method="POST" action="perfil.php" enctype="multipart/form-data">
+            <form method="POST" action="menu_configuracoes.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="avatar">Avatar</label>
                     <input

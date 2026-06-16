@@ -11,7 +11,7 @@ $usuario = new Usuario($_SESSION);
 
 $cor1 = '#c9a45c';
 if (isset($_SESSION['cor_principal'])) {
-  $cor1 = trim  ($_SESSION['cor_principal']      ?? '#c9a45c');
+$cor1 = trim  ($_SESSION['cor_principal']      ?? '#c9a45c');
 }
 
 $cor2 = null;
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $_SESSION['foto_perfil'] = $caminho_final_img;
 
-        $repo->atualizarAvatar($usuario->getId(), $caminho_final_img);
+        $repo->atualizarAvatar($_SESSION['id_usuario'], $caminho_final_img);
         $sucesso = 'Imagem alterada com sucesso';
         $erro = '';
     }
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['cor_principal']       = trim  ($_POST['cor1']      ?? '#c9a45c');
 
 
-        $repo->atualizarCor($usuario->getId(), $_SESSION['cor_principal']);
+        $repo->atualizarCor($_SESSION['id_usuario'], $_SESSION['cor_principal']);
         $sucesso = 'Cor alterada com sucesso';
         $erro = '';
 

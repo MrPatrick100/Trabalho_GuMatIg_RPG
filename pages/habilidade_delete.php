@@ -7,6 +7,7 @@ require_once __DIR__ . '/../repository/RelacaoPersonagemHabilidadeRepository.php
 
 $repoHabilidade = new HabilidadeRepository();
 $repoRelacao = new RelacaoPersonagemHabilidadeRepository();
+$erro = '';
 
 $id = 0;
 $idp = 0;
@@ -30,27 +31,46 @@ if ($habilidade === null || $habilidade->getId_usuario() !== $_SESSION['id_usuar
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if($_POST['acao'] === 'excluir') {
-    $habilidade->alterarDados($habilidade->getNome(), $habilidade->getTipo(), $habilidade->getCiclo(),
-    $habilidade->getEstilo(), $habilidade->getCusto(), $habilidade->getDescricao(), 1);
-    
-    $repoHabilidade->salvar($habilidade);
-    header('Location: index2.php');
-    exit;
+    try {
+      $habilidade->alterarDados($habilidade->getNome(), $habilidade->getTipo(), $habilidade->getCiclo(),
+      $habilidade->getEstilo(), $habilidade->getCusto(), $habilidade->getDescricao(), 1);
+      
+      $repoHabilidade->salvar($habilidade);
+      header('Location: index2.php');
+      exit;
+    } 
+    catch(Exception $e)
+    {
+      $erro = $e->getMessage();
+    }
   }
   else if($_POST['acao'] === 'desvincular') {
-    $repoRelacao->excluirPorPersonagem_Habilidade($idp, $id);
-    
-    if($repoRelacao->verificarExistencia($id) === false) {
-      $repoHabilidade->excluir($id);
+    try {
+      $ex = new Exception();
+      throw $ex;
+      
+      $repoRelacao->excluirPorPersonagem_Habilidade($idp, $id);
+      
+      if($repoRelacao->verificarExistencia($id) === false) {
+        $repoHabilidade->excluir($id);
+      }
+      header('Location: index2.php');
+      exit;
     }
-    header('Location: index2.php');
-    exit;
+    catch(Exception $e)
+    {
+      $erro = $e->getMessage();
+    }
   }
   
 }
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
+
+<?php if ($erro !== ''): ?>
+  <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
+<?php endif; ?>
 
 <div class="page-header">
   <h2>Excluir Habilidade</h2>

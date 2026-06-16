@@ -1,5 +1,11 @@
 <?php
 
+// define('DB_HOST', 'joaolagoas.com.br');
+// define('DB_NAME', 'joaola59_igorgustmat');
+// define('DB_USER', 'joaola59_igorgustmat_usu');
+// define('DB_PASS', 'S[XQy23c)L8B');
+// define('DB_CHARSET', 'utf8mb4');
+
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'banco');
 define('DB_USER', 'root');

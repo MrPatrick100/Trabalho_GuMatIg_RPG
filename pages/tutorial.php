@@ -15,7 +15,7 @@ require_once __DIR__ . '/../repository/UsuarioRepository.php';
             </div>
             <br>
         </div>
-         <div class="form-card">
+        <div class="form-card">
         <div class="form-group">
             <div class="form-group2">
                 <h3 for="nome">Combate bla bla</h3>
@@ -23,7 +23,7 @@ require_once __DIR__ . '/../repository/UsuarioRepository.php';
             </div>
             <br>
         </div>
-         <div class="form-card">
+<div class="form-card">
         <div class="form-group">
             <div class="form-group2">
                 <h3 for="nome">Buffs e Nerfs blabla</h3>

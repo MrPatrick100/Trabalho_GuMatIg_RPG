@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $_SESSION['foto_perfil'] = $caminho_final_img;
 
-        $repo->atualizarAvatar($usuario->getId(), $caminho_final_img);
+        $repo->atualizarAvatar($_SESSION['id_usuario'], $caminho_final_img);
         $sucesso = 'Imagem alterada com sucesso';
         $erro = '';
     }

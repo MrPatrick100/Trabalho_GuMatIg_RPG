@@ -14,15 +14,15 @@ $personagens = $repoPersonagem->listarPorUsuario($_SESSION['id_usuario']);
 $pesquisa = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pesquisa'])) {
-  $pesquisa = trim($_GET['pesquisa']);
+$pesquisa = trim($_GET['pesquisa']);
 }
 
 if ($pesquisa !== '') {
-  $personagens = $repoPersonagem->listarFiltrando($_SESSION['id_usuario'], $pesquisa);
+$personagens = $repoPersonagem->listarFiltrando($_SESSION['id_usuario'], $pesquisa);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['limpar'])) {
-  $personagens = $repoPersonagem->listarPorUsuario($_SESSION['id_usuario']);
+$personagens = $repoPersonagem->listarPorUsuario($_SESSION['id_usuario']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['personagens'])) {

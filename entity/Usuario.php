@@ -7,21 +7,24 @@ class Usuario {
     private string $email;
     private string $senha;
     private string $foto_perfil;
+    private string $cor_principal;
     private string $criadoEm;
 
     public function __construct(array $dados) {
-        $this->id           = (int) ($dados['id']       ?? 0);
-        $this->nome         =        $dados['nome']      ?? '';
-        $this->email        =        $dados['email']     ?? '';
-        $this->senha        =        $dados['senha']     ?? '';
-        $this->foto_perfil  =        $dados['foto_perfil'] ?? '';
-        $this->criadoEm     =        $dados['criado_em'] ?? '';
+        $this->id            = (int) ($dados['id']            ?? 0);
+        $this->nome          =        $dados['nome']          ?? '';
+        $this->email         =        $dados['email']         ?? '';
+        $this->senha         =        $dados['senha']         ?? '';
+        $this->foto_perfil   =        $dados['foto_perfil']   ?? '';
+        $this->cor_principal =        $dados['cor_principal'] ?? '';
+        $this->criadoEm      =        $dados['criado_em']     ?? '';
     }
 
-    public function getId():       int    { return $this->id; }
-    public function getNome():     string { return $this->nome; }
-    public function getEmail():    string { return $this->email; }
-    public function getSenha():    string { return $this->senha; }
-    public function getFotoPerfil(): string { return $this->foto_perfil; }
-    public function getCriadoEm(): string { return $this->criadoEm; }
+    public function getId():           int    { return $this->id; }
+    public function getNome():         string { return $this->nome; }
+    public function getEmail():        string { return $this->email; }
+    public function getSenha():        string { return $this->senha; }
+    public function getFotoPerfil():   string { return $this->foto_perfil; }
+    public function getCorPrincipal(): string { return $this->cor_principal; }
+    public function getCriadoEm():     string { return $this->criadoEm; }
 }

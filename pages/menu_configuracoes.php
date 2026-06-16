@@ -10,11 +10,14 @@ $repo = new UsuarioRepository();
 $usuario = new Usuario($_SESSION);
 
 $cor1 = '#c9a45c';
+$cor2 = '#000000';
 if (isset($_SESSION['cor_principal'])) {
-  $cor1 = trim  ($_SESSION['cor_principal']      ?? '#c9a45c');
+    $cor1 = trim  ($_SESSION['cor_principal'] ?? '#c9a45c');
 }
 
-$cor2 = null;
+if(isset($_SESSION['cor_secundaria'])) {
+    $cor2 = trim ($_SESSION['cor_secundaria'] ?? '#000000');
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['acao'] === 'alterar_avatar')
@@ -39,17 +42,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['acao'] === 'alterar_cor1')
     {
-        $_SESSION['cor_principal']       = trim  ($_POST['cor1']      ?? '#c9a45c');
+        $_SESSION['cor_principal'] = trim ($_POST['cor1'] ?? '#c9a45c');
 
+        $repo->atualizarCorPrincipal($_SESSION['id_usuario'], $_SESSION['cor_principal']);
+        $sucesso = 'Cor principal alterada com sucesso';
+        $erro = '';
 
-        $repo->atualizarCor($usuario->getId(), $_SESSION['cor_principal']);
-        $sucesso = 'Cor alterada com sucesso';
+        header('Location: menu_configuracoes.php');
+        exit;
+    }
+
+    else if ($_POST['acao'] === 'alterar_cor2')
+    {
+        $_SESSION['cor_secundaria'] = trim ($_POST['cor2'] ?? '#000000');
+
+        $repo->atualizarCorSecundaria($_SESSION['id_usuario'], $_SESSION['cor_secundaria']);
+        $sucesso = 'Cor secundária alterada com sucesso';
         $erro = '';
 
         header('Location: menu_configuracoes.php');
         exit;
     }
 }
+
+
 ?>
 
 <div class="page-header">

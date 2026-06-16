@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/06/2026 às 22:09
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
+-- Tempo de geração: 16-Jun-2026 às 19:59
+-- Versão do servidor: 10.4.28-MariaDB
+-- versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `habilidade`
+-- Estrutura da tabela `habilidade`
 --
 
 CREATE TABLE `habilidade` (
@@ -46,7 +46,7 @@ CREATE TABLE `habilidade` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `habilidade`
+-- Extraindo dados da tabela `habilidade`
 --
 
 INSERT INTO `habilidade` (`id_usuario`, `id`, `nome`, `tipo`, `ciclo`, `estilo`, `custo`, `dano`, `buff`, `alcance`, `area`, `duracao`, `pontos`, `descricao`, `deletado`) VALUES
@@ -60,7 +60,7 @@ INSERT INTO `habilidade` (`id_usuario`, `id`, `nome`, `tipo`, `ciclo`, `estilo`,
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `inventario`
+-- Estrutura da tabela `inventario`
 --
 
 CREATE TABLE `inventario` (
@@ -79,7 +79,7 @@ CREATE TABLE `inventario` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `item`
+-- Estrutura da tabela `item`
 --
 
 CREATE TABLE `item` (
@@ -93,7 +93,7 @@ CREATE TABLE `item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `item`
+-- Extraindo dados da tabela `item`
 --
 
 INSERT INTO `item` (`id`, `id_personagem`, `nome`, `tipo`, `descricao`, `equipado`, `deletado`) VALUES
@@ -104,7 +104,7 @@ INSERT INTO `item` (`id`, `id_personagem`, `nome`, `tipo`, `descricao`, `equipad
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `pericias`
+-- Estrutura da tabela `pericias`
 --
 
 CREATE TABLE `pericias` (
@@ -132,7 +132,7 @@ CREATE TABLE `pericias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `pericias`
+-- Extraindo dados da tabela `pericias`
 --
 
 INSERT INTO `pericias` (`id_personagem`, `acrobacia`, `adestramento`, `artes`, `atletismo`, `diplomacia`, `enganacao`, `fortitude`, `furtividade`, `intimidacao`, `intuicao`, `investigacao`, `luta_briga`, `medicina`, `ocultismo`, `percepcao`, `pontaria`, `reflexos_iniciativa`, `religiao`, `tatica`, `vontade`) VALUES
@@ -145,7 +145,7 @@ INSERT INTO `pericias` (`id_personagem`, `acrobacia`, `adestramento`, `artes`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `personagem`
+-- Estrutura da tabela `personagem`
 --
 
 CREATE TABLE `personagem` (
@@ -167,7 +167,7 @@ CREATE TABLE `personagem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `personagem`
+-- Extraindo dados da tabela `personagem`
 --
 
 INSERT INTO `personagem` (`id_usuario`, `id`, `nome`, `idade`, `raca`, `nivel`, `agilidade`, `forca`, `intelecto`, `constituicao`, `carisma`, `magia`, `aparencia`, `deletado`, `lore`) VALUES
@@ -180,7 +180,7 @@ INSERT INTO `personagem` (`id_usuario`, `id`, `nome`, `idade`, `raca`, `nivel`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `personagem_habilidade`
+-- Estrutura da tabela `personagem_habilidade`
 --
 
 CREATE TABLE `personagem_habilidade` (
@@ -191,7 +191,7 @@ CREATE TABLE `personagem_habilidade` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `personagem_habilidade`
+-- Extraindo dados da tabela `personagem_habilidade`
 --
 
 INSERT INTO `personagem_habilidade` (`id_usuario`, `id`, `id_personagem`, `id_habilidade`) VALUES
@@ -203,7 +203,7 @@ INSERT INTO `personagem_habilidade` (`id_usuario`, `id`, `id_personagem`, `id_ha
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuario`
+-- Estrutura da tabela `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -213,59 +213,60 @@ CREATE TABLE `usuario` (
   `senha` char(64) NOT NULL COMMENT 'Hash SHA256 da senha',
   `criado_em` datetime NOT NULL DEFAULT current_timestamp(),
   `foto_perfil` text DEFAULT NULL,
-  `cor_principal` varchar(20) DEFAULT NULL
+  `cor_principal` varchar(20) DEFAULT NULL,
+  `cor_secundaria` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `usuario`
+-- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `criado_em`, `foto_perfil`, `cor_principal`) VALUES
-(1, 'Ash Ketchum', 'admin@email.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-19 16:12:18', '../assets/img_perfil/Boneco.png', NULL),
-(2, 'Gustavo Farias', 'gustavofpt3@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-29 17:57:08', NULL, NULL),
-(3, 'Iguete', 'iguete@email.com', '33bdf44fd9ec710ad1f944a260a39fae3c9e64017cd77f45218178ecb899bbfd', '2026-05-29 18:03:53', NULL, NULL),
-(4, 'GuMatIg', 'gumatig@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-06-02 13:23:06', '', NULL),
-(5, 'teste', 'teste@email.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '2026-06-13 10:12:11', '../assets/img_perfil/Valen_Token.png', NULL);
+INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `criado_em`, `foto_perfil`, `cor_principal`, `cor_secundaria`) VALUES
+(1, 'Ash Ketchum', 'admin@email.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-19 16:12:18', '../assets/img_perfil/Boneco.png', NULL, NULL),
+(2, 'Gustavo Farias', 'gustavofpt3@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-05-29 17:57:08', NULL, '#f5e0e0', '#666666'),
+(3, 'Iguete', 'iguete@email.com', '33bdf44fd9ec710ad1f944a260a39fae3c9e64017cd77f45218178ecb899bbfd', '2026-05-29 18:03:53', NULL, NULL, NULL),
+(4, 'GuMatIg', 'gumatig@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '2026-06-02 13:23:06', '', NULL, NULL),
+(5, 'teste', 'teste@email.com', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', '2026-06-13 10:12:11', '../assets/img_perfil/Valen_Token.png', NULL, NULL);
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices de tabela `habilidade`
+-- Índices para tabela `habilidade`
 --
 ALTER TABLE `habilidade`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_habilidade_usuario` (`id_usuario`);
 
 --
--- Índices de tabela `inventario`
+-- Índices para tabela `inventario`
 --
 ALTER TABLE `inventario`
   ADD KEY `id_personagem` (`id_personagem`);
 
 --
--- Índices de tabela `item`
+-- Índices para tabela `item`
 --
 ALTER TABLE `item`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_personagem` (`id_personagem`);
 
 --
--- Índices de tabela `pericias`
+-- Índices para tabela `pericias`
 --
 ALTER TABLE `pericias`
   ADD KEY `id_personagem` (`id_personagem`);
 
 --
--- Índices de tabela `personagem`
+-- Índices para tabela `personagem`
 --
 ALTER TABLE `personagem`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_personagem_usuario` (`id_usuario`);
 
 --
--- Índices de tabela `personagem_habilidade`
+-- Índices para tabela `personagem_habilidade`
 --
 ALTER TABLE `personagem_habilidade`
   ADD PRIMARY KEY (`id`),
@@ -274,14 +275,14 @@ ALTER TABLE `personagem_habilidade`
   ADD KEY `fk_personagem_habilidade_usuario` (`id_usuario`);
 
 --
--- Índices de tabela `usuario`
+-- Índices para tabela `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `uq_email` (`email`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
@@ -315,41 +316,41 @@ ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- Restrições para tabelas despejadas
+-- Restrições para despejos de tabelas
 --
 
 --
--- Restrições para tabelas `habilidade`
+-- Limitadores para a tabela `habilidade`
 --
 ALTER TABLE `habilidade`
   ADD CONSTRAINT `fk_habilidade_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
 
 --
--- Restrições para tabelas `inventario`
+-- Limitadores para a tabela `inventario`
 --
 ALTER TABLE `inventario`
   ADD CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`id_personagem`) REFERENCES `personagem` (`id`);
 
 --
--- Restrições para tabelas `item`
+-- Limitadores para a tabela `item`
 --
 ALTER TABLE `item`
   ADD CONSTRAINT `fk_item_personagem` FOREIGN KEY (`id_personagem`) REFERENCES `personagem` (`id`);
 
 --
--- Restrições para tabelas `pericias`
+-- Limitadores para a tabela `pericias`
 --
 ALTER TABLE `pericias`
   ADD CONSTRAINT `pericias_ibfk_1` FOREIGN KEY (`id_personagem`) REFERENCES `personagem` (`id`);
 
 --
--- Restrições para tabelas `personagem`
+-- Limitadores para a tabela `personagem`
 --
 ALTER TABLE `personagem`
   ADD CONSTRAINT `fk_personagem_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`);
 
 --
--- Restrições para tabelas `personagem_habilidade`
+-- Limitadores para a tabela `personagem_habilidade`
 --
 ALTER TABLE `personagem_habilidade`
   ADD CONSTRAINT `fk_personagem_habilidade_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),

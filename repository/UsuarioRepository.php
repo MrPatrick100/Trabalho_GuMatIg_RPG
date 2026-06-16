@@ -43,8 +43,13 @@ class UsuarioRepository {
         $stmt->execute([':email' => $email,':id' => $id]);
     }
 
-    public function atualizarCor(int $id, string $cor): void {
+    public function atualizarCorPrincipal(int $id, string $cor): void {
         $stmt = $this->pdo->prepare('UPDATE usuario SET cor_principal = :cor_principal WHERE id = :id');
         $stmt->execute([':cor_principal' => $cor,':id' => $id]);
+    }
+
+    public function atualizarCorSecundaria(int $id, string $cor): void {
+        $stmt = $this->pdo->prepare('UPDATE usuario SET cor_secundaria = :cor_secundaria WHERE id = :id');
+        $stmt->execute([':cor_secundaria' => $cor,':id' => $id]);
     }
 }

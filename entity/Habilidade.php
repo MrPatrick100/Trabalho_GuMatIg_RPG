@@ -77,10 +77,16 @@ class Habilidade {
             throw new InvalidArgumentException('O ciclo deve ser entre 1 e 6.');
         }
         else {
-            $pontos = 25 + ($ciclo * 25)
+            $pontos = 25 + ($ciclo * 25);
         }
 
-        if ($alcance)
+        if ($alcance == 'curto') $pontos -= 5;
+        else if ($alcance == 'medio') $pontos -= 10;
+        else if ($alcance == 'longo') $pontos -= 20;
+
+        if ($area == 'reta') $pontos -= 10;
+        else if ($area == 'cone') $pontos -= 15;
+        else if ($area == 'raio') $pontos -= 25;
 
         //Colocar as condições de preenchimento
 

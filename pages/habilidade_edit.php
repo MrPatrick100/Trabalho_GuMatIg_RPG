@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/costumizacao.php';
 require_once __DIR__ . '/../repository/HabilidadeRepository.php';
 
+
 $repo = new HabilidadeRepository();
 
 $id = 0;

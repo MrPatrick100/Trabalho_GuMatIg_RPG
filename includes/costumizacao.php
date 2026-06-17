@@ -1,5 +1,10 @@
 <?php
 
+require_once __DIR__ . '/../repository/UsuarioRepository.php';
+
+$repo = new UsuarioRepository();
+$usuario = new Usuario($_SESSION);
+
 function ajustarCor($hex, $percentual) {
     $hex = str_replace('#', '', $hex);
 
@@ -15,12 +20,13 @@ function ajustarCor($hex, $percentual) {
 }
 
 $cor_principal = '#c9a45c';
-$cor_secundaria = '#000000';
+$cor_secundaria = '#212121';
+
 if (isset($_SESSION['cor_principal'])) {
     $cor_principal = trim ($_SESSION['cor_principal'] ?? '#c9a45c');
 }
 if (isset($_SESSION['cor_secundaria'])) {
-    $cor_secundaria = trim ($_SESSION['cor_secundaria'] ?? '#000000');
+    $cor_secundaria = trim ($_SESSION['cor_secundaria'] ?? '#212121');
 }
 $cor_principal_clara = ajustarCor($cor_principal, 20); // 20% mais clara
 $cor_principal_escura  = ajustarCor($cor_principal, -30); // 30% mais escura

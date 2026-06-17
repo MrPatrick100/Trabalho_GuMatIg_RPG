@@ -16,7 +16,7 @@ if (isset($_SESSION['cor_principal'])) {
 }
 
 if(isset($_SESSION['cor_secundaria'])) {
-    $cor2 = trim ($_SESSION['cor_secundaria'] ?? '#000000');
+    $cor2 = trim ($_SESSION['cor_secundaria'] ?? '#212121');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     else if ($_POST['acao'] === 'alterar_cor2')
     {
-        $_SESSION['cor_secundaria'] = trim ($_POST['cor2'] ?? '#000000');
+        $_SESSION['cor_secundaria'] = trim ($_POST['cor2'] ?? '#212121');
 
         $repo->atualizarCorSecundaria($_SESSION['id_usuario'], $_SESSION['cor_secundaria']);
         $sucesso = 'Cor secundária alterada com sucesso';

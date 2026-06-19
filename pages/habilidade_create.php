@@ -19,25 +19,41 @@ $nome = '';
 $tipo = '';
 $ciclo = 1;
 $estilo = '';
+$dano = '';
+$buff_nerf = '';
 $custo = 2;
+$alcance = '';
+$area = '';
+$duracao = '';
+$pontos = 0;
 $descricao = '';
 
-$tipos = ['Passiva', 'Ativa'];
-$estilos = ['Física', 'Mágica', 'Híbrida'];
+$tipos    = ['Passiva', 'Ativa'];
+$estilos  = ['Física', 'Mágica', 'Híbrida'];
+
+$alcances = ['Curto', 'Médio', 'Longo'];
+$areas    = ['Reta', 'Cone', 'Raio'];
+$duracoes = ['Passiva', 'Ativa'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $nome       = trim  ($_POST['nome']      ?? '');
   $tipo       = trim  ($_POST['tipo']      ?? '');
   $ciclo      = (int) ($_POST['ciclo']     ?? 0);
   $estilo     = trim  ($_POST['estilo']    ?? '');
+  $dano       = trim  ($_POST['dano']      ?? '');
+  $buff_nerf  = trim  ($_POST['buff_nerf'] ?? '');
   $custo      = (int) ($_POST['custo']     ?? 0);
+  $alcance    = trim  ($_POST['alcance']   ?? '');
+  $area       = trim  ($_POST['area']      ?? '');
+  $duracao    = trim  ($_POST['duracao']   ?? '');
+  $pontos     = (int) ($_POST['pontos']    ?? 0);
   $descricao  = trim  ($_POST['descricao'] ?? '');
 
   $id_usuario = $_SESSION['id_usuario'];
 
   if($_POST['acao'] === 'cadastrar') {
     try {
-      $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $custo, $descricao, 0);
+      $habilidade = Habilidade::novo($id_usuario, $nome, $tipo, $ciclo, $estilo, $dano, $buff_nerf, $custo, $alcance, $area, $duracao, $pontos, $descricao, 0);
       $repo_habilidade->salvar($habilidade);
       $id_habilidade = $habilidade->getId();
 
@@ -133,6 +149,8 @@ require_once __DIR__ . '/../includes/header.php';
       </select>
     </div>
 
+    
+
     <div class="form-group">
       <label for="custo">Custo</label>
       <input
@@ -145,6 +163,60 @@ require_once __DIR__ . '/../includes/header.php';
         value="<?= $custo ?>"
         required
       />
+    </div>
+
+    <div class="form-group">
+      <label for="alcance">Alcance</label>
+      <select id="alcance" name="alcance" required>
+        <option value="">Selecione o alcance...</option>
+        <?php foreach ($alcances as $alc): ?>
+          <?php
+            $selecionado = '';
+            if ($alcance === $alc) {
+                $selecionado = 'selected';
+            }
+          ?>
+          <option value="<?= $alc ?>" <?= $selecionado ?>>
+            <?= $alc ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="area">Área</label>
+      <select id="area" name="area" required>
+        <option value="">Selecione o área...</option>
+        <?php foreach ($areas as $a): ?>
+          <?php
+            $selecionado = '';
+            if ($area === $a) {
+                $selecionado = 'selected';
+            }
+          ?>
+          <option value="<?= $a ?>" <?= $selecionado ?>>
+            <?= $a ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="duracao">Duração</label>
+      <select id="duracao" name="duracao" required>
+        <option value="">Selecione o duração...</option>
+        <?php foreach ($duracoes as $d): ?>
+          <?php
+            $selecionado = '';
+            if ($duracao === $d) {
+                $selecionado = 'selected';
+            }
+          ?>
+          <option value="<?= $d ?>" <?= $selecionado ?>>
+            <?= $d ?>
+          </option>
+        <?php endforeach; ?>
+      </select>
     </div>
 
     <div class="form-group">

@@ -36,6 +36,7 @@ require_once __DIR__ . '/../includes/header.php';
     <button type="submit" id="limpar" name="limpar">Todos</button>
   </form>
 </div>
+<br>
 
 <?php if (empty($personagens)): ?>
   <div class="empty-state">

@@ -5,9 +5,10 @@
     require_once __DIR__ . "/../pages/personagem_espiar.php";
 ?>
 <script>
-    const grafico = document.getElementById('meuGrafico');
+    const graficoPericias = document.getElementById('graficoPericias');
+    const graficoStatus = document.getElementById('graficoStatus');
 
-    new Chart(grafico, {
+    new Chart(graficoPericias, {
     type: 'radar',
     data: {
         labels: [
@@ -112,48 +113,140 @@
         }
     }
 });
-Chart.defaults.elements.line.borderWidth = 3;
 
-const glowPlugin = {
-    id: 'glow',
-    beforeDatasetDraw(chart) {
-        const ctx = chart.ctx;
+    new Chart(graficoStatus, {
+        type: 'radar',
+        data: {
+            labels: [
+                "Agilidade",
+                "Carisma",
+                "Constituição",
+                "Força",
+                "Intelecto",
+                "Magia"
+            ],
+            datasets: [{
+                label: 'Status',
+                data: [
+                    <?= $personagem->getAgilidade(); ?>,
+                    <?= $personagem->getCarisma(); ?>,
+                    <?= $personagem->getConstituicao(); ?>,
+                    <?= $personagem->getForca(); ?>,
+                    <?= $personagem->getIntelecto(); ?>,
+                    <?= $personagem->getMagia(); ?>
+                ],
 
-        ctx.save();
-        ctx.shadowColor = '<?= $cor_principal; ?>';
-        ctx.shadowBlur = 15;
+                borderColor: '<?= $cor_principal; ?>',
+                backgroundColor: 'rgba(255, 174, 0, 0.45)',
+                pointBackgroundColor: '<?= $cor_principal; ?>',
+                pointBorderColor: '<?= $cor_principal_clara; ?>',
+                pointRadius: (ctx) => ctx.raw <= 0 ? 0 : 3,
+                pointHoverRadius: (ctx) => ctx.raw <= 0 ? 0 : 6,
+                borderWidth: 3,
+                fill: true
+
+            },
+        ],
     },
-    afterDatasetDraw(chart) {
-        chart.ctx.restore();
-    }
-};
 
-Chart.register(glowPlugin);
+        options: {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '<?= $cor_principal; ?>'
+                    }
+                }
+            },
 
-const centerHolePlugin = {
-    id: 'centerHole',
+            scales: {
+                r: {
+                    min: 0,
+                    max: 5,
 
-    afterDraw(chart) {
-        const { ctx } = chart;
-        const scale = chart.scales.r;
+                    ticks: {
+                        display: false
+                    },
 
-        ctx.save();
+                    angleLines: {
+                        color: '<?= $cor_principal; ?>',
+                        lineWidth: 2
+                    },
 
-        ctx.beginPath();
-        ctx.arc(
-            scale.xCenter - 0.25,
-            scale.yCenter,
-            22.5, // tamanho do buraco
-            0,
-            Math.PI * 2
-        );
+                    grid: {
+                        color: '<?= $cor_principal; ?>',
+                        lineWidth: 1
+                    },
 
-        ctx.fillStyle = 'rgba(0,120,255,0.45)'; // mesma cor do fundo
-        ctx.fill();
+                    pointLabels: {
+                        color: '#ffffff',
+                        font: {
+                            size: 12,
+                            weight: 'bold'
+                        }
+                    }
+                    // pointRadius: (ctx) => ctx.raw <= 0 ? 0 : 3,
+                    // pointHoverRadius: (ctx) => ctx.raw <= 0 ? 0 : 6,
+                }
+            }
+        }
+    });
+    
+    Chart.defaults.elements.line.borderWidth = 3;
 
-        ctx.restore();
-    }
-};
+    const glowPlugin = {
+        id: 'glow',
+        beforeDatasetDraw(chart) {
+            const ctx = chart.ctx;
 
-Chart.register(centerHolePlugin);
+            ctx.save();
+            ctx.shadowColor = '<?= $cor_principal; ?>';
+            ctx.shadowBlur = 15;
+        },
+        afterDatasetDraw(chart) {
+            chart.ctx.restore();
+        }
+    };
+
+    Chart.register(glowPlugin);
+
+    const centerHolePlugin = {
+        id: 'centerHole',
+
+        afterDraw(chart) {
+            const { ctx } = chart;
+            const scale = chart.scales.r;
+
+            let raio = 22.5;
+            let cor = 'rgba(0,120,255,0.45)';
+
+            if(chart.canvas.id === 'graficoPericias') {
+                raio = 22.5;
+                cor = 'rgba(0,120,255,0.45)';
+            }
+
+            if(chart.canvas.id === 'graficoStatus') {
+                raio = 0;
+                cor = 'rgba(255, 174, 0, 0.45)';
+            }
+
+            ctx.save();
+
+            ctx.beginPath();
+            ctx.arc(
+                scale.xCenter - 0.25,
+                scale.yCenter,
+                raio, // tamanho do buraco
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle = cor; // mesma cor do fundo
+            ctx.fill();
+
+            ctx.restore();
+        }
+    };
+
+    Chart.register(centerHolePlugin);
+
 </script>

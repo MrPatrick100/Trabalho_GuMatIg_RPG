@@ -41,7 +41,8 @@ require_once __DIR__ . '/../includes/header.php';
     <button type="submit">🔍</button>
     <button type="submit" id="limpar" name="limpar">Todos</button>
   </form>
-</div> -->
+</div> 
+<br> -->
 
 <?php if (empty($habilidades)): ?>
   <div class="empty-state">

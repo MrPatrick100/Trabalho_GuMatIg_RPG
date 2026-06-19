@@ -824,7 +824,7 @@ padding: 12px 14px;
 
 background: var(--cor-secundaria);
 
-color: var(--cor-secundaria-escura);
+color: var(--cor-principal-light);
 
 border: 1px solid var(--cor-principal-dark);
 
@@ -1577,7 +1577,7 @@ transition: .2s;
 input::placeholder,
 textarea::placeholder {
 
-color: var(--cor-secundaria-escura);
+color: var(--cor-principal-dark);
 }
 
 /* seleção de texto */
@@ -1621,4 +1621,14 @@ HABILIDADES
     height: 2rem;
     object-fit: cover;
     margin: -10px;
+}
+
+.foto_personagem {
+    display: inline-block;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    object-fit: cover;
+
+    margin-top: 10px;
 }

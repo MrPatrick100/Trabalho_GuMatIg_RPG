@@ -127,7 +127,7 @@ require_once __DIR__ . '/../includes/header.php';
 
       <div class="form-group">
         <label for="aparencia">Aparência</label>
-        <img src="<?= $personagem->getAparencia() ?>" alt="img">
+        <img src="<?= $personagem->getAparencia() ?>" alt="img" class="foto_personagem">
         <!-- <label for="...">string_img: <?= $personagem->getAparencia() ?></label> -->
       </div>
 
@@ -156,64 +156,64 @@ require_once __DIR__ . '/../includes/header.php';
   </div>
 
   <div class="form-card">
+    <div class="form-group">
+      <h3>PERÍCIAS</h3>
 
-      <div class="form-group">
-          <h3>PERÍCIAS</h3>
-
-          <div class="form-group2">
-              <label for="acrobacia">Acrobacia: <?= $pericias->getAcrobacia() ?></label>
-              <label for="adestramento">Adestramento: <?= $pericias->getAdestramento() ?></label>
-              <label for="artes">Artes: <?= $pericias->getArtes() ?></label>
-              <label for="atletismo">Atletismo: <?= $pericias->getAtletismo() ?></label>
-              <label for="diplomacia">Diplomacia: <?= $pericias->getDiplomacia() ?></label>
-              <label for="enganacao">Enganação: <?= $pericias->getEnganacao() ?></label>
-              <label for="fortitude">Fortitude: <?= $pericias->getFortitude() ?></label>
-              <label for="furtividade">Furtividade: <?= $pericias->getFurtividade() ?></label>
-              <label for="intimidacao">Intimidação: <?= $pericias->getIntimidacao() ?></label>
-              <label for="intuicao">Intuição: <?= $pericias->getIntuicao() ?></label>
-              <label for="investigacao">Investigação: <?= $pericias->getInvestigacao() ?></label>
-              <label for="luta_briga">Luta/Briga: <?= $pericias->getLuta_Briga() ?></label>
-              <label for="medicina">Medicina: <?= $pericias->getMedicina() ?></label>
-              <label for="ocultismo">Ocultismo: <?= $pericias->getOcultismo() ?></label>
-              <label for="percepcao">Percepção: <?= $pericias->getPercepcao() ?></label>
-              <label for="pontaria">Pontaria: <?= $pericias->getPontaria() ?></label>
-              <label for="reflexos_iniciativa">Reflexos/Iniciativa: <?= $pericias->getReflexos_Iniciativa() ?></label>
-              <label for="religiao">Religião: <?= $pericias->getReligiao() ?></label>
-              <label for="tatica">Tática: <?= $pericias->getTatica() ?></label>
-              <label for="vontade">Vontade: <?= $pericias->getVontade() ?></label>
-          </div>
+      <div class="form-group2">
+        <label for="acrobacia">Acrobacia: <?= $pericias->getAcrobacia() ?></label>
+        <label for="adestramento">Adestramento: <?= $pericias->getAdestramento() ?></label>
+        <label for="artes">Artes: <?= $pericias->getArtes() ?></label>
+        <label for="atletismo">Atletismo: <?= $pericias->getAtletismo() ?></label>
+        <label for="diplomacia">Diplomacia: <?= $pericias->getDiplomacia() ?></label>
+        <label for="enganacao">Enganação: <?= $pericias->getEnganacao() ?></label>
+        <label for="fortitude">Fortitude: <?= $pericias->getFortitude() ?></label>
+        <label for="furtividade">Furtividade: <?= $pericias->getFurtividade() ?></label>
+        <label for="intimidacao">Intimidação: <?= $pericias->getIntimidacao() ?></label>
+        <label for="intuicao">Intuição: <?= $pericias->getIntuicao() ?></label>
+        <label for="investigacao">Investigação: <?= $pericias->getInvestigacao() ?></label>
+        <label for="luta_briga">Luta/Briga: <?= $pericias->getLuta_Briga() ?></label>
+        <label for="medicina">Medicina: <?= $pericias->getMedicina() ?></label>
+        <label for="ocultismo">Ocultismo: <?= $pericias->getOcultismo() ?></label>
+        <label for="percepcao">Percepção: <?= $pericias->getPercepcao() ?></label>
+        <label for="pontaria">Pontaria: <?= $pericias->getPontaria() ?></label>
+        <label for="reflexos_iniciativa">Reflexos/Iniciativa: <?= $pericias->getReflexos_Iniciativa() ?></label>
+        <label for="religiao">Religião: <?= $pericias->getReligiao() ?></label>
+        <label for="tatica">Tática: <?= $pericias->getTatica() ?></label>
+        <label for="vontade">Vontade: <?= $pericias->getVontade() ?></label>
       </div>
-      <canvas id="meuGrafico"></canvas>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-      <?php require_once __DIR__ . '/../includes/radar_chart.php'; ?>
+    </div>
+    <canvas id="graficoStatus"></canvas>
+    <br>
+    <canvas id="graficoPericias"></canvas>
+    <?php require_once __DIR__ . '/../includes/radar_chart.php'; ?>
   </div>
 
   <div class="form-card">
     <div class="form-group">
-        <h3 for="inventario">Inventário</h3>
-        <?php foreach ($inventario as $indice => $item): ?>
-          
-        <div class="form-group2">
-          <label for="nome">Nome: <?= $item->getNome() ?></label>
-        </div>
+      <h3 for="inventario">Inventário</h3>
+      <?php foreach ($inventario as $indice => $item): ?>
 
-        <div class="form-group2">
-          <label for="tipo">Tipo: <?= $item->getTipo() ?></label>
-        </div>
+      <div class="form-group2">
+        <label for="nome">Nome: <?= $item->getNome() ?></label>
+      </div>
 
-        <div class="form-group2">
-          <label for="equipado">Equipado: <?= $item->getEquipado() ?></label>
-        </div>
+      <div class="form-group2">
+        <label for="tipo">Tipo: <?= $item->getTipo() ?></label>
+      </div>
 
-        <div class="form-group2">
-          <label for="deletado">Deletado: <?= $item->getDeletado() ?></label>
-        </div>
+      <div class="form-group2">
+        <label for="equipado">Equipado: <?= $item->getEquipado() ?></label>
+      </div>
 
-        <div class="form-group2">
-          <label for="descricao">Descrição: <?= $item->getDescricao() ?></label>
-        </div>
-        <br>
-        <?php endforeach; ?>
+      <div class="form-group2">
+        <label for="deletado">Deletado: <?= $item->getDeletado() ?></label>
+      </div>
+
+      <div class="form-group2">
+        <label for="descricao">Descrição: <?= $item->getDescricao() ?></label>
+      </div>
+      <br>
+      <?php endforeach; ?>
     </div>
   </div>
 </div>

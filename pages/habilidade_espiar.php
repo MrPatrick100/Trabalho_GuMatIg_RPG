@@ -71,6 +71,18 @@ require_once __DIR__ . '/../includes/header.php';
         <label for="custo">Custo: <?= $habilidade->getCusto() ?></label>
       </div>
 
+      <div class="form-group2">
+        <label for="alcance">Alcance: <?= $habilidade->getAlcance() ?></label>
+      </div>
+
+      <div class="form-group2">
+        <label for="area">Área: <?= $habilidade->getArea() ?></label>
+      </div>
+
+      <div class="form-group2">
+        <label for="duracao">Duração: <?= $habilidade->getDuracao() ?></label>
+      </div>
+
   </div>
   <div class="form-group">
     <div class="form-group2">

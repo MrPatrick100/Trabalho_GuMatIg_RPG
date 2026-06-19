@@ -33,7 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if($_POST['acao'] === 'excluir') {
     try {
       $habilidade->alterarDados($habilidade->getNome(), $habilidade->getTipo(), $habilidade->getCiclo(),
-      $habilidade->getEstilo(), $habilidade->getCusto(), $habilidade->getDescricao(), 1);
+      $habilidade->getEstilo(), $habilidade->getDano(), $habilidade->getBuffNerf(),
+      $habilidade->getCusto(), $habilidade->getAlcance(), $habilidade->getArea(), $habilidade->getDuracao(),
+      $habilidade->getPontos(), $habilidade->getDescricao(), 1);
       
       $repoHabilidade->salvar($habilidade);
       header('Location: index2.php');

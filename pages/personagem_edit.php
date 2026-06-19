@@ -119,6 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $caminho_final_img = "../assets/img_personagem/" . $nome_img; //Decide o caminho final de onde vai ficar a img
     move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
+    if($caminho_final_img !== "../assets/img_personagem/")
+      $_SESSION['aparencia'] = $caminho_final_img;
 
     $nome = trim($_POST['nome'] ?? '');
     $idade = (int) ($_POST['idade'] ?? 0);
@@ -130,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $constituicao = (int) ($_POST['constituicao'] ?? 0);
     $carisma = (int) ($_POST['carisma'] ?? 0);
     $magia = (int) ($_POST['magia'] ?? 0);
-    $aparencia = trim($caminho_final_img ?? '');
+    $aparencia = trim($_SESSION['aparencia'] ?? '');
     $lore = trim($_POST['lore'] ?? '');
     $hp = $nivel * 5 + $constituicao * 5;
     $stamina = $forca * 10;
@@ -335,6 +337,7 @@ require_once __DIR__ . '/../includes/header.php';
           id="aparencia"
           name="aparencia"
           accept="image/png, image/jpeg"
+          value="<?= $aparencia ?>"
         />
       </div>
 

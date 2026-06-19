@@ -52,7 +52,10 @@ class PersonagemRepository {
     public function salvar(Personagem $personagem): void {
         if ($personagem->getId() > 0) {
             $stmt = $this->pdo->prepare(
-                'UPDATE personagem SET nome = :nome, idade = :idade, raca = :raca, nivel = :nivel, agilidade = :agilidade, forca = :forca, intelecto = :intelecto, constituicao = :constituicao, carisma = :carisma, magia = :magia, aparencia = :aparencia, lore = :lore, deletado = :deletado WHERE id = :id'
+                'UPDATE personagem SET nome = :nome, idade = :idade, raca = :raca,
+                nivel = :nivel, agilidade = :agilidade, forca = :forca, intelecto = :intelecto,
+                constituicao = :constituicao, carisma = :carisma, magia = :magia, aparencia = :aparencia,
+                deletado = :deletado, lore = :lore  WHERE id = :id'
             );
             $stmt->execute([
                 ':id' => $personagem->getId(),
@@ -60,15 +63,15 @@ class PersonagemRepository {
                 ':idade' => $personagem->getIdade(),
                 ':raca' => $personagem->getRaca(),
                 ':nivel' => $personagem->getNivel(),
-                ':agilidade' => $personagem->getNome(),
+                ':agilidade' => $personagem->getAgilidade(),
                 ':forca' => $personagem->getForca(),
                 ':intelecto' => $personagem->getIntelecto(),
                 ':constituicao' => $personagem->getConstituicao(),
                 ':carisma' => $personagem->getCarisma(),
                 ':magia' => $personagem->getMagia(),
                 ':aparencia' => $personagem->getAparencia(),
-                ':lore' => $personagem->getLore(),
                 ':deletado' => $personagem->getDeletado(),
+                ':lore' => $personagem->getLore(),
             ]);
             return;
         }
@@ -78,7 +81,8 @@ class PersonagemRepository {
         }
 
         $stmt = $this->pdo->prepare(
-            'INSERT INTO personagem (id_usuario, nome, idade, raca, nivel, agilidade, forca, intelecto, constituicao, carisma, magia, aparencia, lore, deletado) VALUES (:idu, :nome, :idade, :raca, :nivel, :agilidade, :forca, :intelecto, :constituicao, :carisma, :magia, :aparencia, :lore, :deletado)'
+            'INSERT INTO personagem (id_usuario, nome, idade, raca, nivel, agilidade, forca, intelecto, constituicao, carisma, magia, aparencia, deletado, lore) 
+            VALUES (:idu, :nome, :idade, :raca, :nivel, :agilidade, :forca, :intelecto, :constituicao, :carisma, :magia, :aparencia, :deletado, :lore)'
         );
         $stmt->execute([
             ':idu'   => $personagem->getId_usuario(),
@@ -93,8 +97,8 @@ class PersonagemRepository {
             ':carisma'   => $personagem->getCarisma(),
             ':magia'  => $personagem->getMagia(),
             ':aparencia'  => $personagem->getAparencia(),
-            ':lore' => $personagem->getLore(),
             ':deletado' => $personagem->getDeletado(),
+            ':lore' => $personagem->getLore()
         ]);
 
         $personagem->registrarIdGerado((int) $this->pdo->lastInsertId());

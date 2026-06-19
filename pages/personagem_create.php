@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $caminho_final_img = "../assets/img_personagem/" . $nome_img; //Decide o caminho final de onde vai ficar a img
   move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
+  $_SESSION['aparencia'] = $caminho_final_img;
 
   $nome = trim($_POST['nome'] ?? '');
   $idade = (int) ($_POST['idade'] ?? 0);

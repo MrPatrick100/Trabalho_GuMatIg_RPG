@@ -5,7 +5,11 @@ require_once __DIR__ . '/../includes/costumizacao.php';
 require_once __DIR__ . '/../repository/PersonagemRepository.php';
 require_once __DIR__ . '/../repository/HabilidadeRepository.php';
 require_once __DIR__ . '/../repository/RelacaoPersonagemHabilidadeRepository.php';
+?>
 
+
+
+<?php
 $repo_habilidade = new HabilidadeRepository();
 $repo_personagem = new PersonagemRepository();
 $repo_relacao = new RelacaoPersonagemHabilidadeRepository();
@@ -31,6 +35,9 @@ $descricao = '';
 $tipos    = ['Passiva', 'Ativa'];
 $estilos  = ['Física', 'Mágica', 'Híbrida'];
 
+$danos = ['1', '1d4', '1d6', '1d8', '1d10', '1d12', '1d20'];
+$buffs_nerfs = ['1[perícia]', '1d4[perícia]', '1[status]', '1d4[status]', '1[geral]', '1d4[geral]'];
+
 $alcances = ['Curto', 'Médio', 'Longo'];
 $areas    = ['Reta', 'Cone', 'Raio'];
 $duracoes = ['Passiva', 'Ativa'];
@@ -40,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $tipo       = trim  ($_POST['tipo']      ?? '');
   $ciclo      = (int) ($_POST['ciclo']     ?? 0);
   $estilo     = trim  ($_POST['estilo']    ?? '');
-  $dano       = trim  ($_POST['dano']      ?? '');
-  $buff_nerf  = trim  ($_POST['buff_nerf'] ?? '');
+  $dano       = trim  ($_POST['dano_completo']      ?? '');
+  $buff_nerf  = trim  ($_POST['buff_nerf_completo'] ?? '');
   $custo      = (int) ($_POST['custo']     ?? 0);
   $alcance    = trim  ($_POST['alcance']   ?? '');
   $area       = trim  ($_POST['area']      ?? '');
@@ -149,7 +156,25 @@ require_once __DIR__ . '/../includes/header.php';
       </select>
     </div>
 
-    
+    <div class="form-group">
+      <label for="dano">Dano</label>
+      <select id="dano" name="dano">
+        <option value="">Selecione o dano...</option>
+        <?php foreach ($danos as $d): ?>
+          <?php
+            $selecionado = '';
+            if ($dano === $d) {
+                $selecionado = 'selected';
+            }
+          ?>
+          <option value="<?= $d ?>" <?= $selecionado ?>>
+            <?= $d ?>
+          </option>
+        <?php endforeach; ?>
+        <option value="limpar">Limpar</option>
+      </select>
+      <input type="text" id="dano_completo" name="dano_completo" readonly>
+    </div>
 
     <div class="form-group">
       <label for="custo">Custo</label>
@@ -334,6 +359,23 @@ require_once __DIR__ . '/../includes/header.php';
         }
 
         btnAdicionar.addEventListener('click', criarSelect);
+
+        //Dano e Buff/Nerf
+        const selectDano = document.getElementById('dano');
+        const campo = document.getElementById('dano_completo');
+
+        selectDano.addEventListener('change', function() {
+            const valor = this.value;
+
+            if (valor === '') return;
+            else if (valor === "limpar") campo.value = '';
+
+            else if (campo.value.trim() === '') {
+                campo.value = valor;
+            } else {
+                campo.value += '+' + valor;
+            }
+        });
       </script>
     </div>
 

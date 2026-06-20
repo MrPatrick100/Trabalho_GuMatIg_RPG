@@ -68,6 +68,10 @@ require_once __DIR__ . '/../includes/header.php';
       </div>
 
       <div class="form-group2">
+        <label for="dano">Dano: <?= $habilidade->getDano() ?></label>
+      </div>
+
+      <div class="form-group2">
         <label for="custo">Custo: <?= $habilidade->getCusto() ?></label>
       </div>
 

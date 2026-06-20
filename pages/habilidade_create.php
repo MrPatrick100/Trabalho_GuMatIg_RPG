@@ -40,7 +40,7 @@ $buffs_nerfs = ['1[perícia]', '1d4[perícia]', '1[status]', '1d4[status]', '1[g
 
 $alcances = ['Curto', 'Médio', 'Longo'];
 $areas    = ['Reta', 'Cone', 'Raio'];
-$duracoes = ['Passiva', 'Ativa'];
+$duracoes = ['1', '1d4'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $nome       = trim  ($_POST['nome']      ?? '');
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $custo      = (int) ($_POST['custo']     ?? 0);
   $alcance    = trim  ($_POST['alcance']   ?? '');
   $area       = trim  ($_POST['area']      ?? '');
-  $duracao    = trim  ($_POST['duracao']   ?? '');
+  $duracao    = trim  ($_POST['duracao_completa']   ?? '');
   $pontos     = (int) ($_POST['pontos']    ?? 0);
   $descricao  = trim  ($_POST['descricao'] ?? '');
 
@@ -228,20 +228,22 @@ require_once __DIR__ . '/../includes/header.php';
 
     <div class="form-group">
       <label for="duracao">Duração</label>
-      <select id="duracao" name="duracao" required>
+      <select id="duracao" name="duracao">
         <option value="">Selecione o duração...</option>
-        <?php foreach ($duracoes as $d): ?>
+        <?php foreach ($duracoes as $dur): ?>
           <?php
             $selecionado = '';
-            if ($duracao === $d) {
+            if ($duracao === $dur) {
                 $selecionado = 'selected';
             }
           ?>
-          <option value="<?= $d ?>" <?= $selecionado ?>>
-            <?= $d ?>
+          <option value="<?= $dur ?>" <?= $selecionado ?>>
+            <?= $dur ?>
           </option>
         <?php endforeach; ?>
+        <option value="limpar">Limpar</option>
       </select>
+      <input type="text" id="duracao_completa" name="duracao_completa" readonly>
     </div>
 
     <div class="form-group">
@@ -360,22 +362,62 @@ require_once __DIR__ . '/../includes/header.php';
 
         btnAdicionar.addEventListener('click', criarSelect);
 
-        //Dano e Buff/Nerf
-        const selectDano = document.getElementById('dano');
-        const campo = document.getElementById('dano_completo');
-
-        selectDano.addEventListener('change', function() {
+        //Intercalar Dados
+        function IntercalarDados(select, selected_campo){
+          select.addEventListener('change', function() {
             const valor = this.value;
+            let total = selected_campo.value;
+            let encontrado = false;
 
-            if (valor === '') return;
-            else if (valor === "limpar") campo.value = '';
+            
+            if (valor === "limpar") selected_campo.value = '';
+            if (valor === '' || valor === 'limpar') return;
 
-            else if (campo.value.trim() === '') {
-                campo.value = valor;
-            } else {
-                campo.value += '+' + valor;
+            if (selected_campo.value.trim() === '') {
+              total = valor;
             }
-        });
+            else {
+              const total_repartido = total.split('+');
+
+              for(let i = 0; i < total_repartido.length; i++) {
+
+              let total_repartido_puro = total_repartido[i].slice(1); //Retira o primeiro valor da string -> qtd de dados
+              let valor_puro = valor.slice(1); //Retira o primeiro valor da string -> qtd de dados
+
+                if (total_repartido_puro === valor_puro) {
+                  
+                  if(total_repartido[i].includes('d')) {  // Detecta se o valor é um fixo ou um dado
+                    valor_repartido = total_repartido[i].split('d');
+                    total_repartido[i] = String(parseInt(valor_repartido[0]) + 1) + 'd' + valor_repartido[1];
+                  }
+                  else {
+                    total_repartido[i] = String(parseInt(total_repartido[i]) + 1)
+                  }
+                  encontrado = true;
+                  break;
+                }
+              }
+              if (encontrado) total = total_repartido.join('+')
+              else total += '+' + valor;
+            }
+
+            selected_campo.value = total;
+            this.selectedIndex = 0;
+          });
+        }
+
+        //Dano, Buff/Nerf e Duração
+        const selectDano = document.getElementById('dano');
+        const campoDanoCompleto = document.getElementById('dano_completo');
+        IntercalarDados(selectDano, campoDanoCompleto)
+
+        const selectDuracao = document.getElementById('duracao');
+        const campoDuracaoCompleta = document.getElementById('duracao_completa');
+        IntercalarDados(selectDuracao, campoDuracaoCompleta)
+
+        
+
+        
       </script>
     </div>
 

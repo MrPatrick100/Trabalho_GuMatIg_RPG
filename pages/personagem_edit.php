@@ -163,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pericias["Vontade"]                = (int) ($_POST['vontade'] ?? 0);
 
     try {
-        $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, FALSE);
+        $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, 0, 0);
         $repoPersonagem->salvar($personagem);
 
         $pericia->alterarDados(

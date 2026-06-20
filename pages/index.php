@@ -8,8 +8,8 @@ $repo = new PersonagemRepository();
 $personagens = $repo->listarPorUsuario($_SESSION['id_usuario']);
 $pesquisa = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pesquisa'])) {
-  $pesquisa = trim($_GET['pesquisa']);
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['pesquisar'])) {
+  $pesquisa = trim($_GET['pesquisar']);
 }
 
 if ($pesquisa !== '') {
@@ -18,6 +18,22 @@ if ($pesquisa !== '') {
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['limpar'])) {
   $personagens = $repo->listarPorUsuario($_SESSION['id_usuario']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['favorito'])) {
+  $personagens = $repo->filtrarPorFavorito($_SESSION['id_usuario']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idp'])) {
+  $idp = $_GET['idp'];
+  
+  if($_GET['acao'] === 'desfavoritar') {
+    $repo->setFavorito($idp, 0);
+  }
+
+  else if($_GET['acao'] === 'favoritar') {
+    $repo->setFavorito($idp, 1);
+  }
 }
 
 require_once __DIR__ . '/../includes/header.php';
@@ -31,9 +47,14 @@ require_once __DIR__ . '/../includes/header.php';
 
 <div>
   <form class="search-bar" method="GET" action="index.php">
-    <input type="search" name="pesquisa" placeholder="Buscar personagem...">
-    <button type="submit">🔍</button>
-    <button type="submit" id="limpar" name="limpar">Todos</button>
+    <input type="search" name="btn-pesquisa" placeholder="Buscar personagem...">
+    <button type="submit" name="pesquisar">🔍</button>
+    <button type="submit" id="btn-limpar" name="limpar">Todos</button>
+    <button type="submit" id="btn-favorito" name="favorito">Favoritos</button>
+    <!-- <button type="submit" id="btn-filtrar" name="filtrar">Filtrar</button>
+    <button type="button" id="btn-mostrar-filtros" name="mostrar-filtros">+</button>
+    <input type="checkbox" class="opcao-filtro" id="ciclo" name="filtro" value="ciclo">
+    <input type="checkbox" class="opcao-filtro" id="nivel" name="filtro" value="nivel"> -->
   </form>
 </div>
 <br>
@@ -68,6 +89,11 @@ require_once __DIR__ . '/../includes/header.php';
                 <a href="personagem_edit.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-editar">Editar Personagem</a>
                 <a href="personagem_delete.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-excluir">Excluir</a>
                 <a href="personagem_espiar.php?id=<?= $personagem->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
+                <?php if ($personagem->getFavorito() == 1): ?>
+                  <a href="index.php?idp=<?= $personagem->getId() ?>&acao=desfavoritar" class="btn btn-sm btn-desfavoritar"><img src="../assets/images/estrela_favoritada.png" width="20px" class="img-favorito"></a>
+                <?php else: ?>
+                  <a href="index.php?idp=<?= $personagem->getId() ?>&acao=favoritar" class="btn btn-sm btn-favoritar"><img src="../assets/images/estrela_desfavoritada.png" width="20px" class="img-favorito"></a>
+                <?php endif; ?>
               </td>
             </tr>
           <?php endif; ?>

@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $personagem->alterarDados(
     $personagem->getNome(), $personagem->getIdade(), $personagem->getRaca(), $personagem->getNivel(),
     $personagem->getAgilidade(), $personagem->getForca(), $personagem->getIntelecto(), $personagem->getConstituicao(),
-    $personagem->getCarisma(), $personagem->getMagia(), $personagem->getAparencia(), $personagem->getLore(), 1
+    $personagem->getCarisma(), $personagem->getMagia(), $personagem->getAparencia(), $personagem->getLore(), 1, $personagem->getFavorito()
   );
   $repoPersonagem->salvar($personagem);
   foreach($itens as $item) {

@@ -397,7 +397,7 @@ border-color: var(--cor-principal);
 
 background: var(--cor-principal);
 
-color: white;
+color: var(--cor-secundaria-escura);
 }
 
 /* excluir */
@@ -414,6 +414,20 @@ border-color: var(--red);
 .btn-excluir:hover {
 
 background: #9c1515;
+}
+
+.btn-espiar {
+    background: var(--cor-principal-escura);
+
+    color: var(--cor-principal-light);
+
+    border-color: var(--cor-principal);
+}
+
+.btn-espiar:hover {
+    background: var(--cor-principal);
+
+    color: var(--cor-secundaria-escura);
 }
 
 /* ghost */
@@ -439,6 +453,34 @@ font-size: .72rem;
 #btn-ver-mais {
     margin-top: 10px;
     cursor: pointer;
+}
+
+.btn-favoritar {
+    background: var(--cor-principal-escura);
+
+    color: var(--cor-principal-light);
+
+    border-color: var(--cor-principal);
+}
+
+.btn-favoritar:hover {
+    background: var(--cor-principal);
+
+    color: var(--cor-secundaria-escura);
+}
+
+.btn-desfavoritar {
+    background: var(--cor-principal-escura);
+
+    color: var(--cor-principal-light);
+
+    border-color: var(--cor-principal);
+}
+
+.btn-desfavoritar:hover {
+    background: var(--cor-principal);
+
+    color: var(--cor-secundaria-escura);
 }
 
 /* =================================================
@@ -506,7 +548,7 @@ border-collapse: collapse;
 
 .data-table th {
 
-padding: 14px 16px;
+padding: 14px 32px;
 
 background: var(--cor-secundaria);
 
@@ -528,6 +570,7 @@ text-align: left;
 .data-table td {
 
 padding: 16px;
+padding-left: 32px;
 
 color: var(--cor-principal-light);
 

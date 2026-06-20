@@ -17,6 +17,7 @@ class Personagem {
     private string $aparencia;
     private string $lore;
     private int    $deletado;
+    private int    $favorito;
     private int    $hp;
     private int    $stamina;
     private int    $mana;
@@ -38,6 +39,7 @@ class Personagem {
         $this->aparencia         =        $dados['aparencia']       ?? '';
         $this->lore              =        $dados['lore'] ?? '';
         $this->deletado          = (int) ($dados['deletado'] ?? 0);
+        $this->favorito          = (int) ($dados['favorito'] ?? 0);
         $this->hp                = $this->nivel * 5 + $this->constituicao * 5;
         $this->stamina           = $this->forca * 10;
         $this->mana              = $this->magia * 10;
@@ -59,7 +61,8 @@ class Personagem {
     public function getMagia():           int    { return $this->magia; }
     public function getAparencia():       string { return $this->aparencia; }
     public function getLore():            string { return $this->lore; }
-    public function getDeletado():        int   { return $this->deletado; }
+    public function getDeletado():        int    { return $this->deletado; }
+    public function getFavorito():        int    { return $this->favorito; }
     public function getHp():              int    { return $this->hp; }
     public function getStamina():         int    { return $this->stamina; }
     public function getMana():            int    { return $this->mana; }
@@ -68,21 +71,21 @@ class Personagem {
     public static function novo(
         int $id_usuario, string $nome, int $idade, string $raca, int $nivel, 
         int $agilidade, int $forca, int $intelecto, int $constituicao, int $carisma, int $magia, 
-        string $aparencia, string $lore, int $deletado
+        string $aparencia, string $lore, int $deletado, int $favorito
     ): Personagem {
         if ($id_usuario <= 0) {
             throw new InvalidArgumentException('Usuário inválido.');
         }
 
         $personagem = new Personagem(['id_usuario' => $id_usuario]);
-        $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, $deletado);
+        $personagem->alterarDados($nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, $deletado, $favorito);
 
         return $personagem;
     }
 
     public function alterarDados(
         string $nome, int $idade, string $raca, int $nivel, int $agilidade, int $forca, int $intelecto, int $constituicao, 
-        int $carisma, int $magia, string $aparencia, string $lore, int $deletado
+        int $carisma, int $magia, string $aparencia, string $lore, int $deletado, int $favorito
     ): void {
         $nome = trim($nome);
         $raca = trim($raca);
@@ -112,6 +115,7 @@ class Personagem {
         $this->aparencia    = $aparencia;
         $this->lore         = $lore;
         $this->deletado     = $deletado;
+        $this->favorito     = $favorito;
         $this->hp           = $nivel * 5 + $constituicao * 5;
         $this->stamina      = $forca * 10;
         $this->mana         = $magia * 10;

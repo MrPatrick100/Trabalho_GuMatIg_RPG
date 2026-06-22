@@ -31,6 +31,7 @@
       });
   </script>
   </div>
+  
     <div class="header-user">
       <?php
         $nomeUser = $_SESSION['usuario_nome'] ?? 'Usuário';

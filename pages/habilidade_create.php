@@ -5,8 +5,10 @@ require_once __DIR__ . '/../includes/costumizacao.php';
 require_once __DIR__ . '/../repository/PersonagemRepository.php';
 require_once __DIR__ . '/../repository/HabilidadeRepository.php';
 require_once __DIR__ . '/../repository/RelacaoPersonagemHabilidadeRepository.php';
-?>
 
+
+
+?>
 
 
 <?php

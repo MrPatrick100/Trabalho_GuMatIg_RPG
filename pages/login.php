@@ -27,10 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Compara o hash SHA256 da senha digitada com o hash salvo no banco
         if ($usuario && hash('sha256', $senha) === $usuario->getSenha()) {
-            $_SESSION['id_usuario']   = $usuario->getId();
-            $_SESSION['usuario_nome'] = $usuario->getNome();
-            $_SESSION['email']        = $usuario->getEmail();
-            $_SESSION['senha']        = $usuario->getSenha();
+            $_SESSION['id_usuario']     = $usuario->getId();
+            $_SESSION['usuario_nome']   = $usuario->getNome();
+            $_SESSION['email']          = $usuario->getEmail();
+            $_SESSION['senha']          = $usuario->getSenha();
+            $_SESSION['foto_perfil']    = $usuario->getFotoPerfil();
+            $_SESSION['cor_principal']  = $usuario->getCorPrincipal();
+            $_SESSION['cor_secundaria'] = $usuario->getCorSecundaria();
 
             header('Location: index.php');
             exit;

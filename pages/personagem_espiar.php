@@ -135,14 +135,20 @@ require_once __DIR__ . '/../includes/header.php';
         <div class="lore">
           <label for="lore">História</label>
           <p id="texto-lore"><?= nl2br(htmlspecialchars($personagem->getLore())) ?></p>
-          <button type="button" id="btn-ver-mais" class="btn">
-            Ver mais
-          </button>
+          <?php if(strlen($personagem->getLore()) > 200): ?>
+            <button type="button" id="btn-ver-mais" class="btn">
+              Ver mais
+            </button>
+          <?php endif; ?>
         </div>
         <script>
           document.addEventListener("DOMContentLoaded", () => {
             const texto = document.getElementById("texto-lore");
             const botao = document.getElementById("btn-ver-mais");
+
+            if (texto.textContent.length <= 200) {
+              texto.classList.toggle("aberto");
+            }
 
             botao.addEventListener("click", () => {
               texto.classList.toggle("aberto");

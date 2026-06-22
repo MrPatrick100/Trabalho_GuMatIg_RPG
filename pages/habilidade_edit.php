@@ -30,7 +30,8 @@ $tipo = '';
 $ciclo = 1;
 $estilo = '';
 $dano = '';
-$buff_nerf = '';
+$buff = '';
+$nerf = '';
 $custo = 2;
 $alcance = '';
 $area = '';
@@ -42,10 +43,11 @@ $tipos    = ['Passiva', 'Ativa'];
 $estilos  = ['Física', 'Mágica', 'Híbrida'];
 
 $danos = ['1', '1d4', '1d6', '1d8', '1d10', '1d12', '1d20'];
-$buffs_nerfs = ['1[perícia]', '1d4[perícia]', '1[status]', '1d4[status]', '1[geral]', '1d4[geral]'];
+$buffs = ['1[perícia]', '1d4[perícia]', '1[status]', '1d4[status]', '1[geral]', '1d4[geral]'];
+$nerfs = ['1[perícia]', '1d4[perícia]', '1[status]', '1d4[status]', '1[geral]', '1d4[geral]'];
 
-$alcances = ['Curto', 'Médio', 'Longo'];
-$areas    = ['Reta', 'Cone', 'Raio'];
+$alcances = ['Pessoal', 'Curto', 'Médio', 'Longo'];
+$areas    = ['Individual', 'Reta', 'Cone', 'Raio'];
 $duracoes = ['1', '1d4'];
 
 if ($habilidade !== null) {
@@ -53,9 +55,10 @@ if ($habilidade !== null) {
   $tipo = $habilidade->getTipo();
   $ciclo = $habilidade->getCiclo();
   $estilo = $habilidade->getEstilo();
-  $dano = $habilidade->getDano();
-  $buff_nerf = $habilidade->getBuffNerf();
   $custo = $habilidade->getCusto();
+  $dano = $habilidade->getDano();
+  $buff = $habilidade->getBuff();
+  $nerf = $habilidade->getNerf();
   $alcance = $habilidade->getAlcance();
   $area = $habilidade->getArea();
   $duracao = $habilidade->getDuracao();
@@ -64,23 +67,23 @@ if ($habilidade !== null) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome       = trim  ($_POST['nome']      ?? '');
-    $tipo       = trim  ($_POST['tipo']      ?? '');
-    $ciclo      = (int) ($_POST['ciclo']     ?? 0);
-    $estilo     = trim  ($_POST['estilo']    ?? '');
-    $dano       = trim  ($_POST['dano_completo']      ?? '');
-    $buff_nerf  = trim  ($_POST['buff_nerf'] ?? '');
-    $custo      = (int) ($_POST['custo']     ?? 0);
-    $alcance    = trim  ($_POST['alcance']   ?? '');
-    $area       = trim  ($_POST['area']      ?? '');
-    $duracao    = trim  ($_POST['duracao_completa']   ?? '');
-    $pontos     = (int) ($_POST['pontos']    ?? 0);
-    $descricao  = trim  ($_POST['descricao'] ?? '');
+    $nome       = trim  ($_POST['nome']             ?? '');
+    $tipo       = trim  ($_POST['tipo']             ?? '');
+    $ciclo      = (int) ($_POST['ciclo']            ?? 0);
+    $estilo     = trim  ($_POST['estilo']           ?? '');
+    $dano       = trim  ($_POST['dano_completo']    ?? '');
+    $buff       = trim  ($_POST['buff']             ?? '');
+    $custo      = (int) ($_POST['custo']            ?? 0);
+    $alcance    = trim  ($_POST['alcance']          ?? '');
+    $area       = trim  ($_POST['area']             ?? '');
+    $duracao    = trim  ($_POST['duracao_completa'] ?? '');
+    $pontos     = (int) ($_POST['pontos']           ?? 0);
+    $descricao  = trim  ($_POST['descricao']        ?? '');
 
     $id_usuario = $_SESSION['id_usuario'];
 
     try {
-        $habilidade->alterarDados($nome, $tipo, $ciclo, $estilo, $dano, $buff_nerf, $custo, $alcance, $area, $duracao, $pontos, $descricao, 0);
+        $habilidade->alterarDados($nome, $tipo, $ciclo, $estilo, $custo, $dano, $buff, $nerf, $alcance, $area, $duracao, $pontos, $descricao, 0);
         $repo->salvar($habilidade);
 
         header('Location: index2.php');

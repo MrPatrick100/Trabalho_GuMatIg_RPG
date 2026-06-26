@@ -64,7 +64,6 @@ class Inventario {
         $arma2      = trim($arma2);
         $amuleto    = trim($amuleto);
         $itens      = trim($itens);
-        $moedas     = trim($moedas);
 
         //Colocar as condições de preenchimento
 

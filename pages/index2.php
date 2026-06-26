@@ -50,6 +50,35 @@ require_once __DIR__ . '/../includes/header.php';
     <a href="habilidade_create.php" class="btn btn-primary">Cadastrar agora</a>
   </div>
 <?php else: ?>
+  <button class="btn btn-personagem">▶ Todas</button>
+  <div class="habilidades">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome</th>
+          <th>Estilo</th>
+          <th>Ciclo</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <?php foreach ($habilidades as $indice => $h): ?>
+        <?php if($h->getDeletado() !== 1): ?>
+          <tbody>
+            <tr>
+              <td>#</td>
+              <td><?= $h->getNome() ?></td>
+              <td><?= $h->getEstilo() ?></td>
+              <td><?= $h->getCiclo() ?>°</td>
+              <td class="acoes">
+                <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
+              </td>
+            </tr>
+          </tbody>
+        <?php endif; ?>
+      <?php endforeach; ?>
+    </table>
+  </div>
   <div class="personagens-container">
     <?php foreach ($personagens as $p): ?>
       <br>

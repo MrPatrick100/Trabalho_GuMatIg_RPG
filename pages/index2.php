@@ -72,6 +72,7 @@ require_once __DIR__ . '/../includes/header.php';
               <td><?= $h->getCiclo() ?>°</td>
               <td class="acoes">
                 <a href="habilidade_edit.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-editar">Editar</a>
+                <a href="habilidade_espiar.php?id=<?= $h->getId() ?>" class="btn btn-sm btn-espiar">Espiar</a>
               </td>
             </tr>
           </tbody>

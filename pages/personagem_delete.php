@@ -8,6 +8,7 @@ require_once __DIR__ . '/../repository/ItemRepository.php';
 
 $repoPersonagem = new PersonagemRepository();
 $repoItem = new ItemRepository();
+$erro = '';
 
 $id = 0;
 if (isset($_GET['id'])) {
@@ -29,15 +30,19 @@ if ($personagem === null || $personagem->getId_usuario() !== $_SESSION['id_usuar
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $personagem->alterarDados(
-    $personagem->getNome(), $personagem->getIdade(), $personagem->getRaca(), $personagem->getNivel(),
-    $personagem->getAgilidade(), $personagem->getForca(), $personagem->getIntelecto(), $personagem->getConstituicao(),
-    $personagem->getCarisma(), $personagem->getMagia(), $personagem->getAparencia(), $personagem->getLore(), 1, $personagem->getFavorito()
-  );
-  $repoPersonagem->salvar($personagem);
-  foreach($itens as $item) {
-    $item->alterarDados($item->getNome(), $item->getTipo(), $item->getDescricao(), $item->getEquipado(), 1);
-    $repoItem->salvar($item);
+  try{
+    $personagem->alterarDados(
+      $personagem->getNome(), $personagem->getIdade(), $personagem->getRaca(), $personagem->getNivel(),
+      $personagem->getAgilidade(), $personagem->getForca(), $personagem->getIntelecto(), $personagem->getConstituicao(),
+      $personagem->getCarisma(), $personagem->getMagia(), $personagem->getAparencia(), $personagem->getLore(), 1, $personagem->getFavorito()
+    );
+    $repoPersonagem->salvar($personagem);
+    foreach($itens as $item) {
+      $item->alterarDados($item->getNome(), $item->getTipo(), $item->getDescricao(), $item->getEquipado(), 1);
+      $repoItem->salvar($item);
+    }
+  } catch (Exception $e) {
+    $erro = 'erro ao excluir personagem';
   }
   header('Location: index.php');
   exit;
@@ -45,6 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 require_once __DIR__ . '/../includes/header.php';
 ?>
+
+<?php if ($erro !== ''): ?>
+  <div class="alert alert-erro"><?= htmlspecialchars($erro) ?></div>
+<?php endif; ?>
 
 <div class="page-header">
   <h2>Excluir Personagem</h2>

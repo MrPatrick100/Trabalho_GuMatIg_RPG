@@ -82,7 +82,6 @@ require_once __DIR__ . '/../includes/header.php';
   </div>
   <div class="personagens-container">
     <?php foreach ($personagens as $p): ?>
-      <br>
       <button class="btn btn-personagem">
         ▶ <?= $p->getNome() ?>
       </button>
@@ -122,6 +121,7 @@ require_once __DIR__ . '/../includes/header.php';
           </tbody>  
         </table>
       </div>
+      <br>
     <?php endforeach; ?>
   </div>
     <script>

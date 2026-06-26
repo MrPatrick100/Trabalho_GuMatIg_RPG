@@ -55,14 +55,19 @@ $pericias = [
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  $img = $_FILES['aparencia']; // Guarda o objeto da imagem em img
+  try {
+    $img = $_FILES['aparencia']; // Guarda o objeto da imagem em img
 
-  $nome_img = $img['name']; //pega o nome do objeto e guarda em uma variavel
-  $caminho_temporario_img = $img['tmp_name']; //pega o caminho temporário do objeto e guarda em uma variavel
+    $nome_img = $img['name']; //pega o nome do objeto e guarda em uma variavel
+    $caminho_temporario_img = $img['tmp_name']; //pega o caminho temporário do objeto e guarda em uma variavel
 
-  $caminho_final_img = "../assets/img_personagem/" . $nome_img; //Decide o caminho final de onde vai ficar a img
-  move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
-  $_SESSION['aparencia'] = $caminho_final_img;
+    $caminho_final_img = "../assets/img_personagem/" . $nome_img; //Decide o caminho final de onde vai ficar a img
+    move_uploaded_file($caminho_temporario_img, $caminho_final_img); //Copia a imagem para a pasta que a gente vai puxar
+    $_SESSION['aparencia'] = $caminho_final_img;
+
+  } catch (Exception $e) {
+    $erro = 'erro ao carregar a imagem';
+  }
 
   $nome = trim($_POST['nome'] ?? '');
   $idade = (int) ($_POST['idade'] ?? 0);
@@ -105,22 +110,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $pericias["Vontade"]                = (int) ($_POST['vontade'] ?? 0);
 
   try {
-        $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, 0, 0);
-        $repoPersonagem->salvar($personagem);
+    $personagem = Personagem::novo($id_usuario, $nome, $idade, $raca, $nivel, $agilidade, $forca, $intelecto, $constituicao, $carisma, $magia, $aparencia, $lore, 0, 0);
+    $repoPersonagem->salvar($personagem);
 
-        $pericia = Pericia::novo(
-          $personagem->getId(), $pericias["Acrobacia"], $pericias["Adestramento"], $pericias["Artes"], $pericias["Atletismo"], 
-          $pericias["Diplomacia"], $pericias["Enganacao"], $pericias["Fortitude"], $pericias["Furtividade"], $pericias["Intimidacao"],
-          $pericias["Intuicao"], $pericias["Investigacao"], $pericias["Luta_Briga"], $pericias["Medicina"], $pericias["Ocultismo"],
-          $pericias["Percepcao"], $pericias["Pontaria"], $pericias["Reflexos_Iniciativa"],
-          $pericias["Religiao"], $pericias["Tatica"], $pericias["Vontade"]
-        );
-        $repoPericia->salvar($pericia);
+    $pericia = Pericia::novo(
+      $personagem->getId(), $pericias["Acrobacia"], $pericias["Adestramento"], $pericias["Artes"], $pericias["Atletismo"], 
+      $pericias["Diplomacia"], $pericias["Enganacao"], $pericias["Fortitude"], $pericias["Furtividade"], $pericias["Intimidacao"],
+      $pericias["Intuicao"], $pericias["Investigacao"], $pericias["Luta_Briga"], $pericias["Medicina"], $pericias["Ocultismo"],
+      $pericias["Percepcao"], $pericias["Pontaria"], $pericias["Reflexos_Iniciativa"],
+      $pericias["Religiao"], $pericias["Tatica"], $pericias["Vontade"]
+    );
+    $repoPericia->salvar($pericia);
 
-        header('Location: index.php');
-        exit;
-  } catch (InvalidArgumentException $e) {
-        $erro = $e->getMessage();
+    header('Location: index.php');
+    exit;
+  } catch (Exception $e) {
+    $erro = 'erro ao carregar personagem';
   }
 }
 

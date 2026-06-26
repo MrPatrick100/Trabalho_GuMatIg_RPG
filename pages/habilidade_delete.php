@@ -43,14 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } 
     catch(Exception $e)
     {
-      $erro = $e->getMessage();
+      $erro = 'erro ao excluir habilidade';
     }
   }
   else if($_POST['acao'] === 'desvincular') {
     try {
-      $ex = new Exception();
-      throw $ex;
-      
+
       $repoRelacao->excluirPorPersonagem_Habilidade($idp, $id);
       
       if($repoRelacao->verificarExistencia($id) === false) {
@@ -61,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     catch(Exception $e)
     {
-      $erro = $e->getMessage();
+      $erro = 'erro ao desvincular habilidade';
     }
   }
   

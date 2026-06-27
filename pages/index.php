@@ -25,14 +25,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['favorito'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['idp'])) {
-  $idp = $_GET['idp'];
-  
-  if($_GET['acao'] === 'desfavoritar') {
-    $repo->setFavorito($idp, 0);
-  }
+  try {
+    $idp = $_GET['idp'];
+    
+    if($_GET['acao'] === 'desfavoritar') {
+      $repo->setFavorito($idp, 0);
+    }
 
-  else if($_GET['acao'] === 'favoritar') {
-    $repo->setFavorito($idp, 1);
+    else if($_GET['acao'] === 'favoritar') {
+      $repo->setFavorito($idp, 1);
+    }
+  } catch (Exception $e) {
+    $erro = 'Ocorreu um erro ao favoritar o personagem: ' . $e->getMessage();
   }
 }
 

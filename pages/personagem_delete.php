@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $repoItem->salvar($item);
     }
   } catch (Exception $e) {
-    $erro = 'erro ao excluir personagem';
+    $erro = 'Ocorreu um erro ao excluir o personagem: ' . $e->getMessage();
   }
   header('Location: index.php');
   exit;

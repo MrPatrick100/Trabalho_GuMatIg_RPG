@@ -24,15 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['limpar'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['habilidades'])) {
-    foreach ($_POST['habilidades'] as $id_habilidade) {
-        if($_POST['acao'] === 'excluir') {
-            $repoRelacao->excluirPorHabilidade($id_habilidade);
-            $repoHabilidade->excluir($id_habilidade);
+    try {
+        foreach ($_POST['habilidades'] as $id_habilidade) {
+            if($_POST['acao'] === 'excluir') {
+                $repoRelacao->excluirPorHabilidade($id_habilidade);
+                $repoHabilidade->excluir($id_habilidade);
+            }
+            else if ($_POST['acao'] === 'recuperar')
+            {
+                $repoHabilidade->recuperar($id_habilidade);
+            }
         }
-        else if ($_POST['acao'] === 'recuperar')
-        {
-            $repoHabilidade->recuperar($id_habilidade);
-        }
+    } catch(Exception $e) {
+        echo 'Erro ao ' . $_POST['acao'] . ' a habilidade: ' . $e->getMessage();
     }
 }
 

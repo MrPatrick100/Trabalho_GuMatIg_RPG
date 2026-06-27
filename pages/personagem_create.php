@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: index.php');
     exit;
   } catch (Exception $e) {
-    $erro = 'erro ao carregar personagem';
+    $erro = 'Ocorreu um erro ao cadastrar o personagem: ' . $e->getMessage();
   }
 }
 

@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } 
     catch(Exception $e)
     {
-      $erro = 'erro ao excluir habilidade';
+      $erro = 'Ocorreu um erro ao excluir a habilidade: ' . $e->getMessage();
     }
   }
   else if($_POST['acao'] === 'desvincular') {
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     catch(Exception $e)
     {
-      $erro = 'erro ao desvincular habilidade';
+      $erro = 'Ocorreu um erro ao excluir a habilidade: ' . $e->getMessage();
     }
   }
   

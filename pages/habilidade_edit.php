@@ -83,13 +83,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_usuario = $_SESSION['id_usuario'];
 
     try {
-        $habilidade->alterarDados($nome, $tipo, $ciclo, $estilo, $custo, $dano, $buff, $nerf, $alcance, $area, $duracao, $pontos, $descricao, 0);
-        $repo->salvar($habilidade);
+      // throw new Exception('erro ao editar');
+      $habilidade->alterarDados($nome, $tipo, $ciclo, $estilo, $custo, $dano, $buff, $nerf, $alcance, $area, $duracao, $pontos, $descricao, 0);
+      $repo->salvar($habilidade);
 
-        header('Location: index2.php');
-        exit;
-    } catch (InvalidArgumentException $e) {
-        $erro = $e->getMessage();
+      header('Location: index2.php');
+      exit;
+
+    } catch (Exception $e) {
+      $erro = 'Ocorreu um erro ao editar a habilidade: ' . $e->getMessage();
     }
 }
 

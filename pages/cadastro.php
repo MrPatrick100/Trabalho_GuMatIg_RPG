@@ -19,13 +19,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     else {
+      try {
+        // throw new Exception('erro ao cadastrar');
         $repo = new UsuarioRepository();
         $senha = hash('sha256', $senha);
         $repo->criarUsuario($nome, $email, $senha);
 
         header('Location: login.php');
+        exit;
+
+      } catch (Exception $e) {
+        $erro = 'Erro ao cadastrar usuário: ' . $e->getMessage();
+      }
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

@@ -79,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       header('Location: index2.php');
       exit;
     } 
-    catch (InvalidArgumentException $e) {
-      $erro = $e->getMessage();
+    catch (Exception $e) {
+      $erro = 'Ocorreu um erro ao cadastrar a habilidade: ' . $e->getMessage();
     }
   }
 }

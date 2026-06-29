@@ -3,11 +3,23 @@ require_once __DIR__ . '/../includes/auth.php';
 require_once __DIR__ . '/../includes/costumizacao.php';
 require_once __DIR__ . '/../includes/header.php';
 require_once __DIR__ . '/../repository/UsuarioRepository.php';
+require_once __DIR__ . '/../repository/PersonagemRepository.php';
+require_once __DIR__ . '/../repository/PericiaRepository.php';
+require_once __DIR__ . '/../repository/ItemRepository.php';
+require_once __DIR__ . '/../repository/HabilidadeRepository.php';
+require_once __DIR__ . '/../repository/RelacaoPersonagemHabilidadeRepository.php';
 
 $erro = '';
 $sucesso = '';
 $repo = new UsuarioRepository();
+$repoPersonagem = new PersonagemRepository();
+$repoPericia = new PericiaRepository();
+$repoItem = new ItemRepository();
+$repoHabilidade = new HabilidadeRepository();
+$repoRelacao = new RelacaoPersonagemHabilidadeRepository();
 $usuario = $repo->buscarPorEmail($_SESSION['email']);
+$personagens = $repoPersonagem->listarPorUsuario($_SESSION['id_usuario']);
+$habilidades = $repoHabilidade->listarPorUsuario($_SESSION['id_usuario']);
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
@@ -72,6 +84,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sucesso = 'Senha alterada com sucesso';
             $erro = '';
         }
+    }
+    if ($_POST['acao'] === 'excluir_conta')
+    {
+        try{
+            foreach ($personagens as $p){
+            $id_personagem = $p->getId();
+
+            $pericia = $repoPericia->listarPorPersonagem($id_personagem);
+            $repoPericia->excluir($id_personagem);
+            $repoItem->excluirPorPersonagem($id_personagem);
+
+            $repoPersonagem->excluir($id_personagem);
+            }
+
+        foreach ($habilidades as $h){
+            $id_habilidade = $h->getId();
+
+            $repoRelacao->excluirPorHabilidade($id_habilidade);
+
+            $repoHabilidade->excluir($id_habilidade);
+            }
+
+            $repo->excluir($_SESSION['id_usuario']);
+            session_unset();
+            session_destroy();
+            header('Location: login.php');
+            exit;
+        }
+        catch(Exception $e){
+            $erro = 'Ocorreu um erro ao excluir a conta: ' . $e->getMessage();
+        }
+        
     }
 }
 ?>
@@ -212,6 +256,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </script>
                 </div>
             </div>
+            <br>
+            <div class="form-group2">
+                <button type="button" id="btn-excluir-conta" class="btn">EXCLUIR CONTA</button>
+                <div id="form-excluir-conta" class="form-excluir-conta">
+                    <form method="POST" action="menu_seguranca_privacidade.php">
+                        <h3>Você tem certeza?</h3>
+                        <p>
+                            Você está prestes a EXCLUIR uma CONTA
+                            Esta ação NÃO pode ser desfeita.
+                        </p>
+
+                        <button type="submit" class="btn btn-primary" name="acao" value="excluir_conta">Sim, excluir</button>
+                        <button type="button" class="btn btn-ghost" id="btn-cancelar4">Cancelar</button>
+                    </form>
+                    <script>
+                        const btnExcluirConta = document.getElementById("btn-excluir-conta");
+                        const formExcluirConta = document.getElementById("form-excluir-conta");
+                        const btnCancelar4 = document.getElementById("btn-cancelar4");
+
+                        btnExcluirConta.addEventListener("click", () => {
+                            btnExcluirConta.classList.toggle("active");
+                            formExcluirConta.classList.toggle("active");
+                        });
+
+                        btnCancelar4.addEventListener("click", () => {
+                            btnExcluirConta.classList.remove("active");
+                            formExcluirConta.classList.remove("active");
+                        });
+                    </script>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

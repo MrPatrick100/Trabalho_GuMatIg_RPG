@@ -584,9 +584,6 @@ require_once __DIR__ . '/../includes/header.php';
       </div>
 
     </form>
-    <form action="inventario_edit.php" method="post">
-      <button type="submit" class="btn btn-primary">Editar inventário</button>
-    </form>
   </div>
 </div>
 

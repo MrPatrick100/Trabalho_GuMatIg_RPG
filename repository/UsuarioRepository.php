@@ -25,7 +25,7 @@ class UsuarioRepository {
 
     public function criarUsuario(string $nome, string $email, string $senha): void {
         $stmt = $this->pdo->prepare('INSERT INTO usuario (nome, email, senha, foto_perfil) VALUES (:nome, :email, :senha, :foto_perfil)');
-        $stmt->execute([':nome' => $nome, ':email' => $email, ':senha' => $senha, ':foto_perfil' => '']);
+        $stmt->execute([':nome' => $nome, ':email' => $email, ':senha' => $senha, ':foto_perfil' => '../assets/img_perfil/avatar.png']);
     }
 
     public function atualizarSenha(int $id, string $senha): void {
@@ -51,5 +51,10 @@ class UsuarioRepository {
     public function atualizarCorSecundaria(int $id, string $cor): void {
         $stmt = $this->pdo->prepare('UPDATE usuario SET cor_secundaria = :cor_secundaria WHERE id = :id');
         $stmt->execute([':cor_secundaria' => $cor,':id' => $id]);
+    }
+
+    public function excluir(int $id): void {
+        $stmt = $this->pdo->prepare('DELETE FROM usuario WHERE id = :id');
+        $stmt->execute([':id' => $id]);
     }
 }

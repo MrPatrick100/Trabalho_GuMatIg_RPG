@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/../repository/UsuarioRepository.php';
 
+session_start();
+
+require_once __DIR__ . '/../includes/costumizacao.php';
+
 $erro = '';
 $emailFormulario = $_POST['email'] ?? '';
 

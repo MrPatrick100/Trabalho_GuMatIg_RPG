@@ -1463,7 +1463,8 @@ CONFIG FORMS
 
 .form-alterar-senha,
 .form-alterar-avatar,
-.form-alterar-email {
+.form-alterar-email,
+.form-excluir-conta {
 
 position: fixed;
 
@@ -1502,7 +1503,8 @@ gap: 12px;
 
 .form-alterar-senha::before,
 .form-alterar-avatar::before,
-.form-alterar-email::before {
+.form-alterar-email::before,
+.form-excluir-conta::before {
 
 content: "";
 
@@ -1529,7 +1531,8 @@ OPEN PANELS
 
 .form-alterar-senha.active,
 .form-alterar-avatar.active,
-.form-alterar-email.active {
+.form-alterar-email.active,
+.form-excluir-conta.active {
 
 bottom: 275px;
 
@@ -1553,7 +1556,8 @@ left: -100%;
 
 .form-alterar-senha,
 .form-alterar-avatar,
-.form-alterar-email {
+.form-alterar-email,
+.form-excluir-conta {
 
 
 width: calc(100% - 24px);

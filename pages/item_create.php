@@ -50,7 +50,7 @@ require_once __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="page-header">
-  <h2>Novo Item (<?= $id_personagem ?>)</h2>
+  <h2>Novo Item</h2>
   <a href="index.php" class="btn btn-ghost">← Voltar</a>
 </div>
 

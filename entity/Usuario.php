@@ -16,9 +16,9 @@ class Usuario {
         $this->nome           =        $dados['nome']          ?? '';
         $this->email          =        $dados['email']         ?? '';
         $this->senha          =        $dados['senha']         ?? '';
-        $this->foto_perfil    =        $dados['foto_perfil']   ?? '';
-        $this->cor_principal  =        $dados['cor_principal'] ?? '';
-        $this->cor_secundaria =        $dados['cor_secundaria']?? '';
+        $this->foto_perfil    =        $dados['foto_perfil']   ?? '../assets/img_perfil/avatar.png';
+        $this->cor_principal  =        $dados['cor_principal'] ?? '#c9a45c';
+        $this->cor_secundaria =        $dados['cor_secundaria']?? '#212121';
         $this->criadoEm       =        $dados['criado_em']     ?? '';
     }
 
